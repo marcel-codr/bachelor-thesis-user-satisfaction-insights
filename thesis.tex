@@ -33,7 +33,7 @@
 	ngerman,
 	ruledheaders=section,%Ebene bis zu der die Überschriften mit Linien abgetrennt werden, vgl. DEMO-TUDaPub
 	class=report,% Basisdokumentenklasse. Wählt die Korrespondierende KOMA-Script Klasse
-	thesis={type=master},% Dokumententyp Thesis, für Dissertationen siehe die Demo-Datei DEMO-TUDaPhd
+	thesis={type=bachelor},% Dokumententyp Thesis, für Dissertationen siehe die Demo-Datei DEMO-TUDaPhd
 	accentcolor=1b,% Auswahl der Akzentfarbe
 	custommargins=true,% Ränder werden mithilfe von typearea automatisch berechnet
 	marginpar=false,% Kopfzeile und Fußzeile erstrecken sich nicht über die Randnotizspalte
@@ -111,17 +111,17 @@
 \begin{document}
 
 \Metadata{
-	title=Titel des Dokuments Format je nach Länge 2 oder 3-zeilig,
-	author=Max Mustermann
+	title=Auto-Generated User Intent- and Satisfaction Insights in Enterprise-GenAI Applications,
+	author=Marcel Pfeiffer
 }
 
 \pagenumbering{gobble}
 
-\title{Titel des Dokuments Format je nach Länge 2 oder 3-zeilig}
+\title{Auto-Generated User Intent- and Satisfaction Insights in Enterprise-GenAI Applications}
 
-\studentID{12345678}
-\author[M. Musterman]{Max Musterman}%optionales Argument ist die Signatur,
-\birthplace{}%Geburtsort, bei Dissertationen zwingend notwendig
+\studentID{2912332}
+\author[M. Pfeiffer]{Marcel Pfeiffer}%optionales Argument ist die Signatur,
+\birthplace{Koblenz}%Geburtsort, bei Dissertationen zwingend notwendig
 \reviewer{Prof. Dr. Peter Buxmann \and Prof. Dr. X Y}%Gutachter
 
 %Diese Felder erden untereinander auf der Titelseite platziert.
@@ -193,7 +193,6 @@ TUD						&	Technische Universität Darmstadt\\
 \setcounter{seitenzahlroemisch}{\value{page}}
 \pagenumbering{arabic}
 
-
 Die Datei \file{DEMO-TUDaThesis.tex} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
 Sie ist Teil des TUDa-CI-Bundles wurde vom in Teilen tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
 
@@ -219,6 +218,19 @@ Beispiele:
 
 \section{Zitierungen}
 Wörtliche Zitate, die sich über mind. drei Textzeilen erstrecken, sind mit der "Zitat" zu formatieren. Alle anderen Zitate erhalten die gleiche Formatierung wie der restliche Fließtext \parencite{buxmann2015softwareindustrie}.
+
+%---------------------------------------------------------------------%
+%------------------------------ Theoretical Background ---------------%
+%---------------------------------------------------------------------%
+\chapter{Theoretical Background}
+\section{User Satisfaction in IS}
+\section{User Satisfaction in Knowledge Management Systems}
+
+
+
+%---------------------------------------------------------------------%
+%------------------------------ Theoretical Background ---------------%
+%---------------------------------------------------------------------%
 
 %---------------------------------------------------------------------%
 %---------------------------- Conclusion -----------------------------%
