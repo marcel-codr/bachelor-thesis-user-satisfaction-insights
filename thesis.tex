@@ -178,7 +178,7 @@ Der Abstract fasst den Inhalt der Abschlussarbeit auf maximal einer halben Seite
 \begin{xtabular}{ll}
 IS					&	Information Systems\\
 TUD					&	Technische Universität Darmstadt\\
-KMS                 &   Knowledge Management Systems \\
+KMS                 &   Knowledge Management System \\
 
 \end{xtabular} 
 
@@ -256,35 +256,75 @@ This process, however, is not a one-way street. The model includes a crucial fee
 Now that we have a solid understanding of IS acceptance and success in general we are going to have a closer look at knowledge management systems (KMS) in particular enterprise GenAI systems. We'll start of with some definitions that will help us understand what KM and KMS are. "Knowledge is an evolving mix of framed experience, values, contextual information, and expert insight that provides a framework for evaluating and incorporating new experiences and information". This means that knowledge is a key key factor in the devision-making processes e.g. in enterprises. Knowledge Management on the other hand "is the practice of selectively applying knowledge from previous experiences of decision making to current and future decision making activities with the express purpose of improving the organization’s effectiveness". KMS in the end can be defined as "IT-based systems developed to support and enhance the organizational processes of knowledge creation, storage/retrieval, transfer and application". Overall we can conclude that KMS are systems that support the decision making process e.g. in a company by managing and selectively providing knowledge to their users. Since KMS are by definition a specialized form of IS we can simply apply the ISSM to them.\\
 Following Jennex and Olfman we can extend the three quality factors to gain a better understanding
 of knowledge management success.\\
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{knowledge_management_success.png}
+    \caption{Knowledge management success model by Jennex & Olfman}
+    \label{fig:enter-label}
+\end{figure}
 The \textit{System Quality} dimension now extends to contain the \textit{technological resources}, \textit{KM form} and the \textit{KM level}. \textit{Technological resources} define the capability of an organization to develop, operate, and maintain KM. This includes all kinds of technical conditions like the amount of experience available to develop, operate and maintain the KM, the underlying network infrastructure or the databases to hold the data use in KM. The \textit{KM form} refers to the extent to which knowledge and knowledge management processes are computerized and integrated. This is important since computerized KM processes are more effective than analogue ones as they make knowledge accessible everywhere at any time through a simple to use interface. The \textit{KM level} in the end refers to the ability to influence current activities. \textit{Technological resources} and the \textit{KM form} are both enablers for the \textit{KM level} and serve as a technical foundation for the ability of the KMS to influence the decision-making process.\\\\
 The \textit{Knowledge Quality· dimension} consists of three subsidiary factors too - the \textit{KM strategy/process}, the \textit{Richness} of the captured knowledge and the \textit{Linkages} among the knowledge components. The \textit{Knowledge strategy/process} factor is the basis for the two other factors and means looks at the organizational processes organizing the knowledge management and to which extend these processes are formalized. \textit{Richness} on the other hand evaluates the accuracy and timeliness of the knowledge itself - one could say it is the quality of the actual knowledge. Linkages refer to how accessible the knowledge is through things like knowledge and topic maps etc.\\\\
 The \textit{service quality} dimension determines if users of the KMS are provided with sufficient support to use the KMS effectively. It consists of three parts aswell. The \textit{management support} refers to the provision of adequate resources for the KM the organization aswell as the creation of knowledge-sharing organization culture by the organization's management. User KM service quality refers to the support provided by the user organization in order to train the users to use the KMS effectively. On the other hand the IS KM service quality refers to the support provided by the  IS organization to allow users to use the KM aswell as maintaining it. This includes the building, setup and maintaining the KM infrastructure ensuring availability, reliability and security of the KMS provided.\\\\
 All three dimensions - the \textit{system quality}, \textit{knowledge quality} and the \textit{service quality} influence similar to the original ISSS the \textit{Intention to use and usage} aswell as the \textit{User Satisfaction} and cause a \textit{net benefit} in the end.
 \section{RAG Systems in enterprises}
 Since we now know what determines the success of KMS in organizations like enterprises, we are going to have a closer look at the GenAI systems that are used to support KM in an organization, find out what they are used for and which factors define their quality.\\
-The GenAI system that we are going to focus on throughout this thesis is a retrieval augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS or third-party sources through retrieval algorithms, and pass the retrieved knowledge to large language models (LLM) that generate answers grounded on the retrieved knowledge. This approach provides various advantages for the organizational use.\\
+The GenAI system that we are going to focus on throughout this thesis is a retrieval augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS or third-party sources through retrieval algorithms, and pass the retrieved knowledge to large language models (LLM) that generate answers grounded on the retrieved knowledge. As such RAG systems can be used for knowledge retrieval and provide advantages for this task.\\
 One problem of LLMs that do not use RAG is that they can only provide the data that they were trained on. This causes them to become out-dated. As we know from the KMS success model it is crucial for an organization to be able to access up-to-date information using their KMS. RAG systems can provide this by utilizing up-to-date knowledge sources for their generation.\\
 Another issue of LLMs is that they tend to hallucinate if they don't know the answer to a users query or apply a pattern from the training data in a wrong way. Since RAG systems bound the LLMs they use to the information provided by the retrieval algorithms, they reduce hallucinations and a user is always able to verify the answer provided by the LLM by double-checking the sources that were used by the RAG system. This way the RAG approach improves the accuracy of LLMs.\\
-Since RAG systems are able to query various data sources at once 
-
-- RAG System allgemein erklären
-- Aufgaben
-- Qualitätsmetriken 
+Since RAG systems are able to query various data sources at once, they provide good linkages to other KMS as well. Following the KM success model RAG systems seem like a pretty good choice when it comes to KM.\\
+However, RAG systems need some effort to serve these qualities to their users in the organizations practice. One of the major challenges is the underlying data that is used for the RAG system. These data are usually not optimized for the use by a RAG system which poses a lot of challenges to the operators of the system. One example for these challenges are vast and complex knowledge bases that on the one hand lead to poor performance - bad \textit{system performance} - since the retrieval algorithms have to perform on a huge dataset and on the other hand pose challenges regarding the integration of them (\textit{service quality}) since various APIs have to be connected to the RAG system. Enterprises usually need a very high accuracy as well because their decision-making processes involve important legal or financial decisions and if a RAG system fails to meet the required accuracy, e.g. because the retrieval algorithms are not able to gather the requested information from the huge and complex dataset, this can lead to a poor \textit{net benefit} of the system. RAG systems like any other GenAI technology are new to most end users too and require training \textit{(service quality)} in order to allow users to use them effectively. In the end we can conclude that RAG systems provide a huge potential at enhancing an organizations KM, but they need a lot of effort to realize it. The goal of this thesis is to support organizations with the realization of RAG applications potential by providing system administrators valuable insights into the usage of the systems.\\
 %---------------------------------------------------------------------%
 %------------------------------ Methodology --------------------------%
 %---------------------------------------------------------------------%
 \chapter{Methodology}
-\textbf{Problem Identification and Motivation}\\
-\textbf{Define Objectives of Artifacts}\\
-\textbf{Development of Artifacts}\\
-\textbf{Demonstration and Evaluation}\\
+The research methodology is based on the DSR approach, which involves both the development and the evaluation of artifacts in iterative cycles. DSR aims to develop innovative solutions for specific problems and to test these solutions in real-world contexts (Peffers et al., 2007b, p. 4).\\
+\subsection{Problem Identification and Motivation}
+In the first phase of the DSR approach, the need for support in managing the RAG system was identified. It was determined that system administrators require insights that allow them to better assess the current performance and quality of the RAG application and to draw conclusions about which measures must be taken to improve it. Examples of such measures could be employee training, improving the knowledge base, or enhancing the RAG mechanism itself.
+\section{First iteration - Definition of valuable insights}
+In the first iteration, specific software features were defined to support system administrators in managing the system. This was done in collaboration with the developers of the RAG software under investigation during several joint workshops.
+\subsection{Define Objectives of Artifacts}
+In a first workshop, initial ideas for evaluating the RAG application were collected, and its current data situation was analyzed to determine what additional data must be gathered to implement the automated analysis. The developers were presented with the foundational principles of Information Systems Success (ISSS) and Knowledge Management Systems (KMS) success. They then developed ideas related to both topics in small groups and afterwards discussed their findings in a plenary session. Through this process, the objectives for the evaluation of the RAG system were clearly established
+\subsection{Development of Artifacts}
+Based on the developers' ideas, specific concepts for software features were developed and then classified into the quality categories of the IS Success Model (ISSM).
+\subsection{Demonstration and Evaluation}
+In a second workshop, the developed concepts were presented to the developers and feedback on them was gathered. Additionally, the individual software features were prioritized to ensure that the subsequent implementation phase could focus on developing and delivering the most important ones.
+\section{Second iteration - Implementation of insights}
+In the second iteration, the developed software features were technically implemented and integrated into the existing RAG application.
+\subsection{Define Objectives of Artifacts}
+First, various solutions for the technical implementation were developed and presented once again to the development team. Feedback was gathered, and a decision was made on how the features should be technically implemented.
+\subsection{Development of Artifacts}
+Subsequently, the software features were implemented and integrated into the existing RAG application. This was done using an iterative software development process (Scrum). Technical reviews took place to validate the correctness of the created software features.
+\subsection{Demonstration and Evaluation}
+Finally, the created software features were presented to the development team in a final workshop and feedback was gathered.
 %---------------------------------------------------------------------%
 %------------------------------ Results ------------------------------%
 %---------------------------------------------------------------------%
 \chapter{Results}
-\section{Identified software features}
-\section{Description of the created software features}
-\section{Customers feedback}
+In the following chapter we are going to elaborate on the conecpts of the software features created during the workshops and how they have been implemented in the RAG application. The feedback of the developer team will be discussed as well.
+\section{Description of the RAG system used in the study}
+
+\section{Software features}
+\subsection{Measurements of the system quality}
+\subsubsection{Response times}
+To determine the system performance, it is crucial to measure the time it takes from the initiation of a request until the answer is generated completely. Yet the response time should always be connected with 
+\subsubsection{Error rates}
+\subsection{Measurements of the knowledge quality}
+\subsubsection{Topic maps}
+\subsubsection{Task type maps}
+\subsubsection{Quality of the retrieval and the generated responses}
+\subsubsection{Combining quality with task types and topics}
+\subsubsection{Combination of task type and topics}
+\subsection{Measurements of the service quality}
+\subsubsection{Interactivity}
+\subsubsection{Knowledge gap detection}
+\section{Description of the technical implementation of the software features}
+\subsubsection{Topic maps}
+\subsubsection{Task type maps}
+\subsubsection{Quality of the retrieval and the generated responses}
+\subsubsection{Combining quality with task types and topics}
+\subsubsection{Combination of task type and topics}
+
+\section{Final feedback from the development team}
 
 %---------------------------------------------------------------------%
 %------------------------------ Discussion ---------------------------%
