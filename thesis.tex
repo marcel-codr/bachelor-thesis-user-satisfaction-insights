@@ -300,9 +300,40 @@ Finally, the created software features were presented to the development team in
 %------------------------------ Results ------------------------------%
 %---------------------------------------------------------------------%
 \chapter{Results}
-In the following chapter we are going to elaborate on the conecpts of the software features created during the workshops and how they have been implemented in the RAG application. The feedback of the developer team will be discussed as well.
+In the following chapter, we are going to elaborate on the concepts for software features created during the workshops and how they have been implemented in the RAG application. Feedback from the developer team will be discussed as well.
 \section{Description of the RAG system used in the study}
+To provide a basis for further investigation, this section describes the features of the Retrieval-Augmented Generation (RAG) system under examination. The system is designed for enterprise use, making company-specific knowledge accessible to employees through a conversational interface powered by LLMs.
 
+\subsection{System Architecture and Technology Stack}
+The system is deployed on the Google Cloud Platform (GCP) and utilizes Vertex AI Search for the initial document retrieval from its knowledge base. The relevance of the retrieved documents is subsequently optimized by the Vertex AI Reranker. For the generation component, the system is capable of integrating various LLMs through the LangChain framework. Given its deployment on GCP, Google's Gemini models are typically employed for response generation.
+
+A central architectural feature of the system is the implementation of distinct \textbf{Use Cases}. This allows the system to provide context-aware responses by augmenting the generation prompt with use-case-specific information, such as a specialized glossary or other supplementary data like a use-case-specific tonality. Each Use Case is associated with a specific selection of \textbf{Knowledge Assets}, which are custom compilations of \textbf{Knowledge Sources}. A Knowledge Source contains information on a particular topic and is technically linked to a Datastore in Vertex AI Search, which performs the underlying retrieval.
+
+\subsection{Retrieval and Query Enhancement Features}
+To increase the quality of the generated answers, the system incorporates several features to enhance the retrieval process:
+
+\begin{itemize}
+    \item \textbf{Query Splitting:} The user's search query is semantically decomposed into multiple sub-queries. A separate retrieval process is executed for each sub-query, thereby improving the comprehensiveness and quality of the search results.
+    
+    \item \textbf{Query Reformulation:} The system supports the reformulation of queries, which enables more effective handling of follow-up questions and generally leads to an increase in retrieval quality.
+    
+    \item \textbf{Metadata Filtering:} The search performed by Vertex AI Search can be refined by applying a metadata filter. This allows for the retrieval to be constrained to only those documents that match specific attributes.
+\end{itemize}
+
+\subsection{User Interface and Interaction Features}
+The system provides a range of interactive features to enhance the user experience and workflow integration:
+
+\begin{itemize}
+    \item \textbf{Question Suggessions:} After an answer is generated, the system proposes alternative and potential follow-up questions to the users initial question that the user can select with a single click.
+    
+    \item \textbf{Document Viewer:} The documents retrieved during the search process can be viewed in an integrated file viewer and are also available for download.
+    
+    \item \textbf{Feedback:} Users can provide individual feedback on the quality of the responses.
+
+    \item \textbf{Copy Function:} Users can copy the answer provided by the LLM using a Copy Button
+    
+    \item \textbf{Quick Actions:} The system offers "Quick Actions," which are clickable shortcuts that allow users to perform subsequent tasks with the generated information, such as creating an email or generating a summary.
+\end{itemize}
 \section{Software features}
 \subsection{Measurements of the system quality}
 \subsubsection{Response times}
