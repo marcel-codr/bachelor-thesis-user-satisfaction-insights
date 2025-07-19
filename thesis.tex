@@ -300,7 +300,7 @@ Finally, the created software features were presented to the development team in
 %------------------------------ Results ------------------------------%
 %---------------------------------------------------------------------%
 \chapter{Results}
-In the following chapter, we are going to elaborate on the concepts for software features created during the workshops and how they have been implemented in the RAG application. Feedback from the developer team will be discussed as well.
+In the following chapter, we are going to elaborate on the concepts for software features created during the workshops and how they have been implemented in the RAG application. Feedback from the developer team and their prioritization of the features will be discussed as well.
 \section{Description of the RAG system used in the study}
 To provide a basis for further investigation, this section describes the features of the Retrieval-Augmented Generation (RAG) system under examination. The system is designed for enterprise use, making company-specific knowledge accessible to employees through a conversational interface powered by LLMs.
 
@@ -315,46 +315,46 @@ To increase the quality of the generated answers, the system incorporates severa
 \begin{itemize}
     \item \textbf{Query Splitting:} The user's search query is semantically decomposed into multiple sub-queries. A separate retrieval process is executed for each sub-query, thereby improving the comprehensiveness and quality of the search results.
     
-    \item \textbf{Query Reformulation:} The system supports the reformulation of queries, which enables more effective handling of follow-up questions and generally leads to an increase in retrieval quality.
+    \item \textbf{Query Reformulation:} The system supports the reformulation of queries, which enables more effective handling of follow-up questions that are related to previous questions and generally leads to an increase in retrieval quality.
     
-    \item \textbf{Metadata Filtering:} The search performed by Vertex AI Search can be refined by applying a metadata filter. This allows for the retrieval to be constrained to only those documents that match specific attributes.
+    \item \textbf{Metadata Filtering:} The search performed by Vertex AI Search can be refined by applying a metadata filter. This allows for the retrieval to be constrained to only those documents that match specific attributes enhancing the retrieval performance since the retrieval process can operate on a smaller search space.
 \end{itemize}
 
 \subsection{User Interface and Interaction Features}
 The system provides a range of interactive features to enhance the user experience and workflow integration:
 
 \begin{itemize}
-    \item \textbf{Question Suggessions:} After an answer is generated, the system proposes alternative and potential follow-up questions to the users initial question that the user can select with a single click.
+    \item \textbf{Question Suggestions:} After an answer is generated, the system proposes alternative and potential follow-up questions to the users initial question that the user can select with a single click.
     
-    \item \textbf{Document Viewer:} The documents retrieved during the search process can be viewed in an integrated file viewer and are also available for download.
+    \item \textbf{Document Viewer:} The documents retrieved during the search process can be viewed in an integrated file viewer and are available for download too.
     
-    \item \textbf{Feedback:} Users can provide individual feedback on the quality of responses.
+    \item \textbf{Feedback:} Users can provide individual feedback on their satisfaction with the LLM responses.
 
     \item \textbf{Copy Function:} Users can copy the answer provided by the LLM using a Copy Button
     
     \item \textbf{Quick Actions:} The system offers "Quick Actions," which are clickable shortcuts that allow users to perform subsequent tasks with the generated information, such as creating an email or generating a summary.
 \end{itemize}
 \section{Software features}
-First, this chapter presents the results of the developer workshops, namely the resulting concepts and their contribution to the GenAI success evaluation framework, as well as the prioritization and feedback by the developer team. Then, it describes the software features implemented during this thesis from a usage perspective and technically and presents the evaluation by the development team.
+This chapter presents the results of the developer workshops, namely the resulting concepts and their contribution to the GenAI success evaluation framework, as well as the prioritization and feedback by the developer team.
 \subsection{Measurements of the system quality}
 \subsubsection{Response Time Measurement}
 The first concept for determining the system quality of the RAG application is the measurement of its response time, defined as the duration from the submission of a user's query to the delivery of the complete answer. For a comprehensive analysis, this measurement should incorporate not only the raw duration but also key system factors to assess their impact. These factors include the specific language model (LLM) being used, and whether features such as Query Splitting or Query Reformulation were activated for the request.
 
 For the visualization of this data, a time-series diagram is proposed. The x-axis would represent the time and the y-axis the measured response time. To improve readability and highlight long-term developments, the chart should be smoothed, for instance, by displaying daily averages. The interface should also include interactive filters that allow for the inclusion of the different system factors. These filters would enable users to display data subsets, such as showing only the response times associated with a specific LLM or with Query Splitting enabled/disabled.
 
-The objective of this feature is to empower Use Case administrators to identify performance trends and retrospectively evaluate the impact of their own configuration decisions on response times. Furthermore, it allows them to better assess how different system factors influence system latency. These insights can, in turn, be used to train employees on the effective use of the system, for example, by providing better guidance on the performance implications of choosing a particular language model.
+The objective of this feature is to empower Use Case administrators to identify performance trends and retrospectively evaluate the impact of their own decisions on how to adapt the RAP sytem on response times. Furthermore, it allows them to better assess how different system factors influence the response time. These insights can, in turn, be used to train employees on the effective use of the system, for example, by providing better guidance on the performance implications of choosing a particular language model.
 
-During the workshop, the development team assigned a medium priority to this feature. In their feedback, they noted that while the feature would be straightforward to implement, they suspected that overall response times would not vary significantly. Therefore, they hypothesized that this analysis would likely not yield major conclusions.
+During the workshop, the development team assigned a \textbf{medium priority} to this feature. In their feedback, they noted that while the feature would be straightforward to implement, they suspected that overall response times would not vary significantly. Therefore, they hypothesized that this analysis would likely not yield major conclusions.
 
 \subsubsection{Error Rate Monitoring}
-A second concept proposed to evaluate system quality focuses on monitoring error rates to assess system stability and reliability. The core metrics to be captured are the absolute count and the percentage of user queries that result in a system error. For a more granular analysis, these error metrics can be combined with system factors (such as the selected LLM, or the activation state of Query Splitting and Reformulation) and with different, pre-defined error types.
+A second concept proposed to evaluate system quality focuses on monitoring error rates to assess system stability and reliability. The core metrics to be captured are the absolute count and the percentage of user queries that result in a system error. For a more granular analysis, these error metrics can be combined with the system factors (LLM selection and the activation state of Query Splitting and Reformulation) and with the different predefined error types and messages of the system.
 
-The visalization propsed for these data is a time-series diagram again. The x-axis would represent time, while the y-axis would display the amount or percentage of system errors. The interface is designed to be interactive, featuring filtering options for both system factors and error types. This allows for detailed analysis, such as comparing the error rates of different language models or analyzing the impact of query splitting and query reformulation on error rates.
+The visualization proposed for these data is again a time-series diagram. The x-axis would represent time, while the y-axis would display the amount or percentage of system errors. The interface is designed to be interactive, featuring filtering options for both system factors and error types. This allows for detailed analysis, such as comparing the error rates of different language models or analyzing the impact of query splitting and query reformulation on error rates.
 
 The workshop feedback showed different views on this feature's usefulness and priority. One group assigned it a \textbf{high priority}. They argued that system errors are a major problem that can stop people from using the application and cause them to lose interest. This view highlights the feature's role in keeping users engaged. A second group assigned it a \textbf{medium priority}, seeing it mainly as a diagnostic tool for developers. For them, the main benefit was helping the development team find and fix technical issues faster. This group strongly recommended that this monitoring view should be for internal use by the development team only. They reasoned that showing raw error statistics to Use Case administrators or end-users could damage their trust in the system, which is not in the interest of the RAG systems vendors. In the end, the feature was assigned a \textbf{medium priority} since the arguments from the critical perspective predominated the other ones.
 \subsection{Measurements of the knowledge quality}
-\subsubsection{Topic Maps}
-To better understand what information users are looking for, the concept of a "Topic Map" was developed. This feature is designed to visualize the main topics that appear in the RAG system. The map can generate these topics from three different data sources: the user queries themselves, the content of the documents retrieved by the system, or the knowledge assets that were accessed.
+\subsubsection{Topic Map}
+To better understand what information users are looking for, the concept of a "Topic Map" was developed. This feature is designed to visualize the main topics that appear in the RAG system. The map can display topics from three different data sources: the user queries themselves, the content of the documents retrieved by the system, or the knowledge assets that were accessed.
 
 The map is displayed as a bubble plot, where each bubble represents a specific topic. The positioning is semantic, meaning that topics with similar meanings are positioned closer to each other, and related topics are grouped by color. The size of each bubble shows how frequent or prominent a topic is. The feature also includes a time filter, which allows administrators to see how user interests and queried topics change over a specific period.
 
@@ -367,16 +367,16 @@ The development team rated the overall Topic Map feature as a \textbf{high prior
     
     \item \textbf{Topics from knowledge assets:} This was rated as a \textbf{low priority}. The team reasoned that use-case-administrators already know what their knowledge assets are about, so a visualization of these topics would likely offer little new insight.
 \end{itemize}
-\subsubsection{Task Type Map}
+\subsubsection{Task Type Analysis}
 To analyze user intent and behavior, the concept of a "Task Type Map" was introduced. In contrast to the Topic Map, which focuses on \textit{what} users ask, this feature classifies queries based on \textit{how} users interact with the system. The primary goal is to understand the different ways the application is used, which can provide valuable insights for improving user workflows.
 
 The initial concept proposed displaying this data in a bubble plot, similar to the Topic Map, where bubble size would represent the frequency of each task type. However, the team questioned this visualization during the workshop. They pointed out that the semantic relations of the different task types do not matter in this case since only predefined task types will be assigned to the user queries which makes a semantic interpretation of the different task types themselves obsolete. As a more practical alternative, the team suggested that a \textbf{bar chart} would be better suited to compare the frequencies of these distinct task categories.
 
 Despite the discussion on the best visualization method, the development team assigned the Task Type Map a \textbf{high priority}. They agreed that understanding the primary ways the system is used is crucial. This information can help to improve and streamline common user workflows and better tailor the system to user behaviors.
 \subsubsection{Quality of Retrieval and Response}
-A crucial concept for evaluating the system is the direct measurement of its output quality. This feature focuses on assessing both the relevance of the retrieved documents and the quality of the final, generated response. The main goal is to establish metrics for how well the system performs to ensure users receive helpful and accurate answers.
+An important concept for evaluating the system is the measurement of its output quality. This feature focuses on assessing both the relevance of the retrieved documents and the quality of the generated response. The main goal is to establish metrics for how well the system performs to ensure that users receive accurate and helpful answers.
 
-The discussion highlighted that there is no single, perfect way to measure quality automatically. Therefore, the team proposed different approaches that could suite the quality measurement:
+The discussion highlighted that there is no single and perfect way to measure quality automatically. Therefore, the team proposed different approaches that could suite the quality measurement:
 
 \begin{itemize}
     \item \textbf{AI as a Judge:} Using a separate LLM or another AI model to automatically score the quality of a given response.
@@ -384,26 +384,26 @@ The discussion highlighted that there is no single, perfect way to measure quali
     \item \textbf{User Behavior Analysis:} Using indirect metrics, such as counting the number of follow-up or rephrased questions. A high number could suggest that the initial response was unsatisfactory.
 \end{itemize}
 
-The results, such as the percentage of "good" and "bad" responses, would be displayed in a time-series chart. This would also include filters for system factors (like the model selection or Query Splitting) to see how they affect quality.
+The results would be displayed in a time-series chart with the x-axis representing the time and the y-axis representing the quality of the system's responses. The system factors (the model selection, Query Splitting and Reformulation) also be included as filtering options as described before to see how they affect quality.
 
-The development team unanimously assigned this feature a \textbf{high priority}, describing it as one of the most critical factors for the project's success. The team emphasized that guaranteeing high-quality results is essential for user retention; if users do not get good answers, they will stop using the system. While they acknowledged the challenge of finding a truly reliable automated quality metric, they agreed that developing good proxies for quality was vital.
-\subsubsection{Combined Quality and Topic/Task Map}
-Another concept presented in the workshop was a combination of the previous ideas into a single, powerful visualization. This "Combined Quality and Topic/Task Map" was designed to connect the system's performance quality directly with the specific topics or task types being handled. The goal is to identify patterns and understand if the system's quality varies for different kinds of user queries.
+The development team unanimously assigned this feature a \textbf{high priority}, describing it as one of the most critical factors for the RAG success. The team emphasized that guaranteeing high-quality responses is essential for user retention - if users do not get good answers, they will stop using the system.
+\subsubsection{Combined Quality and Topic/Task Analysis}
+Another concept proposed in the workshop was a combination of the previous ideas on quality measurements and topic/task type analysis into a single visualization. This "Combined Quality and Topic/Task Analysis" was designed to connect the system's performance quality directly with the specific topics or task types being handled. The goal is to identify patterns and understand if the system's quality varies for different kinds of user queries.
 
-This feature uses the bubble plot from the Topic or Task Type maps as its foundation. The positioning of the bubbles (semantic similarity) and their color (topic clusters) remain the same, as does the sliding time window for dynamic analysis. The crucial change lies in the meaning of the bubble size. Instead of representing the frequency of a topic, the size of each bubble now represents the average retrieval or response quality for that topic. For example, a large bubble could signify a topic with consistently high-quality answers, while a smaller bubble might indicate a topic where the system often performs poorly.
+This feature uses the bubble plot from the Topic as its foundation. The positioning of the bubbles (semantic similarity) and their color (topic clusters) remain the same, as does the sliding time window for dynamic analysis. The crucial change lies in the meaning of the bubble size. Instead of representing the frequency of a topic, the size of each bubble now represents the average retrieval or response quality for that topic. For example, a large bubble could signify a topic with consistently high-quality answers, while a smaller bubble might indicate a topic where the system often performs poorly.
 
 The development team assigned this combined view a \textbf{high priority}. The key benefit they identified was the ability to find patterns between query types and the quality of the results. By using this map, administrators could quickly see if a specific topic area suffers from low-quality answers or if certain task types are handled better than others. This information is critical for making targeted improvements and focusing development efforts on the areas where the system is weakest.
 \subsubsection{Combined Task Type and Topic Analysis}
-Another concept was proposed to analyze the relationship between the topics users ask about and the tasks they are trying to perform. This feature is designed to identify the specific user intents that are associated with different topics. The goal is to answer questions such as, "When users ask about Topic X, are they typically looking for a summary, or are they asking for a specific data point?" This provides a deeper understanding of user behavior within different knowledge domains.
+Another concept was proposed to analyze the relationship between the topics users ask about and the tasks they are trying to perform. This feature is designed to identify the specific user intents that are associated with different topics. This provides a deeper understanding of user behavior within different knowledge domains.
 
 For this analysis, a new visualization method was suggested: a \textbf{heatmap}. In this chart, the rows would represent the various topics identified in the system, while the columns would represent the different task types (e.g., knowledge query, summarization). The color intensity of the cell where a topic and task type intersect would indicate how frequently that specific combination has occurred. For example, a darker cell would show that a particular task is performed very often in connection with a given topic.
 
-The feedback for this feature was positive, with priority ratings ranging from \textbf{medium} to \textbf{high}. The team agreed that this analysis could provide "good insights" into user behavior. Understanding which tasks are most common for high-interest topics could help administrators better structure content or create more relevant "Quick Actions" to improve the user experience for those specific topics.
+The team agreed that this analysis could provide "good insights" into user behavior and assigned a \textbf{medium to high priority}. Understanding which tasks are most common for high-interest topics could help administrators better structure content or create more relevant "Quick Actions" to improve the user experience for those specific topics.
 \subsection{Measurements of the service quality}
 \subsubsection{User Interactivity Tracking}
-To evaluate the service quality of the application, a concept for tracking user interactivity was discussed. The idea is to monitor and count a wide range of specific user events that happen during a session. This approach looks beyond the initial query to understand the user's complete interaction, including actions like copying an answer, viewing a source document, or providing direct feedback.
+To evaluate the service quality of the application, a concept for tracking user interactivity was discussed. The idea is to monitor and count a wide range of specific user events that happen during a session. This approach tries to make the whole user interaction interpretable and therefore includes analyses interactions like copying an answer, viewing a source document, or providing direct feedback.
 
-The data would be visualized in a time-series diagram, showing the frequency of these different events over a selected period. A key aspect of this concept is to also provide context or an interpretation of what each event could mean. For example, a high number of users opening source documents might indicate they are actively verifying the system's answers, while frequent "deep-dive" follow-up questions could suggest that the initial answers lacked sufficient detail.
+The data would be visualized in a time-series diagram, showing the frequency of these different events over a selected period. A key aspect of this concept is to also provide the use case admins with context or an interpretation of what each measurements for the different interaction types could mean. For example, a high number of users opening source documents might indicate they are actively verifying the system's answers, while frequent follow-up questions could suggest that the initial answers lacked sufficient detail.
 
 The team assigned this feature an overall \textbf{medium priority}, which led to a detailed discussion about which specific events were the most valuable to track. A central point of the debate was data redundancy. Some team members argued for a lower priority on tracking metrics like the number of questions or raw feedback counts, as this data was already present in other specialized dashboards.
 
@@ -419,21 +419,21 @@ A specific challenge that arose from tracking user interactivity was how to corr
 
 The recommendation from the workshop was to adopt a pragmatic hybrid strategy. The consensus was to start with the "simple distinction" method first, as it is easy to implement and has no operational cost. If this heuristic proves insufficient for reliably separating the two question types, the team could then explore using an AI judge as a second step. This approach was favored due to concerns that the AI judge would be expensive to run and might not guarantee reliable results.
 \subsubsection{Knowledge Gap Detection}
-The final concept proposed under service quality is "Knowledge Gap Detection," which aims to identify areas where the system or users may lack adequate knowledge. This feature builds upon the topic analysis discussed earlier (Section \ref{sec:topic_maps}) by leveraging the detected topics from user queries, retrieved documents, and knowledge assets. The goal is to highlight two distinct types of knowledge gaps:
+The last concept proposed for measuring service quality is "Knowledge Gap Detection," which aims to identify areas where the system or the users may lack adequate knowledge. The goal is to highlight two distinct types of knowledge gaps:
 
 \begin{enumerate}
-    \item \textbf{Knowledge gap within the system:} This occurs when the topic of a user's question aligns with the topic of a relevant knowledge asset, but the documents actually retrieved by the system for that query do not adequately fit the topic. This suggests an internal deficiency in the system's ability to retrieve the correct information, despite the knowledge theoretically existing within its accessible sources. This could be due to issues with indexing, retrieval algorithms, or the structuring of the knowledge assets themselves.
+    \item \textbf{Knowledge gap within the system:} This occurs when the topic of a user's question aligns with the topic of a relevant knowledge asset, but the system fails at retrieving relevant documents. This suggests an internal deficiency in the system's ability to retrieve the correct information, despite the knowledge theoretically existing within its accessible sources. This could be due to issues with indexing, retrieval algorithms, or the structuring of the knowledge assets themselves.
     \item \textbf{User knowledge gap:} This refers to situations where the topic of the user's question does not align with the topic of any relevant knowledge asset. This indicates that the user is searching for information that is either not present in the system's knowledge base or is not categorized in a way that allows for effective retrieval. This gap highlights potential areas where new knowledge assets might need to be created or where user training on system scope might be beneficial.
 \end{enumerate}
 
 For visualization, it is proposed to track the occurrences of these knowledge gap types over time and display them in a time-series diagram. The x-axis would represent time, while the y-axis would indicate the frequency of each gap type. This allows administrators to observe trends in knowledge gaps and identify if certain periods or topics are more prone to these issues.
 
-During the workshops, the development team assigned a \textbf{medium to high priority} to the "Knowledge gap detection" feature, specifically emphasizing its importance for analyzing system data. The ability to identify internal system knowledge gaps was considered crucial for pinpointing areas where the RAG mechanism or the underlying knowledge base needs improvement. The mechanism for checking topic alignment---whether topics "fit together"---was discussed. The proposed approach involves utilizing existing topic modeling techniques or semantic similarity measures (e.g., cosine similarity of embeddings) to compare the topics extracted from user queries, retrieved documents, and knowledge assets. If the similarity score falls below a predefined threshold, a mismatch, and thus a potential gap, is flagged. While the concept of detecting "user knowledge gaps" (point 'b') was acknowledged, it was generally viewed as less critical for immediate system improvement from a vendor perspective, leading to an overall \textbf{medium} priority for this aspect. The primary focus remains on improving the system's ability to leverage its existing knowledge effectively.
+During the workshops, the development team assigned a \textbf{medium to high priority} to the "Knowledge gap detection" feature, specifically emphasizing its importance for analyzing system data. The ability to identify internal system knowledge gaps was considered crucial for pinpointing areas where the RAG mechanism or the underlying knowledge base need improvement. The mechanism for checking topic alignment---whether topics "fit together"---was discussed. The proposed approach involves utilizing existing topic modeling techniques or semantic similarity measures (e.g., cosine similarity of embeddings) to compare the topics extracted from user queries, retrieved documents, and knowledge assets. If the similarity score falls below a predefined threshold, a mismatch, and thus a potential gap, is flagged. While the concept of detecting "user knowledge gaps" (point 'b') was acknowledged, it was generally viewed as less critical for immediate system improvement from a vendor perspective, leading to an overall \textbf{medium} priority for this aspect. The primary focus remains on improving the system's ability to leverage its existing knowledge effectively.
 \subsection{Implementation Roadmap}
 Finally, after discussion with the development team, the following roadmap for implementing the proposed software features was agreed upon:
 \begin{enumerate}
-    \item Implementation of a central data structure
-    \item Implementation of a caching logic
+    \item Implementation of the tracking system for the user interactions
+    \item Implementation of a caching logic for performance optimization
     \item Topic maps
     \item Quality of retrieval/responses
     \item Combination of quality and topic/task type maps
