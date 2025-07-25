@@ -446,12 +446,84 @@ Finally, after discussion with the development team, the following roadmap for i
 \end{enumerate}
 This roadmap was particularly important because it was clear from the beginning that not all of the proposed features could be implemented within the timeframe of this thesis due to time constraints. Therefore, prioritizing the concepts was essential to ensure that the most important features could be developed and integrated first.
 \section{Description of the implemented software features}
-\subsection{Topic maps}
-\subsection{Task type maps}
-\subsection{Quality of the retrieval and the generated responses}
-\subsection{Combining quality with task types and topics}
-\subsection{Combination of task type and topics}
+The following section describes the software features that were implemented in the RAG system. For each feature, the description will cover its integration into the user flow as well as its technical implementation.
+\subsection{Tracking system and GDPR compliance}
+The foundation of the tracking system is BigQuery, a scalable, high-performance data warehouse solution from Google. As it is natively integrated into the Google Cloud Platform (GCP), it is well-suited for analyzing the application's user data.
 
+To record the data, a Google Cloud Run service is used, which receives data from the RAG application's Vue-based frontend via HTTP and writes it to BigQuery. These HTTP calls are executed asynchronously and in parallel with the rest of the application's requests. This ensures that the tracking process does not interfere with the performance or usability of the RAG application.
+The foundation of the tracking system is Google's BigQuery, a scalable, high-performance data warehouse solution. As it is natively integrated into the Google Cloud Platform (GCP), it is well-suited for the analysis of user data.
+
+To record the data, a Google Cloud Run service is used, which receives data from the RAG application's Vue-based frontend via HTTP and writes it to BigQuery. These HTTP calls are executed asynchronously and in parallel with the rest of the application's requests. This ensures that the tracking process does not interfere with the performance or usability of the RAG application. The tracking system supports the recording of the following interaction types:
+\begin{itemize}
+    \item \textbf{Question Asked:} A user submits a new query.
+    \item \textbf{Documents Received:} The system retrieves a set of source documents.
+    \item \textbf{Answer Received:} The LLM generates a final response.
+    \item \textbf{Quick Action Used:} A user uses Quick Action.
+    \item \textbf{Alternative Question Asked:} A user asks an alternative question.
+    \item \textbf{Follow-Up Question Asked:} A user selects a system-suggested follow-up question.
+    \item \textbf{Source Document Opened:} A user opens a source document to view its contents.
+    \item \textbf{Feedback Provided:} A user gives feedback on a generated answer.
+    \item \textbf{Model Selected:} A user changes the language model for the conversation.
+    \item \textbf{Query Reformulation Used:} The query reformulation feature is activated.
+    \item \textbf{Query Splitting Used:} The query splitting feature is activated.
+    \item \textbf{Copy Button Clicked:} A user copies the text of the generated answer.
+    \item \textbf{Filtering Used:} A user applies a metadata filter for the search.
+\end{itemize}
+To maintain the context of a conversation, interactions belonging to a chat or thread within a Use Case are also tracked. In BigQuery, the chat is recorded as a "SessionChat" and the thread is recorded as a "Session". This structure makes it possible to determine which interactions were triggered within the same chat or thread.
+
+For compliance with GDPR (DSGVO) regulations, these chats and threads are pseudonymized. This means that pseudonymized IDs are used to prevent a chat or thread from being linked back to a specific user, removing the possibility of subsequent re-identification. Furthermore, a table was created containing a justification for why the recording is necessary for every single data point that is tracked to make the tracking system GDPR compliant.
+\subsection{Data flow and data preprocessing}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{images/DataFlow_Bachelorthesis.drawio.png}
+    \caption{Dataflow}
+    \label{fig:enter-label}
+\end{figure}
+The data flow for the dashboard system, as illustrated in the preceding diagram, can be broken down into three primary processes:
+
+\begin{enumerate}
+    \item \textbf{Data Collection:} As described before, when a user interacts with the system these interactions, such as asking a question or clicking a button, triggers an event that is sent via an HTTP request to a \textbf{Cloud Run Service}. The purpose of this service is to receive these events and insert the raw interaction data into \textbf{BigQuery}.
+
+    \item \textbf{Data Preprocessing:} To ensure the dashboards are performant and can display analytics quickly, the data is preprocessed since some of the calculation steps have a long runtime (more details on that later). Instead, an automated preprocessing job is run. A \textbf{Cloud Scheduler} is configured to trigger a \textbf{Cloud Run Service} at configurable regular intervals. This service reads the raw data from \textbf{BigQuery}, performs the necessary calculations to prepare the data for displaying in the dashboard, and writes the processed data back into new tables within \textbf{BigQuery}.
+
+    \item \textbf{Data Visualization:} When a user opens a dashboard in the \textbf{Vue Frontend}, a request is sent to a \textbf{Cloud Run Service} that functions as a backend for the dashboard. This service queries the prepared, preprocessed data from \textbf{BigQuery}. It then sends this data back to the \textbf{Vue Frontend}, which renders the final charts and visualizations for the user. This architecture ensures that user requests are served quickly, as the complex data processing has already been handled before.
+\end{enumerate}
+\subsection{The Welcome Page}
+The first page a Use Case administrator sees when accessing the dashboard is the Welcome Page. This page serves as a central starting point, providing instructions on how to use the dashboard system and offering short descriptions for each of the available analytical metrics. As shown in the screenshot, the user receives guidance on the general workflow in a "Getting Started" section. Above this, a selection of cards introduces the different metrics of the dashboard. From here, the administrator can begin their analysis by selecting one of the metrics to explore.
+\subsection{Answer Quality}
+\subsubsection{User Flow}
+The answer quality feature was implemented to provide Use Case administrators with a time-series chart, as outlined in the initial feature concept. This chart allows them to observe trends in answer quality over time and draw conclusions about the success of their own measures. The diagram displays the four quality metrics previously discussed: Relevance, Completeness, Accuracy, and Faithfulness. To provide a clearer overview, the values are smoothed to show the daily averages over the selected period. In addition to filtering by Use Case and date range, the dashboard also displays the overall average values for each metric above the chart, enabling a quick analysis of the entire period. The chart is interactive, allowing users to hide individual lines for better focus and use tooltips to analyze specific data points in detail.
+
+\subsubsection{Technical Implementation}
+During the workshops, three technical options were proposed for this feature: evaluation using binary metrics, analysis of user behavior, or using an AI model as a "judge". The binary metric and user behavior analysis were considered to be less accurate proxies for quality, as both methods only indirectly evaluate the content of the generated response. This is obvious in the case of user behavior analysis, which only looks at the user's subsequent questions, not the answer itself. The binary analysis is also limited, as it primarily checks if the RAG system could assemble relevant information but does not assess the qualitative aspects of that information.
+
+Therefore, the decision was made to implement the AI evaluation variant. In this implementation, a language model is provided with the user's query, the retrieved source documents, and the final answer. Using a prompt template that contains detailed instructions for determining the different quality metrics, the AI "judge" then assesses the answer and calculates the scores.
+\subsection{Document quality}
+\subsubsection{User Flow}
+The Document Quality feature was implemented in a manner similar to the Answer Quality feature, based on the concepts developed in the workshops. For each user query, this dashboard displays a time series that shows several metrics related to the retrieved documents: the average, highest, and lowest relevance scores, as well as the total number of documents. The technical basis for relevance is described in the next section. These values are presented as smoothed daily averages in a time-series chart to make it easier for the administrator to analyze trends. The dashboard also includes options to filter by Use Case and time period, and the overall averages for each metric are displayed as KPI cards above the chart. The chart itself is interactive, allowing administrators to use tooltips for detailed analysis of specific data points and to toggle the visibility of individual time series.
+
+\subsubsection{Technical Implementation}
+To determine the document quality metrics, the implementation uses the relevance scores that are calculated by the system's reranker during the retrieval process. This approach was chosen to avoid the additional costs associated with using another AI model for a separate evaluation. These reranker scores, which are generated by a cross-encoder, already provide an assessment of how well the retrieved documents match the user's query. From these scores, the system then simply calculates the average, highest, and lowest relevance value for each query, as well as the total number of documents retrieved.
+\subsection{Topic maps}
+\subsubsection{User Flow}
+The Topic Maps are presented to the user as a bubble plot. In this visualization, each bubble represents an individual user question. The position of each bubble in the chart is determined by its semantic meaning, with topically similar questions appearing closer together than dissimilar ones. Furthermore, the questions are thematically grouped using a clustering algorithm. Each cluster is assigned a unique color in the chart and is displayed with a descriptive title in the legend. The dashboard allows administrators to filter the view by Use Case and date range, enabling them to analyze how the thematic composition of user queries changes over time. Tooltips are also available to show details for each individual question bubble.
+
+\subsubsection{Technical Implementation}
+Technically, the Topic Maps are generated by first embedding all user queries using the \texttt{gemini-embedding-001} model in its clustering mode. These embeddings are then clustered using the HDBSCAN algorithm. To achieve robust results across varying amounts of data, the input parameters for HDBSCAN, specifically \texttt{min\_cluster\_size} and \texttt{min\_samples}, are dynamically adjusted based on the total number of queries being analyzed. This adaptive approach ensures sensible clustering for both small and large datasets.
+
+After clustering, a language model uses a prompt template to generate a descriptive title for each cluster based on a sample of its questions; this title is then displayed in the legend. Finally, to visualize the 3072-dimensional vectors produced by the embedding model, their dimensionality is reduced to two dimensions using the t-SNE technique, allowing them to be plotted on the 2D chart.
+\subsection{Task type analysis}
+\subsubsection{User flow}
+\subsubsection{Technical implementation}
+\subsection{Combining quality with topic maps}
+\subsubsection{User flow}
+\subsubsection{Technical implementation}
+\subsection{Combining quality with task types}
+\subsubsection{User flow}
+\subsubsection{Technical implementation}
+\subsection{Combination of task type and topics}
+\subsubsection{User flow}
+\subsubsection{Technical implementation}
 \section{Final feedback from the development team}
 
 %---------------------------------------------------------------------%
