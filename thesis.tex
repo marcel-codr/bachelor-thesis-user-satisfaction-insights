@@ -146,7 +146,11 @@
 %----------------------------- Abstract ------------------------------%
 %---------------------------------------------------------------------%
 \chapter*{Abstract}
-Der Abstract fasst den Inhalt der Abschlussarbeit auf maximal einer halben Seite zusammen. Ziel des Abstracts ist es, dem Leser einen möglichst schnellen Überblick über den Inhalt der Arbeit zu verschaffen und die wesentlichen Ergebnisse darzustellen. Mögliche Inhalte sind die Zielsetzung oder Forschungsfrage der Arbeit, verwendete Theorien, die verwendete Methodik sowie eine kurze Darstellung der zentralen Ergebnisse und Beiträge.
+The success of Retrieval-Augmented Generation (RAG) applications in enterprises depends significantly on their quality and stability. However, without systematic evaluation, system administrators lack the data-driven insights necessary to identify weaknesses and justify improvement measures. This bachelor's thesis addresses this challenge through the design, development, and evaluation of a comprehensive analytics dashboard for the automatic success measurement of an internal enterprise GenAI application.
+
+Based on the IS Success Model by DeLone and McLean and applying the Design Science Research methodology, an artifact in the form of an integrated dashboard was created in close collaboration with a development team. It offers administrators multifaceted insights into the dimensions of information quality and user behavior. The core implemented features include the AI-based evaluation of answer and document quality, the visualization of topic clusters using Topic Maps, and the analysis of Task Types. Combined views allow for the direct correlation of quality metrics with specific topics and tasks to precisely identify knowledge gaps and optimization potential.
+
+The evaluation by the development team confirmed the dashboard's significant value and practical relevance. The feedback was particularly positive regarding the design and interactivity, while also providing important direction for future iterations, especially concerning the improvement of user guidance for non-technical users and the addition of drill-down functionalities to enhance actionability. Furthermore, a cost analysis revealed that the analytics functions add a manageable overhead of approximately 20\% to the LLM-related costs. In summary, this work provides a validated and practically tested foundation for the data-driven success measurement of enterprise GenAI systems.
 
 \tableofcontents
 
@@ -187,7 +191,6 @@ KMS                 &   Knowledge Management System \\
 %---------------------------------------------------------------------%
 
 \onehalfspacing
-\chapter{Introduction}
 % Umstellen auf arabische Seitenzahlen. Die Anzahl der bisherigen
 % Seiten wird zwischengespeichert, da die römische Nummerierung am
 % Ende des Dokuments fortgesetzt werden soll.
@@ -220,7 +223,12 @@ Beispiele:
 
 \section{Zitierungen}
 Wörtliche Zitate, die sich über mind. drei Textzeilen erstrecken, sind mit der "Zitat" zu formatieren. Alle anderen Zitate erhalten die gleiche Formatierung wie der restliche Fließtext \parencite{buxmann2015softwareindustrie}.
+\chapter{Introduction}
+Generative AI (GenAI) has seen explosive growth, exemplified by ChatGPT becoming the fastest-growing application in history. This rapid adoption highlights the immense potential of GenAI, not only in the private sector but also within the modern business world, where it is seen as a significant driver of corporate growth. Projections underscore this, suggesting that GenAI could increase Germany's GDP by up to \EUR{585} billion by 2040. For enterprise applications, \textbf{Retrieval-Augmented Generation (RAG)} has emerged as a particularly suitable technology, as it enhances Large Language Models (LLMs) by connecting them to proprietary knowledge bases. This approach improves the traceability of answers and reduces the risk of hallucinations by grounding the model in a specific data basis.
 
+Despite these advantages, the success of enterprise RAG applications is not guaranteed. These systems can be unstable, leading to incorrect or inadequate results. Common failure points include the system failing to provide an answer even when the information is available, generating a false answer by misinterpreting context, or returning an incomplete response. As organizations invest in and deploy these powerful but complex systems, a critical management challenge emerges: How can the success of a GenAI application be reliably measured and monitored over time? Without systematic evaluation, system administrators lack the data-driven insights needed to identify weaknesses, justify improvements, and ultimately ensure that the system delivers a positive return on investment.
+
+This thesis addresses this management challenge directly. It documents the design, development, and evaluation of a comprehensive analytics dashboard created to automatically measure the success of an enterprise GenAI application. Grounded in the theoretical framework of the DeLone and McLean IS Success Model, the artifact provides system administrators with multifaceted insights into information quality, system performance, and user interaction patterns. Following a Design Science Research (DSR) methodology, the features of this dashboard were conceptualized and evaluated in close collaboration with the development team of an existing RAG system, ensuring both academic rigor and practical relevance.
 %---------------------------------------------------------------------%
 %------------------------------ Theoretical Background ---------------%
 %---------------------------------------------------------------------%
@@ -514,32 +522,164 @@ Technically, the Topic Maps are generated by first embedding all user queries us
 After clustering, a language model uses a prompt template to generate a descriptive title for each cluster based on a sample of its questions; this title is then displayed in the legend. Finally, to visualize the 3072-dimensional vectors produced by the embedding model, their dimensionality is reduced to two dimensions using the t-SNE technique, allowing them to be plotted on the 2D chart.
 \subsection{Task type analysis}
 \subsubsection{User flow}
-\subsubsection{Technical implementation}
-\subsection{Combining quality with topic maps}
-\subsubsection{User flow}
-\subsubsection{Technical implementation}
-\subsection{Combining quality with task types}
-\subsubsection{User flow}
-\subsubsection{Technical implementation}
-\subsection{Combination of task type and topics}
-\subsubsection{User flow}
-\subsubsection{Technical implementation}
-\section{Final feedback from the development team}
+The task type analysis was implemented as a time-series diagram. It was noted in the workshop that a bubble plot would be unsuitable for this feature, as the semantic relationship between the discrete task types is not important. A bar chart was suggested as an alternative. However, a time-series chart was ultimately implemented because, in addition to showing numerical values, it also allows for the analysis of trends over time. This chart displays the days on the x-axis and, on the y-axis, the number of times an individual task type occurred in user queries on a given day.
 
+The system recognizes and displays the following task types:
+\begin{itemize}
+    \item Question Answering
+    \item Summarization
+    \item Content Creation
+    \item Code Generation
+    \item Rewriting
+    \item Translation
+    \item Data Analysis
+    \item Other
+\end{itemize}
+
+The dashboard also provides options to filter by Use Case and time period. The chart is interactive, supporting tooltips for detailed analysis and the ability to toggle the visibility of each time series. Furthermore, to provide the at-a-glance summary that a bar chart would have offered, the overall percentage distribution of each task type for the entire selected period is displayed above the chart.
+
+\subsubsection{Technical implementation}
+Technically, a language model assigns each user query to a specific task type. This is done using a prompt template that contains detailed instructions and descriptions for each category. The prompt template receives the user's question, the final answer, and the retrieved documents as input parameters. To save costs, the quality evaluation (as described previously) and the task type assignment were combined into a single prompt. Therefore, for this classification task, the language model receives more inputs than just the user query.
+\subsection{Combining answer and document quality with topic maps}
+\subsubsection{User Flow}
+In the Topic Map view, administrators can choose to display the various collected quality scores for both document and answer quality directly on the bubble plot. When a quality metric is selected from a dropdown menu, the colors of the bubbles change. Instead of indicating cluster membership, the color now represents the selected quality score, with greener colors indicating better values (closer to 1) and redder colors indicating poorer values (closer to 0). The tooltips are also updated to display the relevant quality metrics for each question instead of its cluster information.
+
+Additionally, a detail view is available which presents a table with an overview of either the document or answer quality metrics for all questions within a specific cluster. The administrator can select both the cluster and the set of metrics to be displayed using dropdown menus.
+
+This feature allows for the identification of concrete knowledge gaps for specific topics within a Use Case. By analyzing quality in the context of topics, an administrator can determine which subjects are being answered well and which are not. If a topic is performing unexpectedly poorly, the administrator can use this analysis to recognize the issue and initiate countermeasures, such as adding new source documents to the knowledge base.
+
+\subsubsection{Technical Implementation}
+Technically, this feature is enabled through simple \texttt{JOIN} operations in the BigQuery queries. This allows the quality metrics for each question to be queried and merged with the topic map data at the time of the request.
+\subsection{Combining quality with task types}
+\subsubsection{User Flow}
+The combination of quality and task types is also presented to users as a time-series diagram. In this view, the administrator can select a specific quality metric (from either document or answer quality) using dropdown menus. The chart then displays the performance of this chosen metric over time, with each line representing a different task type (e.g., "Question Answering," "Summarization"). This allows for a direct comparison of how quality differs across various user intents.
+
+As in the other dashboards, the data is smoothed by displaying daily averages. Users can filter the data by Use Case and time period. Above the chart, KPI cards display the overall average values for the relevant quality metrics across the entire selected period. The chart itself is interactive, offering tooltips for a detailed daily breakdown of quality per task type, and the ability to show or hide the lines for specific task types to focus the analysis.
+
+\subsubsection{Technical Implementation}
+Technically, the data for this view is queried using simple \texttt{JOIN} operations on the necessary tables in BigQuery.
+\subsection{Combination of task type and topics}
+\subsubsection{User Flow}
+The final implemented feature is the combination of task type and topic. This analysis is presented to the user as a heatmap. In this visualization, the horizontal axis represents the individual task types, while the vertical axis represents the respective semantic clusters. Each question that belongs to a specific task type and a specific cluster is counted in the cell where the two overlap. Cells with higher total values are colored more darkly than cells with lower values. It is also possible to filter the display for a specific time period and to restrict the view to a single Use Case.
+
+\subsubsection{Technical Implementation}
+Here as well, the data is queried through simple \texttt{JOIN} operations on the necessary tables in BigQuery.
+
+\subsection{Relative Operational Cost Comparison}
+To assess the financial impact of the implemented analytics features, a detailed, relative comparison of operational costs was conducted. The analysis focused specifically on the additional Large Language Model (LLM) and embedding costs incurred by the new analytics pipeline for each user query. This additional cost was then compared to the baseline LLM cost of the main RAG query-response chain. To create a focused comparison, several cost factors were intentionally excluded, most notably data retrieval costs from the Datastore, as well as negligible costs from BigQuery and Cloud Run. This means the resulting percentages represent a \textbf{maximum relative increase}, as including the other baseline costs would lower the final figure.
+
+Two primary scenarios were analyzed to understand the cost impact under different conditions:
+
+\begin{itemize}
+    \item \textbf{Scenario 1: Simple RAG Chain.} The baseline was a simple query using one call to the most capable model (\texttt{Gemini-2.5-Pro}). The additional analytics features require one call to a balanced model (\texttt{Gemini-2.0-Flash}) for the quality and task type evaluation and one call to the embedding model (\texttt{Gemini-Embedding-001}) for the topic map analysis. In this scenario, the relative cost increase was calculated to be \textbf{24\%}.
+
+    \item \textbf{Scenario 2: Complex RAG Chain.} This scenario assumed a more advanced baseline chain that already included features like Query Reformulation and Splitting, which require several additional calls to smaller, faster models. When the same analytics features were added to this more expensive baseline, their relative cost increase was lower, calculated at approximately \textbf{18\%}.
+\end{itemize}
+
+From these scenarios, it was concluded that the analytics features add approximately \textbf{20\%} to the direct LLM-related costs, depending on the complexity of the underlying RAG chain. It is important to contextualize this increase: the cost is comparable to that of other advanced features already in the system. Furthermore, the analysis identified that the primary cost drivers for the entire system were Networking and Cloud Run services, not LLM usage. Therefore, the introduction of the new analytics features is not expected to significantly impact the total operational budget.
+
+\section{Final Feedback from the Development Team}
+Finally, the development team was asked to provide final feedback on the implemented software features in a dedicated workshop. During this session, the fundamental goal of the thesis—evaluating GenAI Success—was first recapped. Following this, each new analytics feature was presented in a live demonstration, with an explanation of how it contributes to the overall evaluation goal. To conclude the workshop, the developers provided structured feedback by filling out a detailed questionnaire, the complete results of which can be found in the appendix.
+
+Overall, the feedback from the development team was highly positive and constructive. The general design, interactivity, and visual presentation of the dashboards were praised, with comments describing them as well-designed and intuitive for technical users. The analysis of the detailed feedback revealed several key themes and areas for potential improvement:
+
+\paragraph{Clarity and User Onboarding} A primary theme that emerged was the need for enhanced clarity, particularly for non-technical administrators. Recurring suggestions included adding more detailed legends to explain what metrics like "Faithfulness" mean, providing concrete examples to help users interpret the scores, and adding automated, LLM-generated summary statements to explain the main takeaways from a chart in plain language.
+
+\paragraph{Visualization Optimization} While the charts were considered visually appealing, the team provided feedback on optimizing the choice of visualization for the specific data. For instance, they suggested that for comparing static distributions like task types, a bar chart might be more effective than a time-series diagram, which is better suited for showing trends. Other suggestions included making clusters in the topic map more visually distinct and using different shapes in line charts for better accessibility.
+
+\paragraph{Actionability and Drill-Down} There was a strong desire to connect the high-level insights to concrete actions. The team suggested adding drill-down capabilities to go from an aggregated metric (e.g., a low quality score for a topic) to the specific source documents or conversations causing the issue. This would allow administrators to move directly from identifying a problem to addressing it.
+
+\paragraph{Trust in AI-Generated Metrics} The developers also provided a nuanced perspective on the AI-based evaluations. They noted that an LLM evaluating its own output is inherently prone to error and that these scores should be viewed as reliable indicators rather than absolute ground truth. Adding disclaimers to the UI to manage user expectations was recommended.
+
+In conclusion, from the development team's perspective, the implemented features provide significant value for assessing GenAI success and represent a strong foundation for future work. The feedback suggests that the primary focus for subsequent iterations should be on improving the onboarding experience for non-technical users and enhancing the actionability of the dashboards by enabling more granular drill-downs.
 %---------------------------------------------------------------------%
 %------------------------------ Discussion ---------------------------%
 %---------------------------------------------------------------------%
+Of course. Here is a complete "Discussion" chapter for your thesis, written in English and formatted in LaTeX. It follows the structure recommended for a TU Darmstadt thesis and synthesizes the results, feedback, and personal notes from our entire conversation.
+
 \chapter{Discussion}
+This chapter provides a comprehensive discussion of the results presented in this thesis. The primary goal of this work was to develop an artifact to automatically evaluate the success of an enterprise GenAI application. The discussion will begin by interpreting the key findings in the context of the initial research question. Subsequently, the limitations of the developed artifact and the research methodology will be critically examined. Finally, the implications for both theory and practice will be outlined, followed by a concrete outlook on future research opportunities.
+
+\section{Interpretation of the Results}
+The central result of this thesis is the successful development and implementation of a multifaceted analytics dashboard integrated into an existing enterprise RAG system. This artifact was designed to provide Use Case administrators with the necessary tools to evaluate and improve the success of their GenAI applications, directly addressing the initial research question.
+
+\paragraph{Connecting to the IS Success Model} The implemented features can be directly mapped to the dimensions of the DeLone and McLean IS Success Model, which served as the theoretical foundation for this work.
+\begin{itemize}
+    \item \textbf{Information Quality} is addressed through the \textit{Answer Quality}, \textit{Document Quality}, and \textit{Topic Map} features. These dashboards provide direct insights into the relevance, accuracy, and completeness of the information provided by the system and allow administrators to identify knowledge gaps by analyzing the topics users are asking about. This directly operationalizes the "Richness" and "Linkages" components of the extended KMS success model by Jennex and Olfman.
+    \item \textbf{System Quality}, while not the primary focus of the implementation due to prioritization, was conceptualized through features like \textit{Response Time} and \textit{Error Rate} monitoring. The implemented features, however, do contribute indirectly by providing data that can be used to diagnose system-level issues that affect information quality.
+    \item \textbf{Service Quality} is reflected in the analysis of \textit{Task Types} and the combined views. By understanding how users interact with the system (e.g., which tasks they perform for which topics), administrators can better tailor the service, for example, by creating more relevant Quick Actions or improving user training.
+\end{itemize}
+The final workshop feedback confirmed that the development team saw a clear link between the implemented features and the goal of evaluating GenAI success. The features were perceived as providing a strong foundation for a comprehensive "Knowledge Analytics Engine."
+
+\paragraph{Functionality and Value Added} The implemented artifact successfully translates abstract quality dimensions into concrete, measurable metrics. The most valuable feature, according to both the initial prioritization and my own assessment, is the \textbf{Topic Map} combined with quality metrics. It moves beyond simple performance tracking and allows administrators to ask, "For which specific topics is our system failing?" This is a highly actionable insight that can directly lead to improvements, such as adding specific documents to the knowledge base. In contrast, features like the standalone quality dashboards provide scores that are harder to interpret without context. They signal that a problem exists but do not immediately point to the cause. The combination of metrics, as implemented in the combined views, is where the true value lies.
+
+\section{Critical Reflection and Limitations}
+A critical reflection on the work is essential to realistically assess its contributions and validity. The limitations of this thesis can be categorized into methodological and technical aspects.
+
+\paragraph{Methodological Limitations}
+\begin{itemize}
+    \item \textbf{Evaluation Scope:} The evaluation of the artifact was conducted exclusively with the internal development team. While their feedback is invaluable for assessing technical feasibility and the conceptual alignment with developer goals, it does not represent the perspective of the end-users—the Use Case administrators. The intuitiveness and practical utility of the dashboards have not yet been validated by the target audience in a real-world setting.
+    \item \textbf{Partial Implementation:} Due to the time constraints of a bachelor's thesis, not all concepts from the initial workshops could be implemented. Features like \textit{Response Time Analysis}, \textit{Error Rate Monitoring}, and \textit{Knowledge Gap Detection} were conceptualized but not realized. This means the implemented artifact provides a view that is heavily focused on Information Quality, while System Quality and Service Quality are less comprehensively covered.
+\end{itemize}
+
+\paragraph{Technical and Conceptual Limitations}
+\begin{itemize}
+    \item \textbf{Reliability of AI-based Evaluation:} The core of the answer quality evaluation relies on an LLM acting as a "judge." As pointed out by the development team, this approach has inherent limitations. An LLM evaluating another LLM's output can be unreliable and may not align with human judgment. The quality scores should therefore be treated as helpful, automated proxies, not as an absolute ground truth. This limitation was a key reason for adding a disclaimer to the UI in the final feedback round.
+    \item \textbf{Complexity vs. Intuitiveness:} The final feedback highlighted a crucial tension. The dashboards are powerful but also complex. A non-technical user will need to invest time to understand the metrics and how to interpret them. This suggests that the "Perceived Ease of Use" (PEU) might be a barrier, even if the "Perceived Usefulness" (PU) is high. The need for better help features and user onboarding was a direct consequence of this observation.
+\end{itemize}
+
+\section{Implications for Practice and Theory}
+Despite the limitations, this thesis offers significant implications for both practical application and academic research in the field of Wirtschaftsinformatik.
+
+\paragraph{Practical Implications} The primary contribution for practice is a ready-to-use analytics tool that empowers organizations to move beyond anecdotal evidence and make data-driven decisions about their enterprise GenAI systems. Use Case administrators can now:
+\begin{enumerate}
+    \item \textbf{Identify and address knowledge gaps} by seeing which topics are frequently asked about but receive low-quality answers.
+    \item \textbf{Optimize user workflows} by understanding the most common task types and creating targeted Quick Actions.
+    \item \textbf{Justify investments} in data maintenance or user training by demonstrating a clear link between these activities and an improvement in quality scores over time.
+\end{enumerate}
+The cost analysis further showed that the financial impact of such an analytics suite is manageable, adding approximately 20\% to the LLM-related costs, which is a justifiable expense for the significant insights gained.
+
+\paragraph{Theoretical Implications} This work contributes to the academic discourse by demonstrating a practical application and operationalization of the IS Success Model in the novel context of enterprise RAG systems. It shows how the abstract dimensions of the model can be translated into specific, measurable KPIs (e.g., "Faithfulness" as a metric for Information Quality). Furthermore, the DSR approach used in this thesis provides a template for how to systematically design, build, and evaluate such management tools in close collaboration with industry practitioners, bridging the gap between theory and practice.
+
+\section{Outlook and Future Research}
+This thesis serves as a strong foundation and opens up several avenues for future research and development.
+\begin{itemize}
+    \item \textbf{Long-Term User Study:} The most important next step is to conduct a long-term study with actual Use Case administrators using the dashboards in their daily work. This would allow for an evaluation of the artifact's real-world impact on system success and would provide invaluable feedback for further refinement.
+    \item \textbf{Refining AI-based Evaluation:} Future research could focus on improving the reliability of the automated quality evaluation. This could involve developing more sophisticated evaluation pipelines, for instance, by incorporating a "self-reflection" step where the AI judge must justify its score, or by fine-tuning smaller, specialized models for the evaluation task to reduce costs and improve consistency.
+    \item \textbf{Closing the Loop - Actionability:} A key suggestion from the feedback was to enhance actionability. Future work could focus on "closing the loop" by integrating the analytics dashboard more tightly with the RAG system's configuration. For example, a "one-click" feature could allow an administrator to flag a low-performing topic, automatically creating a task for a content expert to review and update the relevant documents.
+    \item \textbf{Expanding the Scope:} Finally, the unimplemented features from the roadmap, such as \textit{Error Rate Monitoring} and \textit{Knowledge Gap Detection}, present clear next steps for expanding the dashboard's functionality to provide an even more holistic view of GenAI success.
+\end{itemize}
+In conclusion, the developed artifact represents a significant step towards the systematic and automated evaluation of enterprise GenAI applications. The journey from raw data to actionable insight is complex, but this work has laid a solid and promising foundation for future exploration and improvement.
 
 %---------------------------------------------------------------------%
 %---------------------------- Conclusion -----------------------------%
 %---------------------------------------------------------------------%
-\chapter{Conclusion}
+Of course. Based on the entire process—from the initial feature concepts and their implementation to the final cost analysis and team feedback—here is a conclusion for your thesis.
 
+\chapter{Conclusion}
+\section{Summary of the Work}
+The objective of this thesis was to design and implement a comprehensive system for measuring the success of a sophisticated, enterprise-level Retrieval-Augmented Generation (RAG) application. The project began with a series of collaborative workshops with the development team to conceptualize a suite of analytics features tailored to the specific needs of the RAG system. Following this, a significant portion of these features were technically implemented, resulting in a fully integrated analytics dashboard within the application's admin panel. The technical solution was built on the Google Cloud Platform, leveraging BigQuery for scalable data warehousing, Cloud Run for efficient data processing, and a Vue-based frontend for interactive data visualization.
+
+\section{Key Results and Findings}
+The successfully implemented system provides multifaceted insights into system performance, information quality, and user behavior. Key implemented features include dashboards for \textbf{Answer Quality} and \textbf{Document Quality}, which use AI-based evaluation to provide metrics like relevance and faithfulness. Furthermore, dashboards for \textbf{Topic Map} and \textbf{Task Type} analysis were developed to offer a deeper understanding of user interests and intents. These individual views were then combined into powerful analytical tools to correlate quality with specific topics and task types, allowing administrators to pinpoint knowledge gaps and areas for improvement. A cost analysis concluded that these new features add a manageable, maximum overhead of approximately \textbf{20\%} to the LLM-related costs, which is not expected to significantly impact the system's total operational budget.
+
+\section{Evaluation and Future Work}
+The implemented analytics dashboard was presented to the development team for evaluation. The feedback was overwhelmingly positive, with the team confirming the high value and potential of the features for monitoring and improving the RAG system. The design, interactivity, and visual appeal of the dashboards were particularly praised.
+
+The constructive feedback also highlighted several key areas for future enhancement. The most prominent theme was the need to improve \textbf{clarity and user guidance} for non-technical administrators through more detailed in-app explanations, examples, and metric definitions. A second major theme was the desire for greater \textbf{actionability}, primarily through the implementation of drill-down features that would allow users to trace an aggregated metric back to the specific documents or conversations that influenced it.
+
+Due to the time constraints of this thesis, not all conceptualized features were implemented. The established roadmap provides a clear path for future development. Based on the team's feedback, future work should prioritize:
+\begin{itemize}
+    \item Enhancing user guidance, for example by implementing the suggested LLM-generated "insight statements" for each chart.
+    \item Developing drill-down capabilities to make the data more actionable.
+    \item Integrating the analytics more deeply into administrative workflows, such as the proposed idea to create "Quick Actions" directly from the dashboard.
+\end{itemize}
+
+In conclusion, this work successfully delivered a robust and well-received foundation for GenAI success measurement. The implemented system provides the business with critical insights into its RAG application, and the detailed feedback from the development team creates a clear and validated path for future iterations to further increase its value.
 %---------------------------------------------------------------------%
 %------------------------------ Appendix -----------------------------%
 %---------------------------------------------------------------------%
-\chapter*{Anhang}
+\chapter*{Appendix}
 \addcontentsline{toc}{chapter}{Anhang}           %Kapitel bekommt keine Nummerierung und wird trotzdem
                                                                 %ins Inhaltsverzeichnis aufgenommen
 % Fortsetzung der römischen Seitennummerierung
