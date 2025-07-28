@@ -198,31 +198,6 @@ KMS                 &   Knowledge Management System \\
 \setcounter{seitenzahlroemisch}{\value{page}}
 \pagenumbering{arabic}
 
-Die Datei \file{DEMO-TUDaThesis.tex} ist ein Template für Abschlussarbeiten im Stil des Corporate Designs der TU Darmstadt.
-Sie ist Teil des TUDa-CI-Bundles wurde vom in Teilen tuddesign-Paket von C.~v.~Loewenich und J.~Werner inspiriert.
-
- \section{Abbildungen}
-Abbildungen sollten generell linksbündig in das Dokument eingefügt werden. Die Abbildungs-beschriftung steht dabei unter der Abbildung und ist ebenfalls linksbündig auszurichten. Eine Beschriftung der Abbildungen mit der Abkürzung "Abb." ist ebenfalls möglich. Abbildungen (bzw. ihre Beschriftungen) werden von einer Leerzeile gefolgt, um den Abstand zum nachfolgenden Text zu wahren.
-
-Beispiele:
-
- 
-\begin{figure}[ht]
-     \centering
-     \includegraphics[]{images/Picture 1.png}
-     \caption{Logo des Fachgebiets Wirtschaftsinformatik}
-     \label{fig:logo}
-\end{figure}
-
-\begin{figure}[ht]
-     \centering
-     \includegraphics[]{images/Picture 1.jpg}
-     \caption{Video-Podcast der Vorlesung Internet Economics auf einem iPod}
-     \label{fig:logo2}
-\end{figure}
-
-\section{Zitierungen}
-Wörtliche Zitate, die sich über mind. drei Textzeilen erstrecken, sind mit der "Zitat" zu formatieren. Alle anderen Zitate erhalten die gleiche Formatierung wie der restliche Fließtext \parencite{buxmann2015softwareindustrie}.
 \chapter{Introduction}
 Generative AI (GenAI) has seen explosive growth, exemplified by ChatGPT becoming the fastest-growing application in history. This rapid adoption highlights the immense potential of GenAI, not only in the private sector but also within the modern business world, where it is seen as a significant driver of corporate growth. Projections underscore this, suggesting that GenAI could increase Germany's GDP by up to \EUR{585} billion by 2040. For enterprise applications, \textbf{Retrieval-Augmented Generation (RAG)} has emerged as a particularly suitable technology, as it enhances Large Language Models (LLMs) by connecting them to proprietary knowledge bases. This approach improves the traceability of answers and reduces the risk of hallucinations by grounding the model in a specific data basis.
 
@@ -274,13 +249,45 @@ The \textit{System Quality} dimension now extends to contain the \textit{technol
 The \textit{Knowledge Quality· dimension} consists of three subsidiary factors too - the \textit{KM strategy/process}, the \textit{Richness} of the captured knowledge and the \textit{Linkages} among the knowledge components. The \textit{Knowledge strategy/process} factor is the basis for the two other factors and means looks at the organizational processes organizing the knowledge management and to which extend these processes are formalized. \textit{Richness} on the other hand evaluates the accuracy and timeliness of the knowledge itself - one could say it is the quality of the actual knowledge. Linkages refer to how accessible the knowledge is through things like knowledge and topic maps etc.\\\\
 The \textit{service quality} dimension determines if users of the KMS are provided with sufficient support to use the KMS effectively. It consists of three parts aswell. The \textit{management support} refers to the provision of adequate resources for the KM the organization aswell as the creation of knowledge-sharing organization culture by the organization's management. User KM service quality refers to the support provided by the user organization in order to train the users to use the KMS effectively. On the other hand the IS KM service quality refers to the support provided by the  IS organization to allow users to use the KM aswell as maintaining it. This includes the building, setup and maintaining the KM infrastructure ensuring availability, reliability and security of the KMS provided.\\\\
 All three dimensions - the \textit{system quality}, \textit{knowledge quality} and the \textit{service quality} influence similar to the original ISSS the \textit{Intention to use and usage} aswell as the \textit{User Satisfaction} and cause a \textit{net benefit} in the end.
-\section{RAG Systems in enterprises}
+\section{Generative AI Systems in enterprises}
 Since we now know what determines the success of KMS in organizations like enterprises, we are going to have a closer look at the GenAI systems that are used to support KM in an organization, find out what they are used for and which factors define their quality.\\
+Generative Artificial Intelligence (GenAI) describes AI applications that facilitate access to stored knowledge through natural language interactions, responding to context-specific user questions and instructions. For businesses, the benefit lies in increasing the speed, consistency, and productivity of knowledge applications and integrating knowledge management processes more efficiently into various workflows. The core component of these systems are Large Language Models (LLMs). An LLM is the generative unit that processes information to create new. In the context of RAG systems, its technical role is to synthesize a precise and trustworthy answer from two inputs: the user's original query and the relevant information provided by a retrieval process. The primary business advantage of using LLMs within a RAG architecture is that they can deliver up-to-date and verifiable answers, which significantly reduces the risk of hallucination compared to standalone models.\\
 The GenAI system that we are going to focus on throughout this thesis is a retrieval augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS or third-party sources through retrieval algorithms, and pass the retrieved knowledge to large language models (LLM) that generate answers grounded on the retrieved knowledge. As such RAG systems can be used for knowledge retrieval and provide advantages for this task.\\
 One problem of LLMs that do not use RAG is that they can only provide the data that they were trained on. This causes them to become out-dated. As we know from the KMS success model it is crucial for an organization to be able to access up-to-date information using their KMS. RAG systems can provide this by utilizing up-to-date knowledge sources for their generation.\\
 Another issue of LLMs is that they tend to hallucinate if they don't know the answer to a users query or apply a pattern from the training data in a wrong way. Since RAG systems bound the LLMs they use to the information provided by the retrieval algorithms, they reduce hallucinations and a user is always able to verify the answer provided by the LLM by double-checking the sources that were used by the RAG system. This way the RAG approach improves the accuracy of LLMs.\\
 Since RAG systems are able to query various data sources at once, they provide good linkages to other KMS as well. Following the KM success model RAG systems seem like a pretty good choice when it comes to KM.\\
-However, RAG systems need some effort to serve these qualities to their users in the organizations practice. One of the major challenges is the underlying data that is used for the RAG system. These data are usually not optimized for the use by a RAG system which poses a lot of challenges to the operators of the system. One example for these challenges are vast and complex knowledge bases that on the one hand lead to poor performance - bad \textit{system performance} - since the retrieval algorithms have to perform on a huge dataset and on the other hand pose challenges regarding the integration of them (\textit{service quality}) since various APIs have to be connected to the RAG system. Enterprises usually need a very high accuracy as well because their decision-making processes involve important legal or financial decisions and if a RAG system fails to meet the required accuracy, e.g. because the retrieval algorithms are not able to gather the requested information from the huge and complex dataset, this can lead to a poor \textit{net benefit} of the system. RAG systems like any other GenAI technology are new to most end users too and require training \textit{(service quality)} in order to allow users to use them effectively. In the end we can conclude that RAG systems provide a huge potential at enhancing an organizations KM, but they need a lot of effort to realize it. The goal of this thesis is to support organizations with the realization of RAG applications potential by providing system administrators valuable insights into the usage of the systems.\\
+\section{Issues with RAG systems in organizations}
+However, realizing the full potential of RAG systems in an enterprise context requires significant effort. A major challenge is the underlying data, which is often complex, structured for human consumption, and not optimized for use by a GenAI system. This discrepancy can lead to significant instabilities and incorrect results. These challenges can be categorized according to the dimensions of the IS Success Model, with many of the most critical instabilities being fundamentally issues of \textit{Information Quality}.
+
+A formal taxonomy of failure points highlight the challenges, categorizing them into seven distinct types:
+
+\begin{itemize}
+    \item \textbf{Missing Content:} The requested information is not present in the knowledge base. In this scenario, the system may either correctly state that it found nothing, or, more problematically, misinterpret related data to generate a false answer.
+
+    \item \textbf{Missed the Top Ranked Documents:} The correct information exists within the knowledge base, but the retrieval process fails to find and rank it highly enough to be included in the context passed to the LLM.
+
+    \item \textbf{Not in Context (Consolidation Strategy):} The correct information is successfully retrieved from the vector database, but it is subsequently lost during a necessary consolidation step (such as reranking) that filters or reorders the documents before the generation step.
+
+    \item \textbf{Not Extracted:} The context containing the correct answer is successfully delivered to the LLM, but the model fails to extract the relevant information from that context during the generation step.
+
+    \item \textbf{Wrong Format:} The system provides a factually correct answer, but fails to adhere to a specific output format that was requested by the user in the query.
+
+    \item \textbf{Incorrect Specificity:} The answer given is correct in principle, but it is either too specific or not specific enough to fully satisfy the user's requirement.
+
+    \item \textbf{Incomplete:} The response is correct but fails to include all the different pieces of information that were requested by the user.
+\end{itemize}
+
+Beyond these specific information quality failures, other challenges persist that relate to the other dimensions of the IS Success Model. Vast and complex knowledge bases can lead to poor system performance as retrieval algorithms struggle with the scale, degrading the overall \textit{System Quality}. Enterprises often require very high accuracy for decision-making, and if a RAG system fails to deliver this, it leads to a poor \textit{net benefit}. Finally, because GenAI technology is new to most end-users, significant training is required to ensure effective use, which falls under the dimension of \textit{Service Quality}.
+
+In conclusion, while RAG systems provide immense potential for enhancing an organization's knowledge management, considerable effort is needed to realize it. The goal of this thesis is to support organizations in this process by providing system administrators with valuable insights into the usage and quality of their RAG applications.
+\section{Evaluation and analytics frameworks}
+Several frameworks already exist for evaluating the quality of both the retrieval and generation components of a RAG system. A prominent open-source example is the RAGAS evaluation framework, which in its original version uses an "LLM as a judge" approach to determine quality metrics. Here, \textit{Answer Relevance} assesses if the answer is pertinent to the question, \textit{Faithfulness} evaluates if the answer is supported by the retrieved documents, and \textit{Context Relevance} measures if the retrieved documents are relevant to the question. The framework has since been expanded to include a broader range of metrics, including some that are not model-based; however, a complete list is beyond the scope of this section. Other open-source solutions, such as SCARF and ARES, also rely on LLM-based evaluation models.
+
+Proprietary services also exist, such as Google's Gen AI Evaluation Service available on GCP, which uses a mix of LLM-based and computation-based metrics to assess RAG system quality. This shows that using an LLM to evaluate RAG quality is a common and established practice, an approach that is also adopted in the evaluation dashboard developed in this thesis.
+
+However, the frameworks mentioned above focus exclusively on RAG quality, which corresponds to the \textit{Information Quality} dimension of the IS Success Model. This thesis aims to cover the other quality dimensions as well. Existing systems often achieve a broader analysis through the integration of general analytic tools, like Google Analytics. Such tools make it possible to track detailed user interactions to get a more comprehensive picture of system usage. For instance, \textbf{System Quality} can be assessed by measuring end-to-end page load times or tracking client-side errors to gauge performance and reliability. \textbf{Service Quality} can be analyzed by tracking the usage of support features like the "Copy" or "Feedback" buttons and monitoring engagement with workflow integrations like "Quick Actions," which helps in understanding how well the system's supportive functions are being adopted by users.
+
+The goal of this thesis, therefore, is to develop a dashboard that combines both approaches. It aims to move beyond a narrow focus on RAG-specific Information Quality to provide a foundation for a holistic analysis of all quality dimensions outlined in the IS Success Model.
 %---------------------------------------------------------------------%
 %------------------------------ Methodology --------------------------%
 %---------------------------------------------------------------------%
@@ -595,8 +602,6 @@ In conclusion, from the development team's perspective, the implemented features
 %---------------------------------------------------------------------%
 %------------------------------ Discussion ---------------------------%
 %---------------------------------------------------------------------%
-Of course. Here is a complete "Discussion" chapter for your thesis, written in English and formatted in LaTeX. It follows the structure recommended for a TU Darmstadt thesis and synthesizes the results, feedback, and personal notes from our entire conversation.
-
 \chapter{Discussion}
 This chapter provides a comprehensive discussion of the results presented in this thesis. The primary goal of this work was to develop an artifact to automatically evaluate the success of an enterprise GenAI application. The discussion will begin by interpreting the key findings in the context of the initial research question. Subsequently, the limitations of the developed artifact and the research methodology will be critically examined. Finally, the implications for both theory and practice will be outlined, followed by a concrete outlook on future research opportunities.
 
@@ -654,8 +659,6 @@ In conclusion, the developed artifact represents a significant step towards the 
 %---------------------------------------------------------------------%
 %---------------------------- Conclusion -----------------------------%
 %---------------------------------------------------------------------%
-Of course. Based on the entire process—from the initial feature concepts and their implementation to the final cost analysis and team feedback—here is a conclusion for your thesis.
-
 \chapter{Conclusion}
 \section{Summary of the Work}
 The objective of this thesis was to design and implement a comprehensive system for measuring the success of a sophisticated, enterprise-level Retrieval-Augmented Generation (RAG) application. The project began with a series of collaborative workshops with the development team to conceptualize a suite of analytics features tailored to the specific needs of the RAG system. Following this, a significant portion of these features were technically implemented, resulting in a fully integrated analytics dashboard within the application's admin panel. The technical solution was built on the Google Cloud Platform, leveraging BigQuery for scalable data warehousing, Cloud Run for efficient data processing, and a Vue-based frontend for interactive data visualization.
