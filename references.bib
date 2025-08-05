@@ -5,16 +5,6 @@
     year = {2003}
 }
 
-@article{Davis1989MISQ,
-  author = {Davis, Fred D.},
-  title = {Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology},
-  journal = {MIS Quarterly},
-  volume = {13},
-  number = {3},
-  year = {1989},
-  publisher = {Management Information Systems Research Center, University of Minnesota}
-}
-
 @inproceedings{Sahin2024LLM_proceedings,
   author    = {{\c{S}}ahin, G{\"u}rkan and Varol, Karya and Pak, Burcu Kuleli},
   title     = {{LLM and RAG-Based Question Answering Assistant for Enterprise Knowledge Management}},
@@ -73,7 +63,6 @@
     DOI={10.18653/v1/2024.eacl-demo.16},
     journal={Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: System Demonstrations},
     author={Es, Shahul and James, Jithin and Espinosa Anke, Luis and Schockaert, Steven},
-    year={2024},
 }
 
 @inproceedings{Saad_Falcon_Khattab_Potts_Zaharia_2024,
@@ -84,15 +73,154 @@
     year={2024}
 } 
 
-@article{Peffers01122007,
-    author = {Ken Peffers and Tuure Tuunanen and Marcus A. Rothenberger and Samir Chatterjee},  
-    title = {A Design Science Research Methodology for Information Systems Research},
-    journal = {Journal of Management Information Systems},
-    volume = {24},
-    number = {3},
-    year = {2007},
-    publisher = {Routledge},
-    doi = {10.2753/MIS0742-1222240302},
-    URL = {https://doi.org/10.2753/MIS0742-1222240302},
-    eprint = {https://doi.org/10.2753/MIS0742-1222240302}
+@article{Davis1989,
+   author = {Fred D. Davis},
+   doi = {10.2307/249008},
+   issn = {02767783},
+   issue = {3},
+   journal = {MIS Quarterly: Management Information Systems},
+   keywords = {End user computing,User acceptance,User measurement},
+   pages = {319-339},
+   publisher = {Management Information Systems Research Center},
+   title = {Perceived usefulness, perceived ease of use, and user acceptance of information technology},
+   volume = {13},
+   year = {1989}
+}
+
+@article{Jennex2006,
+   author = {Murray E. Jennex and Lorne Olfman},
+   doi = {10.4018/jkm.2006070104},
+   issn = {15480658},
+   issue = {3},
+   journal = {International Journal of Knowledge Management (IJKM)},
+   keywords = {knowledge management,knowledge management success,knowledge management systems},
+   pages = {51-68},
+   title = {A Model of Knowledge Management Success},
+   volume = {2},
+   year = {2006}
+}
+
+@book{Davenport,
+    author = {Davenport, Thomas and Prusak, Laurence},
+    year = {1998},
+    month = {01},
+    title = {Working Knowledge: How Organizations Manage What They Know},
+    volume = {1},
+    journal = {Ubiquity},
+    doi = {10.1145/348772.348775}
+}
+
+@article{Jennex2006WhatIsKM,
+    author = {Jennex, Murray},
+    year = {2006},
+    month = {01},
+    pages = {i-iv},
+    title = {What is Knowledge Management?},
+    volume = {1},
+    isbn = {9781599042633},
+    journal = {International Journal of Knowledge Management},
+    doi = {10.4018/978-1-59904-261-9.ch001}
+}
+
+@misc{MinskyBritannica,
+  author = {Dennis, Michael Aaron},
+  title = {Marvin Minsky},
+  howpublished = {Encyclopedia Britannica. \url{https://www.britannica.com/biography/Marvin-Minsky}},
+  year = {2025},
+  month = {March},
+  day = {5},
+  note = {Last updated March 5, 2025; Accessed August 1, 2025}
+}
+
+@techReport{Lund2023,
+   author = {Brady D Lund and Ting Wang and Nishith Reddy Mannuru and Bing Nie and Somipam Shimray and Ziang Wang},
+   title = {ChatGPT and a New Academic Reality: AI-Written Research Papers and the Ethics of the Large Language Models in Scholarly Publishing},
+   url = {https://ssrn.com/abstract=4389887},
+    year = 2023,
+}
+
+@article{Lewis2021,
+   abstract = {Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pre-trained models with a differentiable access mechanism to explicit non-parametric memory can overcome this issue, but have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, the other can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state-of-the-art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.},
+   author = {Patrick Lewis and Ethan Perez and Aleksandra Piktus and Fabio Petroni and Vladimir Karpukhin and Naman Goyal and Heinrich Küttler and Mike Lewis and Wen-tau Yih and Tim Rocktäschel and Sebastian Riedel and Douwe Kiela},
+   month = {4},
+   title = {Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks},
+   url = {http://arxiv.org/abs/2005.11401},
+   year = {2021}
+}
+
+@misc{AWS_RAG,
+    author = {AWS},
+    url = {https://aws.amazon.com/de/what-is/retrieval-augmented-generation/}, journal = {Was ist rag? – retrieval augmented generation ERKLÄRT – AWS}
+}
+
+@misc{NStarX_Inc._2025,
+    title={The $2.5 million question: Why Data Quality Makes or breaks your enterprise rag system},
+    url={https://nstarxinc.com/blog/the-2-5-million-question-why-data-quality-makes-or-breaks-your-enterprise-rag-system/},
+    journal={NStarX Inc.},
+    author={NStarX Inc.},
+    year={2025},
+    month={Jul}
+}
+
+@techReport{Tilmann,
+   abstract = {Retrieval-Augmented Generation (RAG) improves the accuracy and relevance of large language model outputs by incorporating knowledge retrieval. However, implementing RAG in enterprises poses challenges around data security, accuracy, scalability, and integration. This paper explores the unique requirements for enterprise RAG, surveys current approaches and limitations, and discusses potential advances in semantic search, hybrid queries, and optimized retrieval. It proposes an evaluation framework to validate enterprise RAG solutions, including quantitative testing, qualitative analysis, ablation studies, and industry case studies. This framework aims to help demonstrate the ability of purpose-built RAG architectures to deliver accuracy and relevance improvements with enterprise-grade security, compliance and integration. The paper concludes with implications for enterprise deployments, limitations, and future research directions. Close collaboration between researchers and industry partners may accelerate progress in developing and deploying retrieval-augmented generation technology.},
+   author = {Tilmann Bruckhaus},
+   keywords = {Accuracy and relevance,Compliance-regulated industries,Enterprise AI,Enterprise integration,Enterprise knowledge bases,Evaluation frameworks,Financial services applications,Generative AI,Healthcare applications,Hybrid query strategies,Information retrieval,Language models,Legal domain applications,Regulatory compliance,Retrieval-Augmented Generation (RAG),Semantic search},
+   title = {RAG Does Not Work for Enterprises}
+}
+
+
+@misc{GoogleGenAIEvaluation,
+    url={https://cloud.google.com/vertex-ai/generative-ai/docs/models/evaluation-overview},
+    journal={Google},
+    publisher={Google}
+} 
+
+@misc{GoogleAnalytics,
+    url={https://developers.google.com/analytics/devguides/collection/ga4},
+    journal={Google analytics for developers  |  google for developers},
+    publisher={Google}
+} 
+
+@article{Peffers2007,
+   abstract = {The paper motivates, presents, demonstrates in use, and evaluates a methodology for conducting design science (DS) research in information systems (IS). DS is of importance in a discipline oriented to the creation of successful artifacts. Several researchers have pioneered DS research in IS, yet over the past 15 years, little DS research has been done within the discipline. The lack of a methodology to serve as a commonly accepted framework for DS research and of a template for its presentation may have contributed to its slow adoption. The design science research methodology (DSRM) presented here incorporates principles, practices, and procedures required to carry out such research and meets three objectives: it is consistent with prior literature, it provides a nominal process model for doing DS research, and it provides a mental model for presenting and evaluating DS research in IS. The DS process includes six steps: problem identification and motivation, definition of the objectives for a solution, design and development, demonstration, evaluation, and communication. We demonstrate and evaluate the methodology by presenting four case studies in terms of the DSRM, including cases that present the design of a database to support health assessment methods, a software reuse measure, an Internet video telephony application, and an IS planning method. The designed methodology effectively satisfies the three objectives and has the potential to help aid the acceptance of DS research in the IS discipline. © 2008 M.E. Sharpe, Inc.},
+   author = {Ken Peffers and Tuure Tuunanen and Marcus A. Rothenberger and Samir Chatterjee},
+   doi = {10.2753/MIS0742-1222240302},
+   issn = {07421222},
+   issue = {3},
+   journal = {Journal of Management Information Systems},
+   keywords = {Case study,Design science,Design science research,Design theory,Mental model,Methodology,Process model},
+   month = {12},
+   pages = {45-77},
+   title = {A design science research methodology for information systems research},
+   volume = {24},
+   year = {2007}
+}
+
+@misc{GoogleCloudDocumentation,
+    url={https://cloud.google.com/docs},
+    journal={Google Cloud Documentation},
+    publisher={Google}
+}
+
+@misc{GoogleVertexAISearch,
+    url={https://cloud.google.com/generative-ai-app-builder/docs/introduction#es-and-personalize},
+    journal={Google},
+    publisher={Google}
+}
+
+@misc{GoogleReranker,
+    url={https://cloud.google.com/generative-ai-app-builder/docs/ranking#rank_or_rerank_a_set_of_records_according_to_a_query}, journal={Google},
+    publisher={Google}
+}
+
+@misc{LangChain,
+    url={https://www.langchain.com/},
+    journal={LangChain}
+}
+
+@misc{GoogleGemini,
+    url={https://ai.google.dev/gemini-api/docs/models},
+    journal={Google},
+    publisher={Google}
 }
