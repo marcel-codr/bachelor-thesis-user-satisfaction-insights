@@ -63,10 +63,12 @@
 %%%%%%%%%%%%%%%%%%%
 %Literaturverzeichnis
 %%%%%%%%%%%%%%%%%%%
-\usepackage[style=apa,backend=biber]{biblatex}    % Literaturverzeichnis
+\usepackage[style=authoryear-ibid,backend=biber]{biblatex}   % Literaturverzeichnis
+\DeclareLanguageMapping{english}{english-apa}
 \bibliography{references}
 \AtBeginBibliography{\setcounter{maxnames}{10}} % Im Literaturverzeichnis nenne mehr als 2 Autoren
 \counterwithout{footnote}{chapter} % Zähle Fußnoten über gesamtes Dokument hoch
+
 
 
 %%%%%%%%%%%%%%%%%%%
