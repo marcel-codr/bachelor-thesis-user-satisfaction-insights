@@ -171,17 +171,35 @@ An evaluation with the development team confirmed the dashboard's significant va
                                                                 %ins Inhaltsverzeichnis aufgenommen
 
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
-% --  --  --  --  --  --  -- -- List of Abbreviations  --  --  --  --  --  --  -- --%
+% --  --  --  --  --  --  --  -- -- List of Abbreviations  --  --  --  --  --  --  -- --%
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter*{List of abbreviations}
-\addcontentsline{toc}{chapter}{List of abbreviations}           %Kapitel bekommt keine Nummerierung und wird trotzdem
+\addcontentsline{toc}{chapter}{List of abbreviations}            %Kapitel bekommt keine Nummerierung und wird trotzdem
                                                                 %ins Inhaltsverzeichnis aufgenommen
 
 \begin{xtabular}{ll}
-IS					&	Information Systems\\
-TUD					&	Technische Universität Darmstadt\\
-KMS                 &   Knowledge Management System \\
-
+AI & Artificial Intelligence\\
+ARES & Automatic RAG Evaluation and Scoring \\
+DSR & Design Science Research\\
+DSGVO & Datenschutz-Grundverordnung (General Data Protection Regulation)\\
+GCP & Google Cloud Platform\\
+GDPR & General Data Protection Regulation\\
+GenAI & Generative AI\\
+HDBSCAN & Hierarchical Density-Based Spatial Clustering of Applications with Noise\\
+IS & Information Systems\\
+ISSM & Information Systems Success Model\\
+KM & Knowledge Management\\
+KMS & Knowledge Management System\\
+LLM & Large Language Model\\
+ML & Machine Learning\\
+PCA & Principal Component Analysis \\
+PEU & Perceived Ease of Use\\
+PU & Perceived Usefulness\\
+RAG & Retrieval-Augmented Generation\\
+RAGAS & Retrieval-Augmented Generation Assessment \\
+TAM & Technology Acceptance Model\\
+t-SNE & t-distributed Stochastic Neighbor Embedding \\
+UMAP & Uniform Manifold Approximation and Projection\\
 \end{xtabular} 
 
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
@@ -258,7 +276,7 @@ All three dimensions - the \textit{system quality}, \textit{knowledge quality} a
 Since we now know what determines the success of KMS in organizations like enterprises, we are going to have a closer look at the GenAI systems that are used to support KM in an organization, find out what they are used for and which factors define their quality.\\
 AI in general is hard to define. For now we will follow the definition by Marvin Minsky and define Artificial Intelligence as "the science of making machines do things that would require intelligence if done by men" \parencite{MinskyBritannica}. In other words, AI systems are systems that show some form of intelligent behavior similar to human intelligence. Machine learning (ML) is a subfield of AI and describes the analysis of huge amounts of data \parencite{Lund2023}. Neural networks are models used in ML to perform this analysis. They imitate the human brain by using interconnected layers of artificial neurons (or nodes) to process information \parencite{Lund2023}. Generative AI (GenAI) is one kind of ML model approach that uses a neural network with a vast number of layers to generate new data based on training data \parencite{Lund2023}.
 Large Language Models are one flavor of GenAI models. These models are trained on huge corpora of text and are capable of many text-processing tasks. The workflow using these LLMs is as follows: A user submits a request, known as a prompt, to the LLM, and the LLM generates a response based on its training data and the prompt \parencite{Lund2023}.\\
-The GenAI system we will focus on throughout this thesis is a retrieval-augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS, or third-party sources through retrieval algorithms \parencite{AWS_RAG}. The retrieved context is then passed alongside the user's query to a large language model (LLM) that generates an answer grounded on the retrieved knowledge. Such RAG systems can be used for open-domain question answering and can be used for knowledge work in an organization as they make (proprietary) knowledge available to an LLM \parencite{Lewis2021}.\\
+The GenAI system we will focus on throughout this thesis is a retrieval-augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS, or third-party sources through retrieval algorithms \parencite{AWS_RAG}. The retrieved context is then passed alongside the user's query to a large language model (LLM) that generates an answer grounded on the retrieved knowledge. Such RAG systems can be used for open-domain question answering and can be used for knowledge work in an organization as they make (proprietary) knowledge available to an LLM \parencite{Lewis2020}.\\
 \subsection{Advantages of RAG systems for organizational KM}
 One problem of LLMs that do not use RAG is that they can only provide the data they were trained on. This causes them to become outdated. As we know from the KMS success model, an organization must be able to access up-to-date information using their KMS. RAG systems can provide this by utilizing up-to-date knowledge sources for their generation.\\
 Another issue with LLMs is that they tend to hallucinate if they don't know the answer to a user's query or apply a pattern from the training data incorrectly. Since RAG systems bind the LLMs they use to the information provided by the retrieval algorithms, they reduce hallucinations, allowing a user to verify the answer provided by the LLM by double-checking the sources used by the RAG system. This way, the RAG approach improves the accuracy of LLMs.\\
