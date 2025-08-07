@@ -173,12 +173,14 @@
 % --  --  --  --  --  --  --  --  -- -- Abstract  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter*{Abstract}
-Generative AI (GenAI) and especially Retrieval Augmented Generation (RAG) applications revolutionize the modern business world. Yet the success of RAG applications in enterprises is not guaranteed and the systems need to be maintained to generate high quality outputs. Without systematic evaluation, system administrators lack the data-driven insights necessary to identify weaknesses and develop improvements. This bachelor's thesis addresses this challenge through the design, development, and evaluation of an analytics dashboard for the automatic success measurement of an enterprise GenAI application.
 
-Following the IS Success Model (ISSM) by DeLone and McLean an Information System's success is determined by three quality factors: \textit{the information quality, the system quality and the service quality}. However, the current evaluation frameworks for RAG systems like RAGAS or ARES focus only on the \textit{information quality} provided by the system. Based on the ISSM an integrated dashboard was created in close collaboration with a development team applying the Design Science Research methodology. It offers administrators insights into all three quality dimensions to provide a more holistic perspective on RAG success. The core features implemented include the AI-based evaluation of answer and document quality, the visualization of topics appearing in the user requests and the analysis of the most important task types. Combined views allow for the direct correlation of quality metrics with specific topics and tasks to identify problems and optimization potential.
+GenAI, particularly RAG applications, are revolutionizing the business world. However, their success is not guaranteed and requires systematic evaluation for quality assurance and continuous improvement. Existing frameworks, such as RAGAS or ARES, often focus solely on information quality, neglecting other key success factors.
 
-An evaluation with the development team confirmed the dashboard's significant value and practical relevance. Furthermore, a cost analysis revealed that the analytics functionalities add an increase of approximately 20\% to the already existing LLM-related costs. This cost increase is justified by the benefit provided by the dashboard. Despite the positive feedback by the development, the implemented dashboard should undergo practical testing with end users to enhance its capabilities. In summary, this work provides an internally validated foundation for the data-driven success measurement of enterprise GenAI systems and establishes the concept of a holistic perspective on RAG success.
+This bachelor's thesis addresses this gap by conceptualizing and implementing an analytics dashboard for the automatic and holistic measurement of an enterprise RAG application's success. Based on the IS Success Model by DeLone and McLean, a dashboard is integrated into an enterprise RAG system to measure and display metrics for the three central quality dimensions – \textit{information quality, system quality}, and \textit{service quality}. The dashboard was developed using the Design Science Research methodology in close collaboration with the development team of the RAG software.
 
+Core features include the AI-supported evaluation of answer and document quality, the visualization of topics in user requests and the analysis of the most important task types.
+
+An evaluation with the development team confirmed the dashboard's high practical value. The additional analytics functions add an extra cost of approximately 20\% relative to existing LLM costs, which is justified by the added value. In summary, this work establishes a validated foundation for the data-driven, holistic success measurement of GenAI systems in enterprises.
 \tableofcontents
 
 
@@ -393,28 +395,28 @@ The system provides a range of interactive features to enhance the user experien
     \item \textbf{Quick Actions:} The system offers "Quick Actions," which are clickable shortcuts that allow users to perform subsequent tasks with the generated information, such as creating an email or generating a summary.
 \end{itemize}
 \section{Software features}
-This chapter presents the results of the developer workshops, including the resulting concepts and their relationship to the GenAI IS \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} and KMS success \parencite{Jennex2006} frameworks, as well as the prioritization and feedback provided by the developer team. Each concept is explained in terms of the quality dimensions that it can be used to measure. While many concepts allow Use Case administrators to improve the system across multiple quality dimensions, they are assigned to the dimension for which they are most suitable.
+This chapter presents the results of the developer workshops, including the resulting concepts and their relationship to the IS \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} and KMS success \parencite{Jennex2006} frameworks, as well as the prioritization and feedback provided by the developer team. Each concept is explained in terms of the quality dimensions that it can be used to measure. While many concepts allow Use Case administrators to improve the system across multiple quality dimensions, they are assigned to the dimension for which they are most suitable.
 \subsection{Mostly system quality related concepts}
 \subsubsection{Response Time Measurement}
 The first concept for determining the system quality of the RAG application is the measurement of its response time, defined as the duration from the submission of a user's query to the delivery of the complete answer. For a comprehensive analysis, this measurement should incorporate not only the raw duration but also key system factors to assess their impact. These factors include the specific language model (LLM) being used and whether features such as Query Splitting or Query Reformulation were activated for the request. Using this feature, Use Case administrators can identify performance trends and retrospectively evaluate the impact of their own decisions on the response times of the RAG system. Furthermore, it enables them to assess better how various system factors affect the response time. These insights can, in turn, be used to train employees on the effective use of the system, for example, by providing better guidance on the performance implications of choosing a particular language model. By evaluating the response time of the system, Use Case administrators can draw conclusions on the performance of it and whether the \textit{technological resources} provided are suitable for the system, which is a key aspect of \textit{system quality} \parencite[p.~56]{Jennex2006}.
 
 For the visualization of this data, a time-series diagram is proposed. The x-axis would represent the time and the y-axis the measured response time. To improve readability and highlight long-term developments, the chart should be smoothed, for instance, by displaying daily averages. The interface should also include interactive filters that allow for the inclusion of the different system factors. These filters would enable users to display data subsets, such as showing only the response times associated with a specific LLM or with Query Splitting enabled/disabled.
 
-During the workshop, the development team assigned a \textbf{medium priority} to this feature. In their feedback, they noted that while the feature would be straightforward to implement, they suspected that overall response times would not vary significantly. Therefore, they hypothesized that this analysis would likely not yield major conclusions.
+During the workshop, the development team assigned a \textbf{medium priority} to this feature \ref{tab:system_quality} \ref{tab:system_quality_g2}. In their feedback, they noted that while the feature would be straightforward to implement, they suspected that overall response times would not vary significantly. Therefore, they hypothesized that this analysis would likely not yield major conclusions.
 
 \subsubsection{Error Rate Monitoring}
 A second concept proposed to evaluate system quality focuses on monitoring error rates to assess system stability and reliability. The core metrics to be captured are the absolute count and the percentage of user queries that result in a system error. For a more granular analysis, these error metrics can be combined with the system factors (LLM selection and the activation state of Query Splitting and Reformulation) and with the different predefined error types and messages of the system. By analyzing the error rates of the system, Use Case administrators can conclude the overall reliability of the system, which is yet another critical \textit{system quality metric} \parencite[p.~64]{DeloneMcLean1992ISSuccess}. By providing the development and operations team of the RAG application with insights into frequent errors, this feature partly contributes to the \textit{IS KM service quality} \parencite[pp.~58--59]{Jennex2006} of the RAG system, as well, since service processes carried out by the RAG system's vendor, such as bug fixes, are enhanced.
 
 The visualization proposed for these data is again a time-series diagram. The x-axis would represent time, while the y-axis would display the amount or percentage of system errors. The interface is designed to be interactive, featuring filtering options for both system factors and error types. This allows for detailed analysis, such as comparing the error rates of different language models or analyzing the impact of query splitting and query reformulation on error rates.
 
-The workshop feedback showed different opinions on this feature's usefulness and priority. One group assigned it a \textbf{high priority}. They argued that system errors are a major problem that can stop people from using the application and cause them to lose interest. This perspective highlights the feature's role in keeping users engaged. A second group assigned it a \textbf{medium priority}, seeing it mainly as a diagnostic tool for developers. For them, the main benefit was helping the development team find and fix technical issues faster. This group strongly recommended that this monitoring view should be for internal use by the development team only. They reasoned that showing raw error statistics to Use Case administrators or end-users could damage their trust in the system, which is not in the interest of the RAG systems vendors. In the end, the feature was assigned a \textbf{medium priority} since the arguments from the critical perspective predominated the other ones.
+The workshop feedback showed different opinions on this feature's usefulness and priority. One group assigned it a \textbf{high priority} \ref{tab:system_quality}. They argued that system errors are a major problem that can stop people from using the application and cause them to lose interest. This perspective highlights the feature's role in keeping users engaged. A second group assigned it a \textbf{medium priority} \ref{tab:system_quality_g2}, seeing it mainly as a diagnostic tool for developers. For them, the main benefit was helping the development team find and fix technical issues faster. This group strongly recommended that this monitoring view should be for internal use by the development team only. They reasoned that showing raw error statistics to Use Case administrators or end-users could damage their trust in the system, which is not in the interest of the RAG systems vendors. In the end, the feature was assigned a \textbf{medium priority} since the arguments from the critical perspective predominated the other ones.
 \subsection{Mostly information quality related concepts}
 \subsubsection{Topic Map}
 To better understand what information users are looking for, the concept of a "Topic Map" was developed. This feature is designed to visualize the main topics that appear in the RAG system. The map can display topics from three different data sources: the user queries themselves, the content of the documents retrieved by the system, or the knowledge assets that were accessed. By making the most important topics visible to the use case admins, the \textit{information quality} and following the KMS success framework \textit{richness} and \textit{linkages} \parencite[pp.~57--58]{Jennex2006} can be enhanced, e.g., by optimizing the underlying data for these topics. \textit{User KM service quality} \parencite[pp.~58--59]{Jennex2006} can be improved as well, since the Use Case administrator can analyze whether users are choosing a suitable use case for their requests and provide guidance if needed.
 
 In the idea discussed in the workshop, the map is displayed as a bubble plot, where each bubble represents a specific topic. The positioning is semantic, meaning that topics with similar meanings are positioned closer to each other, and related topics are grouped by color. The size of each bubble shows how frequent or prominent a topic is. The feature also includes a time filter, which allows administrators to see how user interests and queried topics change over a specific period.
 
-The development team rated the overall Topic Map feature as a \textbf{high priority}, but they assigned different levels of importance to analyzing each of the three data sources:
+The development team rated the overall Topic Map feature as a \textbf{high priority} \ref{tab:info_quality_p1} \ref{tab:info_quality_g2_p1}, but they assigned different levels of importance to analyzing each of the three data sources:
 
 \begin{itemize}
     \item \textbf{Topics from user queries:} This received a \textbf{high priority}. The team agreed that this view would provide the most valuable insights into what knowledge users are actively searching for, which lets use-case-administrators identify their interests and potential knowledge gaps in the system.
@@ -430,7 +432,7 @@ The initial concept proposed displaying this data in a bubble plot, similar to t
 
 However, making the most frequently used task types visible to the Use Case administrators can improve the \textit{richness} and \textit{information quality} \parencite[pp.~57--58]{DeloneMcLean2003ISSuccessTenYearUpdate} by optimizing the RAG system and its underlying data to better fulfill these task types. It also enhances the \textit{User KM service quality} \parencite[pp.~58--59]{Jennex2006}. Use Case administrators can interpret how their users use the RAG system by analyzing the most relevant task types. This enables them to support their users better.
 
-Despite the discussion on the best visualization method, the development team assigned the Task Type Map a \textbf{high priority}. They agreed that understanding the primary ways the system is used is important. This information can help to improve and streamline common user workflows and better tailor the system to user behaviors.
+Despite the discussion on the best visualization method, the development team assigned the Task Type Analysis a \textbf{high priority} \ref{tab:info_quality_p1} \ref{tab:info_quality_g2_p1}. They agreed that understanding the primary ways the system is used is important. This information can help to improve and streamline common user workflows and better tailor the system to user behaviors.
 \subsubsection{Quality of Retrieval and Response}
 An important concept for evaluating the system is the measurement of its output quality. This feature focuses on assessing both the relevance of the retrieved documents and the quality of the generated response. The main goal is to establish metrics for how well the system performs to ensure that users receive accurate and helpful answers. By analyzing the quality evaluations, Use Case administrators can draw conclusions about how well the system performs in terms of information \textit{richness} and \textit{information quality} \parencite[pp.~57--58]{DeloneMcLean2003ISSuccessTenYearUpdate}, identify trends, and also conclude how their own past decisions influenced the \textit{information quality}. This way, they can enhance it over time.
 
@@ -444,26 +446,26 @@ The discussion highlighted that there is no single and perfect way to measure qu
 
 The results would be displayed in a time-series chart with the x-axis representing the time and the y-axis representing the quality of the system's responses. The system factors (the model selection, Query Splitting and Reformulation) are also included as filtering options, as described before, to see how they affect quality.
 
-The development team unanimously assigned this feature a \textbf{high priority}, describing it as one of the most critical factors for the RAG success. The team emphasized that guaranteeing high-quality responses is essential for user retention - if users do not get good answers, they will stop using the system.
+The development team unanimously assigned this feature a \textbf{high priority} \ref{tab:info_quality_p1} \ref{tab:info_quality_p2} \ref{tab:info_quality_g2_p1} \ref{tab:info_quality_g2_p2}, describing it as one of the most critical factors for the RAG success. The team emphasized that guaranteeing high-quality responses is essential for user retention - if users do not get good answers, they will stop using the system.
 \subsubsection{Combined Quality and Topic/Task Analysis}
 Another concept proposed in the workshop was a combination of the previous ideas on quality measurements and topic/task type analysis into a single visualization. This "Combined Quality and Topic/Task Analysis" was designed to connect the system's performance quality directly with the specific topics or task types being handled. The goal is to identify patterns and understand if the \textit{richness} and \textit{information quality} \parencite[pp.~57--58]{DeloneMcLean2003ISSuccessTenYearUpdate} vary for different topics in user queries. By directly connecting output quality to topics, Use Case administrators can pinpoint \textit{information quality} issues and improve the underlying data for the topic if needed.
 
 This feature uses the bubble plot from the "Topic Map" feature as its foundation. In the idea discussed in the workshop the positioning of the bubbles (semantic similarity) and their color (topic clusters) remains the same, as does the time filter for dynamic analysis. The crucial change lies in the meaning of the bubble size. Instead of representing the frequency of a topic, the size of each bubble now represents the average retrieval or response quality for that topic. For example, a large bubble could signify a topic with consistently high-quality answers, while a smaller bubble might indicate a topic where the system often performs poorly.
 
-The development team assigned this combined view a \textbf{high priority}. The key benefit they identified was the ability to find patterns between query types and the quality of the results. By using this map, administrators could quickly see if a specific topic area suffers from low-quality answers or if certain task types are handled better than others. This information is critical for making targeted improvements and focusing development efforts on the areas where the system is weakest.
+The development team assigned this combined view a \textbf{high priority} \ref{tab:info_quality_g2_p1} \ref{tab:info_quality_g2_p2}. The key benefit they identified was the ability to find patterns between query types and the quality of the results. By using this map, administrators could quickly see if a specific topic area suffers from low-quality answers or if certain task types are handled better than others. This information is critical for making targeted improvements and focusing development efforts on the areas where the system is weakest.
 \subsubsection{Combined Task Type and Topic Analysis}
 Another concept was proposed to analyze the relationship between the topics users ask about and the tasks they are trying to perform. This feature is designed to identify the specific user intents that are associated with different topics. This provides a deeper understanding of user behavior within different knowledge domains which allows Use Case administrators to improve the \textit{richness} and \textit{information quality} \parencite[pp.~57--58]{DeloneMcLean2003ISSuccessTenYearUpdate} by optimizing the RAG-system and its underlying documents as well as the \textit{User KM service quality} \parencite[pp.~58--59]{DeloneMcLean2003ISSuccessTenYearUpdate} by allowing them to understand better how users use the system.
 
-For this analysis, a new visualization method was suggested: a \textbf{heatmap}. In this chart, the rows would represent the various topics identified in the system, while the columns would represent the different task types (e.g., knowledge query, summarization). The color intensity of the cell where a topic and task type intersect would indicate how frequently that specific combination has occurred. For example, a darker cell would show that a particular task is performed very often in connection with a given topic.
+For this analysis, a new visualization method was suggested: a heatmap. In this chart, the rows would represent the various topics identified in the system, while the columns would represent the different task types (e.g., knowledge query, summarization). The color intensity of the cell where a topic and task type intersect would indicate how frequently that specific combination has occurred. For example, a darker cell would show that a particular task is performed very often in connection with a given topic.
 
-The team agreed that this analysis could provide "good insights" into user behavior and assigned a \textbf{medium to high priority}. Understanding which tasks are most common for high-interest topics could help administrators better structure content or create more relevant "Quick Actions" to improve the user experience for those specific topics.
+The team agreed that this analysis could provide "good insights" into user behavior and assigned a \textbf{medium to high priority} \ref{tab:info_quality_g2_p1} \ref{tab:info_quality_g2_p2}. Understanding which tasks are most common for high-interest topics could help administrators better structure content or create more relevant "Quick Actions" to improve the user experience for those specific topics.
 \subsection{Mostly service quality related concepts}
 \subsubsection{User Interactivity Tracking}
 To evaluate the service quality \parencite[p.~18]{DeloneMcLean2003ISSuccessTenYearUpdate} of the application, a concept for tracking user interactivity was discussed. The idea is to monitor and count a wide range of specific user events that happen during a session. This approach tries to make the whole user interaction interpretable and therefore includes analyses interactions like copying an answer, viewing a source document, or providing direct feedback. This enables Use Case admins to understand how their users use the system and by this improves their ability to support their users, which means that the \textit{User KM service quality} \parencite[pp.~58--59]{DeloneMcLean2003ISSuccessTenYearUpdate} is improved. Furthermore, since the use of the RAG system is voluntary, we can associate the \textit{actual use} of the system and its functionalities with the \textit{intention to use}, which is a strong indicator for \textbf{net benefits} and IS success overall \parencite[p.~66]{DeloneMcLean1992ISSuccess}.
 
 The data would be visualized in a time-series diagram, showing the frequency of these different events over a selected period. A key aspect of this concept is to also provide the use case admins with context or an interpretation of what each measurements for the different interaction types could mean. For example, a high number of users opening source documents might indicate they are actively verifying the system's answers, while frequent follow-up questions could suggest that the initial answers lacked sufficient detail.
 
-The team assigned this feature an overall \textbf{medium priority}, which led to a detailed discussion about which specific events were the most valuable to track.
+The team assigned this feature an overall \textbf{medium priority} \ref{tab:service_quality} \ref{tab:service_quality_g2}, which led to a detailed discussion about which specific events were the most valuable to track.
 
 The events considered most important were:
 \begin{itemize}
@@ -487,7 +489,7 @@ The last concept proposed for measuring service quality \parencite[p.~18]{Delone
 
 For visualization, it is proposed to track the occurrences of these knowledge gap types over time and display them in a time-series diagram. The x-axis would represent time, while the y-axis would indicate the frequency of each gap type. This allows administrators to observe trends in knowledge gaps and identify if certain periods or topics are more prone to these issues.
 
-During the workshops, the development team assigned a \textbf{medium to high priority} to the "Knowledge gap detection" feature, specifically emphasizing its importance for analyzing system data. The ability to identify internal system knowledge gaps was considered crucial for pinpointing areas where the RAG mechanism or the underlying knowledge base need improvement. The mechanism for checking topic alignment -- whether topics "fit together" -- was discussed. The proposal uses semantic similarity measures (e.g., cosine similarity of embeddings) to compare the topics extracted from user queries, retrieved documents, and knowledge assets. If the similarity score falls below a predefined threshold, a mismatch, and thus a potential gap, is flagged.
+During the workshops, the development team assigned a \textbf{medium to high priority} to the "Knowledge gap detection" feature, specifically emphasizing its importance for analyzing system data \ref{tab:service_quality} \ref{tab:service_quality_g2}. The ability to identify internal system knowledge gaps was considered crucial for pinpointing areas where the RAG mechanism or the underlying knowledge base need improvement. The mechanism for checking topic alignment -- whether topics "fit together" -- was discussed. The proposal uses semantic similarity measures (e.g., cosine similarity of embeddings) to compare the topics extracted from user queries, retrieved documents, and knowledge assets. If the similarity score falls below a predefined threshold, a mismatch, and thus a potential gap, is flagged.
 \subsection{Implementation Roadmap}
 Finally, after discussion with the development team, the following roadmap for implementing the proposed software features was agreed upon:
 \begin{enumerate}
@@ -529,7 +531,7 @@ The tracking system supports the recording of the following interaction types:
 \end{itemize}
 To maintain the context of a conversation, interactions belonging to a chat or thread within a Use Case are also tracked. In BigQuery, the chat is recorded as a "SessionChat" and the thread is recorded as a "Session". This structure makes it possible to determine which interactions were triggered within the same chat or thread.
 
-For compliance with GDPR (DSGVO) \parencite{DSGVO_2024} regulations, these chats and threads are pseudonymized. This means that pseudonymized IDs are used to prevent a chat or thread from being linked back to a specific user, removing the possibility of subsequent re-identification. Furthermore, a table was created containing a justification for why the recording is necessary for every single data point that is tracked to make the tracking system GDPR compliant.
+For compliance with GDPR (DSGVO) \parencite{DSGVO_2024} regulations, these chats and threads are pseudonymized. This means that pseudonymized IDs are used to prevent a chat or thread from being linked back to a specific user, removing the possibility of subsequent re-identification. Furthermore, a table was created containing a justification for why the recording is necessary for every single data point that is tracked to make the tracking system GDPR compliant \ref{tab:gdpr_compliance_en}.
 \subsection{Data flow and data preprocessing}
 \begin{figure}
     \centering
@@ -547,25 +549,24 @@ The data flow for the dashboard system, as illustrated in the preceding diagram,
     \item \textbf{Data Visualization:} When a user opens a dashboard in the Vue Frontend, a request is sent to a Cloud Run Service that functions as a backend for the dashboard. This service queries the prepared, preprocessed data from BigQuery. It then sends this data back to the Vue Frontend, which renders the final charts for the user using the Apache eCharts \parencite{apache_echarts} library. This architecture ensures that user requests are served quickly, as the complex data processing has already been handled before.
 \end{enumerate}
 \subsection{The Welcome Page}
-For all the following features, screenshots are available in the appendix.
-The first page a Use Case administrator sees when accessing the dashboard is the Welcome Page. This page serves as a central starting point, providing instructions on how to use the dashboard system and offering short descriptions for each of the available analytical metrics. As shown in the screenshot, the user receives guidance on the general workflow in a "Getting Started" section. Above this, a cards introduce the different metrics of the dashboard. From here, the administrator can begin their analysis by selecting one of the metrics to explore.
+The first page a Use Case administrator sees when accessing the dashboard is the Welcome Page \ref{fig:welcome_page}. This page serves as a central starting point, providing instructions on how to use the dashboard system and offering short descriptions for each of the available analytical metrics. As shown in the screenshot, the user receives guidance on the general workflow in a "Getting Started" section. Above this, a cards introduce the different metrics of the dashboard. From here, the administrator can begin their analysis by selecting one of the metrics to explore.
 \subsection{Answer Quality}
 \subsubsection{User Flow}
-The answer quality feature was implemented to provide Use Case administrators with a time-series chart, as outlined in the initial feature concept. This chart allows them to observe trends in answer quality over time and draw conclusions about the success of their own measures. The diagram displays the four quality metrics: Relevance, Completeness, Accuracy, and Faithfulness. A description for each metric can be found in the prompt template provided in the appendix. Furthermore, an end-user study should be conducted to validate the choice and correct calculation of these metrics. To provide a clearer overview, the values are smoothed to display the daily averages for the selected period. In addition to filtering by Use Case and date range, the dashboard also displays the overall average values for each metric above the chart, enabling a quick analysis of the entire period. The chart is interactive, allowing users to hide individual lines for better focus and use tooltips to analyze specific data points in detail.
+The answer quality feature was implemented to provide Use Case administrators with a time-series chart, as outlined in the initial feature concept \ref{fig:answer_quality}. This chart allows them to observe trends in answer quality over time and draw conclusions about the success of their own measures. The diagram displays the four quality metrics: Relevance, Completeness, Accuracy, and Faithfulness. A description for each metric can be found in the prompt template provided in the appendix. Furthermore, an end-user study should be conducted to validate the choice and correct calculation of these metrics. To provide a clearer overview, the values are smoothed to display the daily averages for the selected period. In addition to filtering by Use Case and date range, the dashboard also displays the overall average values for each metric above the chart, enabling a quick analysis of the entire period. The chart is interactive, allowing users to hide individual lines for better focus and use tooltips to analyze specific data points in detail.
 
 \subsubsection{Technical Implementation}
 During the workshops, three technical options were proposed for this feature: evaluation using binary metrics, analysis of user behavior, or using an AI model as a "judge". The binary metric and user behavior analysis were considered to be less accurate proxies for quality, as both methods only indirectly evaluate the content of the generated response. This is obvious in the case of user behavior analysis, which only looks at the user's subsequent questions, not the answer itself. In this way, a detailed explanation of the answer quality is not possible. The binary analysis is also limited, as it primarily checks if the RAG system could assemble relevant information, but does not assess the qualitative aspects of that information.
 
-Therefore, the decision was made to implement the AI evaluation variant. In this implementation, a language model is provided with the user's query, the retrieved source documents, and the final answer during the preprocessing step of the data flow. Using a prompt template that contains detailed instructions for determining the different quality metrics, the AI "judge" then assesses the answer and calculates the scores. The prompt template can be found in the appendix. The calculated scores can then be accessed from the frontend via an HTTP request to the Cloud Run backend that accesses the results stored in BigQuery.
+Therefore, the decision was made to implement the AI evaluation variant. In this implementation, a language model is provided with the user's query, the retrieved source documents, and the final answer during the preprocessing step of the data flow. Using a prompt template \ref{lst:prompt_template} that contains detailed instructions for determining the different quality metrics, the AI "judge" then assesses the answer and calculates the scores. The calculated scores can then be accessed from the frontend via an HTTP request to the Cloud Run backend that accesses the results stored in BigQuery.
 \subsection{Document quality}
 \subsubsection{User Flow}
-The Document Quality feature was implemented in a manner similar to the Answer Quality feature, based on the concepts developed in the workshops. For each user query, this dashboard displays a time series that shows several metrics related to the retrieved documents: the average, highest, and lowest relevance scores, as well as the total number of documents. The technical basis for relevance is described in the next section. These values are presented as smoothed daily averages in a time-series chart to make it easier for the Use Case administrator to analyze trends. The dashboard also includes options to filter by Use Case and time period, and the overall averages for each metric are displayed as KPI cards above the chart. The chart itself is interactive, allowing administrators to use tooltips for detailed analysis of specific data points and to toggle the visibility of individual time series.
+The Document Quality feature was implemented in a manner similar to the Answer Quality feature, based on the concepts developed in the workshops \ref{fig:document_quality}. For each user query, this dashboard displays a time series that shows several metrics related to the retrieved documents: the average, highest, and lowest relevance scores, as well as the total number of documents. The technical basis for relevance is described in the next section. These values are presented as smoothed daily averages in a time-series chart to make it easier for the Use Case administrator to analyze trends. The dashboard also includes options to filter by Use Case and time period, and the overall averages for each metric are displayed as KPI cards above the chart. The chart itself is interactive, allowing administrators to use tooltips for detailed analysis of specific data points and to toggle the visibility of individual time series.
 
 \subsubsection{Technical Implementation}
 To determine the document quality metrics, the implementation uses the relevance scores that are calculated by the system's reranker during the retrieval process. This approach was chosen to avoid the additional costs associated with using another AI model for a separate evaluation. These reranker scores, which are generated by Googles Ranking API \parencite{GoogleReranker}, already provide an assessment of how well the retrieved documents match the user's query. From these scores, the system calculates the average, highest, and lowest relevance values for each query, as well as the total number of documents retrieved in the preprocessing step. It can then request these aggregated values.
 \subsection{Topic maps}
 \subsubsection{User Flow}
-The Topic Maps are presented to the user as a bubble plot. In contrast to the proposal from the workshop in the implemented visualization, each bubble represents an individual user question -- not a whole topic -- allowing for a more detailed overview. The position of each bubble in the chart is determined by its semantic meaning, with topically similar questions appearing closer together than dissimilar ones. Furthermore, the questions are thematically grouped using a clustering algorithm. Each cluster of questions is assigned a unique color on the chart and is displayed with a descriptive title in the legend. The dashboard allows administrators to filter the view by Use Case and date range, enabling them to analyze how the thematic composition of user queries changes over time. Tooltips are also available to show details for each individual question bubble.
+The Topic Maps are presented to the user as a bubble plot \ref{fig:topic_maps_overview} \ref{fig:topic_maps_maps}. In contrast to the proposal from the workshop in the implemented visualization, each bubble represents an individual user question -- not a whole topic -- allowing for a more detailed overview. The position of each bubble in the chart is determined by its semantic meaning, with topically similar questions appearing closer together than dissimilar ones. Furthermore, the questions are thematically grouped using a clustering algorithm. Each cluster of questions is assigned a unique color on the chart and is displayed with a descriptive title in the legend. The dashboard allows administrators to filter the view by Use Case and date range, enabling them to analyze how the thematic composition of user queries changes over time. Tooltips are also available to show details for each individual question bubble.
 
 \subsubsection{Technical Implementation}
 The Topic Maps are generated during preprocessing by first embedding all user queries using the \texttt{gemini-embedding-001} model in its clustering mode \parencite{GoogleEmbedding001}. These embeddings are then clustered using the HDBSCAN algorithm \parencite{Malzer2021}. To achieve robust results across varying amounts of data, the input parameters for HDBSCAN, specifically \texttt{min\_cluster\_size} and \texttt{min\_samples}, are dynamically adjusted based on the total number of queries being analyzed. This adaptive approach ensures sensible clustering for both small and large datasets. The HDBSCAN algorithm is a good choice for this use case as it automatically determines the number of topics (clusters) and effectively isolates irrelevant queries as noise. This eliminates the need to pre-specify the number of clusters, a key limitation of methods like K-means, making it ideal for discovering topics in an exploratory way \parencite[p.~5]{Baligodugula2025}. To overcome the issue that HDBSCAN is not well-suited for high-dimensional data \parencite[p.~5]{Baligodugula2025}, UMAP \parencite{McInnes2020} is applied before the HDBSCAN algorithm to reduce the dimensions to 50 beforehand.
@@ -574,7 +575,7 @@ After clustering, a language model uses a prompt template to generate a descript
 The resulting clusters, cluster names and 2-dimensional coordinates stored in BigQuery can be requested by the frontend using the Cloud Run backend.
 \subsection{Task type analysis}
 \subsubsection{User flow}
-The task type analysis was implemented as a time-series diagram. It was noted in the workshop that a bubble plot would not fit to this feature, because the semantic relationship between the discrete task types is not important. A bar chart was suggested as an alternative. However, a time-series chart was ultimately implemented because, in addition to showing numerical values, it also allows for the analysis of trends over time. This chart displays the days on the x-axis and, on the y-axis, the number of times an individual task type occurred in user queries on a given day.
+The task type analysis was implemented as a time-series diagram \ref{fig:task_types}. It was noted in the workshop that a bubble plot would not fit to this feature, because the semantic relationship between the discrete task types is not important. A bar chart was suggested as an alternative. However, a time-series chart was ultimately implemented because, in addition to showing numerical values, it also allows for the analysis of trends over time. This chart displays the days on the x-axis and, on the y-axis, the number of times an individual task type occurred in user queries on a given day.
 
 The system recognizes and displays the following task types:
 \begin{itemize}
@@ -592,12 +593,12 @@ The system recognizes and displays the following task types:
 The dashboard also provides options to filter by Use Case and time period. The chart is interactive, supporting tooltips for detailed analysis and the ability to toggle the visibility of each time series. Furthermore, to provide the at-a-glance summary that a bar chart would have offered, the overall percentage distribution of each task type for the entire selected period is displayed above the chart.
 
 \subsubsection{Technical implementation}
-Technically, a language model assigns each user query to a specific task type during preprocessing. This is done using a prompt template that contains detailed instructions and descriptions for each category. The prompt template receives the user's question, the final answer, and the retrieved documents as input parameters. To save costs, the quality evaluation (as described previously) and the task type assignment were combined into a single prompt. Therefore, for this classification task, the language model receives more inputs than just the user query. In the end the assigned task types can be requested by the frontend using the Cloud Run backend that accesses the results stored in BigQuery.
+Technically, a language model assigns each user query to a specific task type during preprocessing. This is done using a prompt template \ref{lst:prompt_template} that contains detailed instructions and descriptions for each category. The prompt template receives the user's question, the final answer, and the retrieved documents as input parameters. To save costs, the quality evaluation (as described previously) and the task type assignment were combined into a single prompt. Therefore, for this classification task, the language model receives more inputs than just the user query. In the end the assigned task types can be requested by the frontend using the Cloud Run backend that accesses the results stored in BigQuery.
 \subsection{Combining answer and document quality with topic maps}
 \subsubsection{User Flow}
-In the Topic Map view, administrators can display collected document and answer quality scores directly on the bubble plot. Since each user question is represented as a single bubble, and varying bubble sizes would be difficult to distinguish across all questions, bubble size as proposed in the workshop isn't used as a quality indicator. Instead, when a quality metric is chosen from a dropdown menu, the bubbles change color. Greener colors indicate better quality (closer to 1), while redder colors signify poorer quality (closer to 0), replacing cluster membership as the color's meaning. Additionally, tooltips update to show the relevant quality metrics for each question instead of cluster information.
+In the Topic Map view, administrators can display collected document and answer quality scores directly on the bubble plot \ref{fig:topic_maps_quality}. Since each user question is represented as a single bubble, and varying bubble sizes would be difficult to distinguish across all questions, bubble size as proposed in the workshop isn't used as a quality indicator. Instead, when a quality metric is chosen from a dropdown menu, the bubbles change color. Greener colors indicate better quality (closer to 1), while redder colors signify poorer quality (closer to 0), replacing cluster membership as the color's meaning. Additionally, tooltips update to show the relevant quality metrics for each question instead of cluster information.
 
-Additionally, a detail view is available which presents a table with an overview of either the document or answer quality metrics for all questions within a specific cluster. The administrator can select both the cluster and the set of metrics to be displayed using dropdown menus.
+Additionally, a detail view is available which presents a table with an overview of either the document or answer quality metrics for all questions within a specific cluster \ref{fig:topic_maps_details}. The administrator can select both the cluster and the set of metrics to be displayed using dropdown menus.
 
 This feature allows for the identification of specific knowledge gaps for certain topics within a Use Case. By analyzing quality in the context of topics, a Use Case administrator can determine which subjects are being answered well and which are not. If a topic is performing unexpectedly poorly, the administrator can use this analysis to recognize the issue and initiate countermeasures, such as adding new source documents to the knowledge base.
 
@@ -605,7 +606,7 @@ This feature allows for the identification of specific knowledge gaps for certai
 Technically, this feature is enabled through simple \texttt{JOIN} operations in the BigQuery queries. This allows the quality metrics for each question to be queried and merged with the topic map data at the time of the request. Preprocessing is not needed.
 \subsection{Combining quality with task types}
 \subsubsection{User Flow}
-The combination of quality and task types is also presented to Use Case admins as a time-series diagram. In this view, the administrator can select a specific quality metric (from either document or answer quality) using dropdown menus. The chart then displays the performance of this chosen metric over time, with each line representing a different task type (e.g., "Question Answering," "Summarization"). This allows for a direct comparison of how quality differs across various user intents.
+The combination of quality and task types is also presented to Use Case admins as a time-series diagram \ref{fig:quality_per_task_type}. In this view, the administrator can select a specific quality metric (from either document or answer quality) using dropdown menus. The chart then displays the performance of this chosen metric over time, with each line representing a different task type (e.g., "Question Answering," "Summarization"). This allows for a direct comparison of how quality differs across various user intents.
 
 As in the other dashboards, the data is smoothed by displaying daily averages. Users can filter the data by Use Case and time period. Above the chart, cards display the overall average values for the relevant quality metrics across the entire selected period. The chart itself is interactive, offering tooltips for a detailed daily breakdown of quality per task type, and the ability to show or hide the lines for specific task types to focus the analysis.
 
@@ -613,7 +614,7 @@ As in the other dashboards, the data is smoothed by displaying daily averages. U
 Technically, the data for this view is queried using simple \texttt{JOIN} operations on the necessary tables in BigQuery during the user's request.
 \subsection{Combination of task type and topics}
 \subsubsection{User Flow}
-The last implemented feature is the combination of task type and topic. This analysis is presented to the user as a heatmap. In this visualization, the horizontal axis represents the individual task types, while the vertical axis represents the respective semantic clusters. Each question that belongs to a specific task type and a specific cluster is counted in the cell where the two overlap. Cells with higher total values are colored more darkly than cells with lower values. It is also possible to filter the display for a specific time period and to restrict the view to a single Use Case.
+The last implemented feature is the combination of task type and topic \ref{fig:task_type_per_topic}. This analysis is presented to the user as a heatmap. In this visualization, the horizontal axis represents the individual task types, while the vertical axis represents the respective semantic clusters. Each question that belongs to a specific task type and a specific cluster is counted in the cell where the two overlap. Cells with higher total values are colored more darkly than cells with lower values. It is also possible to filter the display for a specific time period and to restrict the view to a single Use Case.
 
 \subsubsection{Technical Implementation}
 Here as well, the data is queried through simple \texttt{JOIN} operations on the necessary tables in BigQuery during the user's request.
@@ -628,21 +629,21 @@ Two primary scenarios were analyzed to understand the cost impact under differen
 
     \item \textbf{Scenario 2: Complex RAG Chain.} This scenario assumed a more advanced baseline chain that already included features like Query Reformulation and Splitting, which require several additional calls to smaller, faster models. When the same analytics features were added to this more expensive baseline, their relative cost increase was lower, calculated at approximately \textbf{18\%} \parencite{GoogleGeminiPricing}.
 \end{itemize}
-Detailed calculations can be found in the appendix.
+Detailed calculations can be found in the appendix \ref{app:cost_calculations}.
 
 From these scenarios, it was concluded that the analytics features add approximately \textbf{20\%} to the direct LLM-related costs, depending on the complexity of the underlying RAG chain. It is important to contextualize this increase: the cost is comparable to that of other advanced features already in the system. Therefore, the introduction of the new analytics features is not expected to impact the total operational budget significantly.
 
 \section{Final Feedback from the Development Team}
 Finally, the development team was asked to provide feedback on the implemented software features in a dedicated workshop. During this session, the fundamental goal of the thesis, evaluating GenAI Success, was recapped first. Following this, each new analytics feature was presented in a live demonstration, with an explanation of how it contributes to the overall evaluation goal. To conclude the workshop, the developers provided structured feedback by filling out a detailed questionnaire, the complete results of which can be found in the appendix.
 
-Overall, the feedback from the development team was highly positive and constructive. The general design, interactivity, and visual presentation of the dashboards were praised, with comments describing them as well-designed and intuitive for technical users. The analysis of the detailed feedback revealed several key themes and areas for potential improvement:
+Overall, the feedback from the development team was highly positive and constructive \ref{tab:feedback_answer_quality} \ref{tab:feedback_doc_quality} \ref{tab:feedback_quality_by_task} \ref{tab:feedback_task_by_topic} \ref{tab:feedback_task_type} \ref{tab:feedback_topic_maps} \ref{tab:general_feedback}. The general design, interactivity, and visual presentation of the dashboards were praised, with comments describing them as well-designed and intuitive for technical users \ref{tab:feedback_answer_quality} \ref{tab:general_feedback}. The analysis of the detailed feedback revealed several key themes and areas for potential improvement:
 
-\paragraph{Clarity and User Onboarding} A primary theme that emerged was the need for enhanced clarity, particularly for non-technical administrators. Recurring suggestions included adding more detailed legends to explain what metrics like "Faithfulness" mean and providing specific examples to help users interpret the scores. It was also noted that explaining the interdependencies between metrics -- for instance, how "Accuracy" and "Completeness" might influence "Faithfulness" -- could provide a deeper understanding, perhaps visualized as a funnel. Furthermore, the idea of adding automated, LLM-generated summary statements to explain the main takeaways from a chart in plain language was proposed to facilitate the access.
-\paragraph{Actionability} A strong desire was expressed to connect high-level insights not just to deeper analysis, but to specific, operational actions. While the team suggested adding drill-down capabilities to trace an aggregated metric to its source, their feedback went further. There was a clear call to bridge the gap between identifying a problem and implementing a solution. Specific proposals included creating functionality to generate a new "Quick Action" directly from an identified, frequent user task, as well as the ability to overlay key events, such as software releases or pipeline updates, onto the quality trend charts. This would enable a direct correlation between development efforts and their impact on performance.
-\paragraph{Visualization Optimization} While the charts were considered visually appealing, the team provided feedback on optimizing the choice of visualization for the specific data. Specific suggestions included making clusters in the topic map more visually distinct by drawing lines around them, using different shapes in line charts for better accessibility, and implementing more advanced user interface controls, such as an interactive "sliding window" to select date ranges directly within a graph.
-\paragraph{Trust and Explainability in AI-Generated Metrics} The developers also provided a differentiated perspective on AI-based evaluations. They noted that an LLM evaluating its output is inherently prone to error and recommended adding disclaimers to manage user expectations. However, their main concern went beyond simple accuracy to the need for explainability. There was a desire not just to see a score, but to understand the reasoning behind it -- why the model considered a particular answer to be of low quality. This feedback highlights a need for systems that provide not just metrics, but also insight into the AI's decision-making process.\\
+\paragraph{Clarity and User Onboarding} A primary theme that emerged was the need for enhanced clarity, particularly for non-technical administrators \ref{tab:feedback_doc_quality}. Recurring suggestions included adding more detailed legends to explain what metrics like "Faithfulness" mean \ref{tab:feedback_answer_quality} and providing specific examples to help users interpret the scores \ref{tab:feedback_answer_quality} \ref{tab:feedback_doc_quality} \ref{tab:feedback_topic_maps}. It was also noted that explaining the interdependencies between metrics -- for instance, how "Accuracy" and "Completeness" might influence "Faithfulness" \ref{tab:feedback_answer_quality} -- could provide a deeper understanding, perhaps visualized as a funnel \ref{tab:feedback_answer_quality}. Furthermore, the idea of adding automated, LLM-generated summary statements to explain the main takeaways from a chart in plain language was proposed to facilitate the access \ref{tab:feedback_quality_by_task} \ref{tab:general_feedback}.
+\paragraph{Actionability} A strong desire was expressed to connect high-level insights not just to deeper analysis, but to specific, operational actions. While the team suggested adding drill-down capabilities to trace an aggregated metric to its source \ref{tab:feedback_doc_quality}, their feedback went further. There was a clear call to bridge the gap between identifying a problem and implementing a solution. Specific proposals included creating functionality to generate a new "Quick Action" directly from an identified, frequent user task \ref{tab:feedback_task_type}, as well as the ability to overlay key events, such as software releases or pipeline updates, onto the quality trend charts \ref{tab:feedback_answer_quality}. This would enable a direct correlation between development efforts and their impact on performance.
+\paragraph{Visualization Optimization} While the charts were considered visually appealing \ref{tab:general_feedback}, the team provided feedback on optimizing the choice of visualization for the specific data. Specific suggestions included making clusters in the topic map more visually distinct by drawing lines around them \ref{tab:feedback_topic_maps}, using different shapes in line charts for better accessibility \ref{tab:feedback_answer_quality}, and implementing more advanced user interface controls, such as an interactive "sliding window" to select date ranges directly within a graph \ref{tab:feedback_answer_quality}.
+\paragraph{Trust and Explainability in AI-Generated Metrics} The developers also provided a differentiated perspective on AI-based evaluations. They noted that an LLM evaluating its output is inherently prone to error \ref{tab:feedback_answer_quality} and recommended adding disclaimers to manage user expectations \ref{tab:feedback_answer_quality}. However, their main concern went beyond simple accuracy to the need for explainability. There was a desire not just to see a score, but to understand the reasoning behind it -- why the model considered a particular answer to be of low quality \ref{tab:feedback_doc_quality}. This feedback highlights a need for systems that provide not just metrics, but also insight into the AI's decision-making process.\\
 \\
-In conclusion, from the development team's perspective, the implemented features provide significant value for assessing GenAI success and represent a strong foundation for future work. The feedback suggests that the primary focus for subsequent iterations should be on improving the onboarding experience for non-technical users and, most important, enhancing the actionability of the dashboards -- not only by enabling more granular drill-downs, but by creating direct pathways from analytical insights to operational improvements.
+In conclusion, from the development team's perspective, the implemented features provide significant value for assessing GenAI success and represent a strong foundation for future work \ref{tab:general_feedback}. The feedback suggests that the primary focus for subsequent iterations should be on improving the onboarding experience for non-technical users and, most important, enhancing the actionability of the dashboards -- not only by enabling more granular drill-downs, but by creating direct pathways from analytical insights to operational improvements.
 
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  Discussion  --  --  --  --  --  --  --  --  -- %
@@ -967,16 +968,9 @@ This paper was written independently and its language was revised with the assis
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\linewidth]{images/AnswerQualityWithTooltip.png}
+    \includegraphics[width=0.75\linewidth]{images/AnswerQuality.png}
     \caption{The Answer Quality dashboard, showing a tooltip with detailed metrics for a specific date.}
-    \label{fig:answer_quality_tooltip}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\linewidth]{images/AnswerQualityWithoutOneLine.png}
-    \caption{The Answer Quality dashboard with one data series hidden to focus the analysis.}
-    \label{fig:answer_quality_filtered}
+    \label{fig:answer_quality}
 \end{figure}
 
 \begin{figure}[h!]
@@ -995,72 +989,44 @@ This paper was written independently and its language was revised with the assis
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\linewidth]{images/TopicMaps1.png}
+    \includegraphics[width=0.75\linewidth]{images/TopicMapsOverview.png}
     \caption{The Topic Map dashboard, visualizing user queries as semantically positioned bubbles.}
-    \label{fig:topic_maps_main}
+    \label{fig:topic_maps_overview}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\linewidth]{images/TopicMaps2.png}
+    \includegraphics[width=0.75\linewidth]{images/TopicMapsMap.png}
     \caption{The Topic Map dashboard with a tooltip showing the text of an individual user query.}
-    \label{fig:topic_maps_tooltip}
+    \label{fig:topic_maps_maps}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\linewidth]{images/TopicMaps3.png}
+    \includegraphics[width=0.75\linewidth]{images/TopicMapsDetails.png}
     \caption{The Topic Map dashboard displaying document quality, with greener bubbles indicating higher relevance.}
-    \label{fig:topic_maps_doc_quality}
+    \label{fig:topic_maps_details}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.75\linewidth]{images/TopicMaps4.png}
-    \caption{The Topic Map dashboard displaying answer quality, where bubble colors represent the 'Faithfulness' score.}
-    \label{fig:topic_maps_ans_quality}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\linewidth]{images/TopicMaps5.png}
-    \caption{The detailed table view showing answer quality metrics for all questions within a specific cluster.}
-    \label{fig:topic_maps_detail_table}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\linewidth]{images/TopicMaps6.png}
-    \caption{The Topic Map dropdown menu for selecting which quality metric to visualize.}
-    \label{fig:topic_maps_menu}
+    \includegraphics[width=0.75\linewidth]{images/TopicMapsQuality.png}
+    \caption{Topic Map with quality overlay}
+    \label{fig:topic_maps_quality}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.75\linewidth]{images/QualityPerTaskType.png}
-    \caption{The Quality per Task Type dashboard, comparing the performance of a quality metric across different user task types.}
-    \label{fig:quality_per_task}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\linewidth]{images/QualityPerTaskTypeTooltip.png}
     \caption{The Quality per Task Type dashboard, with a tooltip showing a detailed breakdown for a specific day.}
-    \label{fig:quality_per_task_tooltip}
+    \label{fig:quality_per_task_type}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.75\linewidth]{images/TaskTypePerTopic.png}
-    \caption{A heatmap showing the correlation between topics (clusters) and user task types.}
-    \label{fig:task_type_per_topic}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\linewidth]{images/TaskTypePerTopicTooltip.png}
     \caption{The Task Type per Topic heatmap with a tooltip indicating the frequency for a specific topic-task combination.}
-    \label{fig:task_type_per_topic_tooltip}
+    \label{fig:task_type_per_topic}
 \end{figure}
 
 \clearpage % This command forces all the images above to be printed before continuing.
@@ -1098,7 +1064,7 @@ Here are the dimensions:
 </Answer Quality Rating Instructions>
 
 <Conversation to assess>
-Question: [QUESTION_PLACEHOLDER]
+Query: [QUESTION_PLACEHOLDER]
 
 Answer: [ANSWER_PLACEHOLDER]
 
@@ -1212,14 +1178,89 @@ IMPORTANT: Provide your evaluation as a JSON object with exactly the fields ment
     InteractionType & Enum, str & Identifier for the type of an interaction. Possible values: QuestionAsked, DocsReceived, AnswerReceived, QuickActionUsed, AlternativeQuestionAsked, FollowUpQuestionAsked, OpenedSource, GaveFeedback, SelectedModel, UsedFiltering, UsedQueryReformulation, UsedQuerySplitting, CopyButtonClicked, TranslationUsed. & Detailed differentiation of user interactions for fine-grained analysis of system behavior and user guidance. \\
 
 \end{longtable}
+\section{Cost Calculations}
+\label{app:cost_calculations}
+
+This section illustrates the calculation of the approximately 20\% relative cost increase in LLM costs.
+
+\subsection{Methodology}
+To be able to create a meaningful estimate, a simplification was applied. The following assumptions and limitations were made:
+\begin{itemize}
+    \item \textbf{Basis of Comparison:} The comparison is exclusively between the costs for LLM calls (inference) and embedding creation that arise.
+    \item \textbf{Token Consideration:} Only the costs for input tokens are considered
+    \item \textbf{Assumption of Equal Prompt Length:} It is assumed that the each prompt in the RAG chain and the evaluation prompt have approximately the same length. This is a simplification deemed sufficient for a high-level directional estimate.
+    \item \textbf{Ignored Costs:} The following cost categories were intentionally not included in this calculation, as they are difficult to attribute to a single request or are considered negligible: \begin{itemize}
+        \item Costs for Retrieval and Datastore in Vertex AI Search (difficult to attribute).
+        \item Costs for BigQuery and Cloud Run (negligible).
+        \item Costs for the generation of cluster names (negligible).
+    \end{itemize}
+    \item \textbf{Result as a Maximum Estimate:} Because retrieval costs in particular are ignored, the calculated values should be considered \textbf{maximum estimates} of the relative cost increase.
+\end{itemize}
+
+\subsection{Pricing Basis}
+The calculations are based on the prices for the respective Google Gemini models assumed in the project (per 1 million input tokens) \parencite{GoogleGeminiPricing}:
+\begin{itemize}
+    \item \textbf{Gemini-2.5-Pro:} \$1.25 / 1M tokens
+    \item \textbf{Gemini-2.0-Flash:} \$0.15 / 1M tokens
+    \item \textbf{Gemini-2.0-flash-lite:} \$0.075 / 1M tokens
+    \item \textbf{Gemini-Embedding-0001:} \$0.15 / 1M tokens
+\end{itemize}
+
+\subsection{Scenario 1: Basic Functionality}
+In this scenario, advanced features like query reformulation and the generation of follow-up questions are deactivated. The RAG System only performs answer generation.
+
+\paragraph{Costs of the RAG System (Baseline):}
+\begin{itemize}
+    \item 1 call to Gemini-2.5-Pro: \textbf{\$1.25}
+\end{itemize}
+
+\paragraph{Additional Costs from Dashboard Features:}
+\begin{itemize}
+    \item 1 call to Gemini-2.0-Flash: \$0.15
+    \item 1 call to Gemini-Embedding-0001: \$0.15
+    \item \textbf{Total Costs:} \$0.15 + \$0.15 = \textbf{\$0.30}
+\end{itemize}
+
+\paragraph{Relative Cost Increase:}
+The percentage increase is derived from the ratio of the additional costs to the baseline costs.
+\begin{equation*}
+\frac{\text{Costs}_\text{new}}{\text{Costs}_\text{Baseline}} = \frac{\$0.30}{\$1.25} = 0.24 = \textbf{24\%}
+\end{equation*}
+
+\subsection{Scenario 2: Full Functionality}
+In this scenario, all features of the RAG System are activated.
+
+\paragraph{Costs of the RAG System (Baseline):}
+\begin{itemize}
+    \item 1 call to Gemini-2.5-Pro: \$1.25
+    \item 2 calls to Gemini-2.0-Flash: $2 \times \$0.15 = \$0.30$
+    \item 2 calls to Gemini-2.0-flash-lite: $2 \times \$0.075 = \$0.15$
+    \item \textbf{Total Baseline Costs:} \$1.25 + \$0.30 + \$0.15 = \textbf{\$1.70}
+\end{itemize}
+
+\paragraph{Additional Costs from Dashboard Features:}
+\begin{itemize}
+    \item 1 call to Gemini-2.0-Flash: \$0.15
+    \item 1 call to Gemini-Embedding-0001: \$0.15
+    \item \textbf{Total Costs:} \$0.15 + \$0.15 = \textbf{\$0.30}
+\end{itemize}
+
+\paragraph{Relative Cost Increase:}
+\begin{equation*}
+\frac{\text{Costs}_\text{new}}{\text{Costs}_\text{Baseline}} = \frac{\$0.30}{\$1.70} \approx 0.176 = \textbf{17.6\%}
+\end{equation*}
+
+\subsection{Conclusion}
+As the calculations demonstrate, the additional costs incurred by the evaluation features per request are in the range of \textbf{approximately 20\%}. The exact increase depends on which features are active in the underlying chain.
+
 \section{Evaluation}
 \subsection{Detailed Feature Feedback}
 
 The following feedback was collected in a workshop with the development team. Participants rated the presented features based on three criteria on a scale of 1 (strongly disagree) to 5 (strongly agree):
 \begin{itemize}
-    \item \textbf{Is Intuitive to Use (Kann intuitiv verwendet werden):} Rating of the feature's user-friendliness and clarity.
-    \item \textbf{Fulfills Functionality (Erfüllt Funktionalität):} Rating of whether the feature achieves its intended purpose.
-    \item \textbf{Provides Added Value (Liefert Mehrwert):} Rating of the feature's contribution to the overall goal of GenAI Success Evaluation.
+    \item \textbf{Is Intuitive to Use:} Rating of the feature's user-friendliness and clarity.
+    \item \textbf{Fulfills Functionality:} Rating of whether the feature achieves its intended purpose.
+    \item \textbf{Provides Added Value:} Rating of the feature's contribution to the overall goal of GenAI Success Evaluation.
 \end{itemize}
 
 The detailed scores and original comments are listed in the following tables.
@@ -1240,25 +1281,25 @@ The detailed scores and original comments are listed in the following tables.
     \bottomrule
     \endlastfoot
 
-    1 & Entwickler & \textbf{5}: Es ist alles sehr klar und übersichtlich gestaltet. Ich finde es sehr gut designed. Ich finde mich gut zurecht. & \textbf{5}: Was ich cool fänd, ist wenn man die Zeitspanne per maus im Graphen auswählen kann. Wie so ein sliding window. Vielleicht könnte man auch für uns release dates/changes an der Pipeline in dem Chart markieren dann könnte man Qualität zu Änderungen an der Pipeline nachvollziehen. & \textbf{5}: Ich denke es ist sehr wichtig die Qualität der Antworten zu überwachen. \\
+    1 & Entwickler & \textbf{5}: Es ist alles sehr klar und übersichtlich gestaltet. Ich finde es sehr gut designed. Ich finde mich gut zurecht. & \textbf{5}: \textit{Potential for Improvement:} Was ich cool fänd, ist wenn man die Zeitspanne per maus im Graphen auswählen kann. Wie so ein sliding window. Vielleicht könnte man auch für uns release dates/changes an der Pipeline in dem Chart markieren dann könnte man Qualität zu Änderungen an der Pipeline nachvollziehen. & \textbf{5}: Ich denke es ist sehr wichtig die Qualität der Antworten zu überwachen. \\
     \midrule
-    2 & Product Owner & \textbf{3}: Mehr Legenden wären hilfreich, z. B. Score liegt zwischen 0 und 1, was genau bedeuten die Kategorien wie Treue. & \textbf{5}: Alle Werte sind gut ablesbar. Verbesserung: Siehe oben, mehr Beschreibungen für Nutzerinfos. & \textbf{5}: Schafft mehr Transparenz für den Nutzer. \\
+    2 & Product Owner & \textbf{3}: Mehr Legenden wären hilfreich, z. B. Score liegt zwischen 0 und 1, was genau bedeuten die Kategorien wie Treue. & \textbf{5}: Alle Werte sind gut ablesbar. \textit{Potential for Improvement:} Siehe oben, mehr Beschreibungen für Nutzerinfos. & \textbf{5}: Schafft mehr Transparenz für den Nutzer. \\
     \midrule
-    3 & Customer Success Manager & \textbf{4}: Ich finde die Erklärung oben sehr gut! Die Skalen von 0-1 finde ich per se klar, aber die Bezeichnung der Skalen würde dennoch helfen. & \textbf{5}: Tranparenz hinsichtlich der Erklärung, wie sich die einzelnen Werte berechnen (non-technisch und nicht zu ausschweifend). Verbesserung: Skalen bezeichnen, y-Achse insbesondere, Vergleichbarkeit schaffen. & \textbf{5} \\
+    3 & Customer Success Manager & \textbf{4}: Ich finde die Erklärung oben sehr gut! Die Skalen von 0-1 finde ich per se klar, aber die Bezeichnung der Skalen würde dennoch helfen. & \textbf{5}: \textit{Potential for Improvement:} Tranparenz hinsichtlich der Erklärung, wie sich die einzelnen Werte berechnen (non-technisch und nicht zu ausschweifend). & \textbf{5} \\
     \midrule
-    4 & Manager & \textbf{4}: Ich überlege, ob es einen Zusammenhang zwischen den 4 kategorien gibt. Ist nicht eine hohe Treue, von hoher Genauigkeit und vollständigkeit abhängig? Falls ja, wäre das gut, dem Nutzer zu erklären, oder es vllt sogar wie einen Informations funnel drop-off darzustellen. & \textbf{4}: Ich denke nochmal auf die abhängigkeit der kategorien eingehen. & \textbf{5} \\
+    4 & Manager & \textbf{4}: Ich überlege, ob es einen Zusammenhang zwischen den 4 kategorien gibt. Ist nicht eine hohe Treue, von hoher Genauigkeit und vollständigkeit abhängig? Falls ja, wäre das gut, dem Nutzer zu erklären, oder es vllt sogar wie einen Informations funnel drop-off darzustellen. & \textbf{4}: \textit{Potential for Improvement:} Ich denke nochmal auf die abhängigkeit der kategorien eingehen. & \textbf{5} \\
     \midrule
-    5 & Entwickler/TPO & \textbf{3}: Man muss sich zumindest mal die Beschreibung gut durchlesen, die 4 Metriken sind jetzt glaube ich gerade für Laien (irgendwelche Gabelstaplerverkäufer zB) bestimmt nicht bekannt. & \textbf{4}: Gibt einen Überblick, aber da es durch LLMs erstellt wird, kann es glaube ich relativ random sein. Bzw ist die Frage so, was an Kontext alles dazu kommt. Also meine Vermutung wäre zB, dass ein menschlicher Experte wahrscheinlich oft anders scoren würde. Verbesserung: Vielleicht noch die Möglichkeit die 4 Kategorien zu gewichten und daraus einen "Superscore" basteln. & \textbf{2}: Glaube es ist besser als nichts, aber würde jetzt nur rein aus Intuition so vermuten, dass es wahrscheinlich nicht super akkurat ist. \\
+    5 & Entwickler/TPO & \textbf{3}: Man muss sich zumindest mal die Beschreibung gut durchlesen, die 4 Metriken sind jetzt glaube ich gerade für Laien (irgendwelche Gabelstaplerverkäufer zB) bestimmt nicht bekannt. & \textbf{4}: Gibt einen Überblick, aber da es durch LLMs erstellt wird, kann es glaube ich relativ random sein. Bzw ist die Frage so, was an Kontext alles dazu kommt. Also meine Vermutung wäre zB, dass ein menschlicher Experte wahrscheinlich oft anders scoren würde. \textit{Potential for Improvement:} Vielleicht noch die Möglichkeit die 4 Kategorien zu gewichten. Vielleicht ist mir ja was bestimmtes wichtiger. Und dann daraus einen "Superscore" basteln, der alle 4 Kategorien gewichtet enthält. & \textbf{2}: Glaube es ist besser als nichts, aber würde jetzt nur rein aus Intuition so vermuten, dass es wahrscheinlich nicht super akkurat ist. \\
     \midrule
-    6 & Developer & \textbf{5}: Nutzung eindeutig. & \textbf{3}: LLM bewertet sich im Grunde selbst indem es seine eigene Antwortqualität benotet. Ist zwar einfach + vollautomatisch umsetzbar aber dafür sehr fehleranfällig. Verbesserung: Komplexere Evaluationspipeline bauen bspw. mit Inkorporation von Websuche + Self-reflection - sorgt dann halt auch wieder für deutlich höhere Kosten. & \textbf{4}: Automatische Qualitätsevaluation ist immer sinnvoll. \\
+    6 & Developer & \textbf{5}: Nutzung eindeutig. & \textbf{3}: LLM bewertet sich im Grunde selbst indem es seine eigene Antwortqualität benotet=> Ist zwar einfach + vollautomatisch umsetzbar aber dafür sehr fehleranfällig. \textit{Potential for Improvement:} Komplexere Evaluationspipeline bauen bspw. mit Inkorporation von Websuche + Self-reflection - sorgt dann halt auch wieder für deutlich höhere Kosten hahahah. & \textbf{4}: Automatische Qualitätsevaluation ist immer sinnvoll. \\
     \midrule
-    7 & Software Entwickler & \textbf{3}: Ist villeicht nicht intuitiv genug für einen Nutzer. & \textbf{5}: Immerhin ist die funktion nützlich und es erfüllt die Funktionalität. Verbesserung: Villeicht es intuitiver ohne graphen, sonder nur mit einem einzelnen score. & \textbf{5}: Die Funktion ist nützlich, es erstellt eine neue nützliche information der Antwortqualität zum verbessern des Produkts. \\
+    7 & Software Entwickler & \textbf{3}: Ist villeicht nicht intuitiv genug für einen Nutzer. & \textbf{5}: Immerhin ist die funktion nützlich und es erfüllt die Funktionalität. \textit{Potential for Improvement:} Villeicht es intuitiver ohne graphen, sonder nur mit einem einzelnen score. & \textbf{5}: Die Funktion ist nützlich, es erstellt eine neue nützliche information der Antwortqualität zum verbessern des Produkts. \\
     \midrule
-    8 & Softwareentwickler & \textbf{5}: bekannte Diagrammart, Farben stimmen überein, Filter sind intuitiv verständlich. & \textbf{4}: (A) kann gut erkannt werden ob der Trend nach oben geht. (B) könnte schwierig werden, da der Nutzer ggf. nicht weiß, ab welchem Wert keine weitere Maßnahme notwendig ist. Verbesserung: verschiedene Arten von Punkten (Kreis, Quadrat, etc.), um Linien nicht nur anhand der Farbe unterscheiden zu können. Für (B) eine Art Threshold (vline) anzeigen. & \textbf{5} \\
+    8 & Softwareentwickler & \textbf{5}: - bekannte Diagrammart - Farben stimmen überein in der Übersicht mit den Durchschnittswerten und dem Diagramm - die Filter sind intuitiv verständlich. & \textbf{4}: Die gewünschte Funktionalität ist es, abzuschätzen zu können, ob (A) bereits erfolgte Maßnahmen zu einer gewünschten Qualitätssteigerung geführt haben und ob (B) andererseits bewerten zu können, ob weitere Maßnahmen notwendig sind. (A) kann gut erkannt werden ob der Trend nach oben geht (B) könnte schwierig werden, da der Nutzen ggf. nicht weiß, ab welchem Wert keine weitere Maßnahme notwendig ist -> welcher Wert ist "gut genug"? \textit{Potential for Improvement:} verschiedene Arten von Punkten (Kreis mit weißer Füllung, Quadrat, Rhombus, etc. pp.), um nicht nur anhand der Farbe die Linien unterscheiden zu können für (B) der Begründung, könnte man - falls es so etwas gibt - eine Art Threshold (vline) anzeigen (mit entsprechendem Tooltip, der das erklärt). & \textbf{5} \\
     \midrule
-    9 & Softwareentwickler & \textbf{3}: Beispiele in einem Help Tooltip wären sinnvoll um die einzelnen Metriken nochmal genauer zu erläutern. & \textbf{5}: Verbesserung: Prüfen wie gut die Evaluierungen durch das LLM sind und ob sie deswegen wirklichen Mehrwert bieten. Vielleicht noch einen Disclaimer hinpacken, dass diese Werte auch alle KI-generiert sind. & \textbf{4} \\
+    9 & Softwareentwickler & \textbf{3}: Beispiele in einem Help Tooltip wären sinnvoll um die einzelnen Metriken nochmal genauer zu erläutern. & \textbf{5}: \textit{Potential for Improvement:} Prüfen wie gut die Evaluierungen durch das LLM sind und ob sie deswegen wirklichen Mehrwert bieten. Vielleicht noch einen Disclaimer hinpacken, dass diese Werte auch alle KI-generiert sind. & \textbf{4} \\
     \midrule
-    10 & Developer & \textbf{5} & \textbf{5}: Verbesserung: Titel des Diagramms finde ich zu generisch. Erklärung was Maßnahmen sein könnten, um Werte zu verbessern? Information wie genau die Werte ermittelt wurden? Ist 1 überhaupt realistisch erreichbar? Was wäre ein "guter" Wert? & \textbf{5} \\
+    10 & Developer & \textbf{5} & \textbf{5}: \textit{Potential for Improvement:} Titel des Diagramms finde ich zu generisch. Dann kann man ihn auch weglassen. Erklärung was Maßnahmen sein könnten, um Werte zu verbessern? Information wie genau die Werte ermittelt wurden? Ist 1 überhaupt realistisch erreichbar? Was wäre ein "guter" Wert, wäre vlt noch eine sinnvolle Information für den Nutzer. & \textbf{5} \\
 \end{longtable}
 
 \clearpage
@@ -1279,25 +1320,25 @@ The detailed scores and original comments are listed in the following tables.
     \bottomrule
     \endlastfoot
 
-    1 & Entwickler & \textbf{5} & \textbf{5}: Es wäre cool, wenn man noch fein granularer z.B. in einer Tabelle pro Use-Case die Metriken auf einer Dokumenten Ebene sehen könnte. & \textbf{5}: Absolut, ala garbage in garbage out. \\
+    1 & Entwickler & \textbf{5} & \textbf{5}: \textit{Potential for Improvement:} Es wäre cool, wenn man noch fein granularer z.B. in einer Tabelle pro Use-Case die Metriken auf einer Dokumenten Ebene sehen könnte. & \textbf{5}: Absolut, ala garbage in garbage out. \\
     \midrule
     2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter (mehr Legenden, Beschreibungen). & \textbf{5} & \textbf{5} \\
     \midrule
-    3 & Customer Success Manager & \textbf{3}: Beispiele zur Bewertung angeben, damit das Feature für non-technicals verständlich wird. & \textbf{3} & \textbf{2}: Dokumentenqulität sehr wichtig, die generelle Zahl hilft jedoch im Zweifel weniger als die Analyse einzelner Themenbereiche oder gar Dokumente. Vll kann man zwischen Sources unterscheiden? Dann wäre pro Use Case ein deutlicher Mehrwert gewonnen. \\
+    3 & Customer Success Manager & \textbf{3}: Skalen bezeichnen, y-Achse insbesondere, Vergleichbarkeit schaffen. & \textbf{3}: \textit{Potential for Improvement:} Beispiele zur Bewertung angeben, damit das Feature für non-technicals verständlich wird. & \textbf{2}: Dokumentenqulität sehr wichtig, die generelle Zahl hilft jedoch im Zweifel weniger als die Analyse einzelner Themenbereiche oder gar Dokumente. Vll kann man zwischen Sources unterscheiden? Dann wäre pro Use Case ein deutlicher Mehrwert gewonnen, weil ich eine genauere Einschätzung mit Bezug zu den tatsächlichen Dokumenten erhalte. \\
     \midrule
-    4 & Manager & \textbf{4}: Die werte befinden sich teil über 1. anders als in der beschreibung. & \textbf{4}: ist es besser eine höhere anzahl verwendeter Dokumente zu haben, oder eine niedrigere? & \textbf{5} \\
+    4 & Manager & \textbf{4}: Die werte befinden sich teil über 1. anders als in der beschreibung. & \textbf{4}: \textit{Potential for Improvement:} ist es besser eine höhere anzahl verwendeter Dokumente zu haben, oder eine niedrigere? & \textbf{5} \\
     \midrule
-    5 & Entwickler/TPO & \textbf{5}: Glaube "Relevanz" und "Anzahl gefundener Dokumente" sind eher Begriffe, die man auf Anhieb versteht. & \textbf{4}: Verbesserung: Eventuell noch die Dokumente aus dem Retriever auch mit reinnehmen? (optional). Manchmal ist ja doch auch der Reranker einfach dumm, bzw gibt er auch oft ganz schön andere Scores als der Retriever. & \textbf{5}: Ist einfach zu verstehen und man kann denke ich es gut nutzen, um die Datenlage zu analysieren und daraus Schritte abzuleiten. \\
+    5 & Entwickler/TPO & \textbf{5}: Glaube "Relevanz" und "Anzahl gefundener Dokumente" sind eher Begriffe, die man auf Anhieb versteht. & \textbf{4}: \textit{Potential for Improvement:} Eventuell noch die Dokumente aus dem Retriever auch mit reinnehmen? (optional). Manchmal ist ja doch auch der Reranker einfach dumm, bzw gibt er auch oft ganz schön andere Scores als der Retriever. & \textbf{5}: Ist einfach zu verstehen und man kann denke ich es gut nutzen, um die Datenlage zu analysieren und daraus Schritte abzuleiten. \\
     \midrule
-    6 & Developer & \textbf{5}: Nutzung eindeutig. & \textbf{3}: Hier sind die Scores am Ende halt auch wieder das Ergebnis von je einem LLM Call. Das Problem ist halt hier dass das LLM den Retriever bewertet und es uns nur mitteilt dass die Dokumente gut/schlecht sind aber keinen tieferen Insight liefert WARUM. & \textbf{4} \\
+    6 & Developer & \textbf{5}: Nutzung eindeutig. & \textbf{3}: Hier sind die Scores am Ende halt auch wieder das Ergebnis von je einem LLM Call. Sowas wie Recall + Precision macht hier aber auch keinen Sinn da man dafür ja annotierte Docs bräuchte + Fragenset ... ist schwierig hahaha aber kann gut sein dass das mit vollautomatischer LLM-Evaluation das beste ist was geht. Das Problem ist halt hier dass das LLM (d.h. der Generator) am Ende des Tages den Retriever bewertet und es zumindest uns als Developern/Nutzern nur mitteilst dass die Dokumente die gefunden wurde gut/schlecht sind aber keinen tieferen Insight liefert WARUM jetzt gute/schlechte Dokumente gefunden wurden. & \textbf{4} \\
     \midrule
-    7 & Software Entwickler & \textbf{3}: Wie schon vorher begründet, villeicht sind die Graphen zu komplex für einen Endnutzer, zu viele metriken können auch verwirrend sein. & \textbf{5}: Mir scheint es die gewünschte funktionalität zu erfüllen. Verbesserung: Dumb it down for the end user. & \textbf{5}: Sieht gut aus, ist eine nützliche information, es kann benutzt werden für die verbesserung und entwicklung von wingman. \\
+    7 & Software Entwickler & \textbf{3}: Wie schon vorher begründet, villeicht sind die Graphen zu komplex für einen Endnutzer, zu viele metriken können auch verwirrend sein. & \textbf{5}: Mir scheint es die gewünschte funktionalität zu erfüllen. \textit{Potential for Improvement:} Dumb it down for the end user. & \textbf{5}: Sieht gut aus, ist eine nützliche information, es kann benutzt werden für die verbesserung und entwicklung von wingman. \\
     \midrule
-    8 & Softwareentwickler & \textbf{4}: selbe Punkte wie eben, ABER die Auswahl mit dem Diagrammmodus könnte verwirren bzw. übersehen werden, ggf. in die Einstellungsleiste oben (bei Datumsfiltern) mit aufnehmen. & \textbf{5}: Es sollte leicht ersichtlich werden, welche Dokumente am hilfreichsten sind. Aber meine Frage: Was bringt hier der Diagramm-Modus "Anzahl Dokumente"? Geht es nicht eigentlich nur um die Qualität? & \textbf{5}: Ziel ist es, die relevantesten Dokumente hochzuladen, und das wird hiermit besser zu erkennen. \\
+    8 & Softwareentwickler & \textbf{4}: selbe Punkte wie eben, ABER die Auswahl mit dem Diagrammmodus könnte verwirren bzw. übersehen werden, ggf. in die Einstellungsleiste oben (bei Datumsfiltern) mit aufnehmen. & \textbf{5}: Es sollte leicht ersichtlich werden, welche Dokumente am hilfreichsten sind. Aber meine Frage: Was bringt hier der Diagramm-Modus "Anzahl Dokumente"? Geht es nicht eigentlich nur um die Qualität? \textit{Potential for Improvement:} wie vorhin. & \textbf{5}: Ziel ist es, die relevantesten Dokumente hochzuladen, und das wird hiermit besser zu erkennen. \\
     \midrule
-    9 & Softwareentwickler & \textbf{5}: Skala 0-1 leicht verständlich. & \textbf{5}: Pro Use Case kann man gut einsehen, ob relevante Dokumente vorhanden sind. Verbesserung: Die Farben der Metriken finde ich nicht super intuitiv. Höchste Relevanz vielleicht lieber grün und niedrigste rot. & \textbf{5}: Dokumentenbasis kann basierend darauf erweitert werden. \\
+    9 & Softwareentwickler & \textbf{5}: Skala 0-1 leicht verständlich. & \textbf{5}: Pro Use Case kann man gut einsehen, ob relevante Dokumente vorhanden sind. \textit{Potential for Improvement:} Die Farben der Metriken finde ich nicht super intuitiv. Höchste Relevanz vielleicht lieber grün und niedrigste rot. & \textbf{5}: Dokumentenbasis kann basierend darauf erweitert werden. \\
     \midrule
-    10 & Developer & \textbf{4} & \textbf{4}: Weiß ich, welches Dokument nicht gut funktioniert, wenn es mehrere pro Use Case gibt? Durchschnittsymbol bei höchsten und niedrigste Relevanz? Diagrammtitel zu generisch. Übersicht welche Dokumente dann wirklich auch top oder flop sind? Ein Diagramm über die Entwicklung der Anzahl der Dokumente sagt nicht viel aus oder? & \textbf{3} \\
+    10 & Developer & \textbf{4} & \textbf{4}: \textit{Potential for Improvement:} Weiß ich, welches Dokument nicht gut funktioniert, wenn es mehrere pro Use Case gibt? Durchschnittsymbol bei höchsten und niedrigste Relevanz? Diagrammtitel zu generisch. Übersicht welche Dokumente dann wirklich auch top oder flop sind? Um wirklich Dokumente zu ändern, müsste man wissen, welche Dokumente ein Flop sind. Ein Diagramm über die Entwicklung der Anzahl der Dokumente sagt nicht viel aus oder? Ist das hier wirklich von Relevanz? & \textbf{3} \\
 \end{longtable}
 
 \clearpage
@@ -1320,23 +1361,23 @@ The detailed scores and original comments are listed in the following tables.
 
     1 & Entwickler & \textbf{5} & \textbf{5} & \textbf{5}: Zu sehen, wo die Pipeline noch fehlschlägt und genau diese Edge Cases zu adressieren ist sehr sehr wichtig. \\
     \midrule
-    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter. & \textbf{5}: Cluster noch stärker hervorheben (z.B. kurze Beschreibung, nicht nur Titel?). & \textbf{5}: Hilft zu sehen, wie viele Anfragen wirklich thematisch gestellt werden. \\
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter (mehr Legenden, Beschreibungen). & \textbf{5}: \textit{Potential for Improvement:} Cluster noch stärker hervorheben, dass Nutzer schneller verstehen, wie die Cluster zusammengesetzt sind und entstehen (z. B. noch kurze Beschreibung, nicht nur Titel?). & \textbf{5}: Hilft auch zu sehen, wie viele Anfragen wirklich thematisch gestellt werden und ob Nutzer gezielt zum Thema des Assets fragen. \\
     \midrule
-    3 & Customer Success Manager & \textbf{3}: Darstellung empfinde ein wenig als verwirrend, wegen fehlenden Skalen. & \textbf{5}: Prozent-Zahlen bzgl. Fragen zum Use Case / Clusterings / Knowledge Sourcen angeben \& ob diese im positiven / negativen Bereich liegen. & \textbf{4} \\
+    3 & Customer Success Manager & \textbf{3}: Gut, die Darstellung der Darstellung empfinde ein wenig als verwirrend, wegen fehlenden Skalen. & \textbf{5}: \textit{Potential for Improvement:} Prozent-Zahlen bzgl. Fragen zum Use Case / Clusterings / Knowledge Sourcen angeben \& ob diese im positiven / negativen Bereich liegen. Dies würde einen weiteren Mehrwert für den Kunden liefern. & \textbf{4} \\
     \midrule
-    4 & Manager & \textbf{3}: Clustergröße sollte einen weniger technischen namen bekommen. Das Diagram ist etwas komplex. & \textbf{4}: das diagram etwas vereinfachen. & \textbf{5} \\
+    4 & Manager & \textbf{3}: Clustergröße sollte denke ich eher einen weniger technischen namen bekommen. Das Diagram ist etwas komplex, die Blöcke sind sehr einfach. & \textbf{4}: \textit{Potential for Improvement:} das diagram etwas vereinfachen. & \textbf{5} \\
     \midrule
-    5 & Entwickler/TPO & \textbf{4}: Zumindest mit kleiner Intro glaube ich kann man das schon ganz gut verstehen, wenn man so bisschen Plan von Clustern hat. & \textbf{4}: Es gibt einen guten Überblick über oft gefragte Topics. Verbesserung: Cluster besser kennzeichnen (Kreis, Farbiger Hintergrund). Qualität lieber durch Größe der Punkte darstellen als durch Grüntöne. & \textbf{4}: Es gibt einen guten Überblick und zeigt direkt, wie gut diese abschneiden. \\
+    5 & Entwickler/TPO & \textbf{4}: Zumindest mit kleiner Intro glaube ich kann man das schon ganz gut verstehen, wenn man so bisschen Plan von Clustern hat. & \textbf{4}: Es gibt einen guten Überblick über Topics, die oft gefragt werden und zeigt auch direkt so, wie gut diese abschneiden. \textit{Potential for Improvement:} Cluster besser kennzeichnen (Kreis, Farbiger Hintergrund). Die Qualität lieber durch Größe der Punkte darstellen als durch verschiedene Grüntöne (war zumindest in der Präsi nicht wirklich zu erkennen). & \textbf{4}: Es gibt einen guten Überblick über Topics, die oft gefragt werden und zeigt auch direkt so, wie gut diese abschneiden. \\
     \midrule
-    6 & Developer & \textbf{5} & \textbf{5}: coolstes Feature 10/10. & \textbf{5}: feier ich. \\
+    6 & Developer & \textbf{5}: coolstes Feature 10/10. & \textbf{5}: feier ich. & \textbf{5}: feier ich. \\
     \midrule
-    7 & Software Entwickler & \textbf{3}: Wie von Casper vorgeschlagen, mit dem clustering können grenzen um die cluster gemalt werden. & \textbf{4}: Ich bin verwirrt dass fragen außerhalb des clusters, bei denen wingman keine antwort gibt, gut evaluiert wurden. Verbesserung: Gut evaluierte datenpunkte die vom use case cluster weit entfernt sind ignorieren. Antwort beim clustering algorithmus benutzen. & \textbf{5}: Guter Feature, macht sinn es zu haben. \\
+    7 & Software Entwickler & \textbf{3}: Wie von Casper vorgeschlagen, mit dem clustering können grenzen um die cluster gemalt werden um die cluster voneinander abzugrenzen. & \textbf{4}: Ich bin immernoch verwirrt dass fragen außerhalb des clusters bei denen wingman keine antwort gibt, gut evaluiert wurden. \textit{Potential for Improvement:} Man könnte gut evaluierte datenpunkte die vom use case cluster weit entfernt sind ignorieren, da sie falsch evauliert wurden. Man könnte auch die antwort beim clustering algorithmus und bei der evaluation benutzen, villeicht kann das auch das Problem lösen. & \textbf{5}: Guter Feature, macht sinn es zu haben. \\
     \midrule
-    8 & Softwareentwickler & \textbf{3}: Dem Nutzer ist nicht klar, wie das Clustering zu lesen ist. Ein Balkendiagramm wäre vielleicht besser. Die Cluster-Details unten sind sehr hilfreich. & \textbf{3}: Wo sieht man die Antwort-/Dokumentqualität in den einzelnen Themenbereichen? Verbesserung: Cluster-Qualität gleich sortieren wie die Legende. Ggf. Balkendiagramm. & \textbf{4}: sehr hilfreich um zu sehen wie die Nutzer den Use Case verwenden. \\
+    8 & Softwareentwickler & \textbf{3}: > dass Use Case Admins die Themen der Nutzeranfragen einschätzen können sehr gut erkennbar aber generell könnte es sein, dass dem Nutzer nicht klar ist, wie das Clustering zu lesen ist, also dass die Punkte einzelne Fragen sind und die Farben die unterschiedlichen Cluster; hier wäre vielleicht einfach ein Balkendiagramm, was für jeden (automatischen) Cluster anzeigt, wie häufig Fragen aus diesem Themengebiet kommen, wiederum die Cluster-Details unten sind sehr hilfreich und die Hauptstatistiken oben (Anzahl Fragen, durchschnittliche Cluster-Größe) sind auch sehr hilfreich. & \textbf{3}: > Use Case Admins die Themen der Nutzeranfragen einschätzen können SEHR GUT erkennbar > zudem auch die Antwort-/Dokumentqualität in den einzelnen Themenbereichen betrachten können Wo sieht man das? > Zudem kann abgeschätzt werden, ob die Nutzer überhaupt passende Fragen an einen Use Case stellen oder, ob ggf. Schulungen oder andere Dokumentenbasen notwendig sind. SEHR GUT erkennbar. \textit{Potential for Improvement:} - Cluster-Qualität gleich sortieren wie die Cluster in der Legende im Diagramm - ggf. das angesprochene Balkendiagramm. & \textbf{4}: sehr hilfreich um zu sehen wie die Nutzer den Use Case verwenden, allerdings frage ich mich noch, was die genaue Clusteransicht bringt, denn eigentlich ist doch eher die Anzahl/Verteilung interessant; und ich bin mir unsicher, wie hilfreich es ist, die Qualitätsbewertungen im Cluster anzuzeigen. \\
     \midrule
-    9 & Softwareentwickler & \textbf{3}: Ein Cluster muss sich der User wahrscheinlich ein bisschen mehr gewöhnen. Toggle zwischen Clustern und Qualität ist noch nicht ganz optimal. & \textbf{4}: Aus den Tooltips ist teilweise Text noch über die Ränder gelaufen. Schwellwerte für die Farben der Zahlen in der Tabelle waren nicht symmetrisch. & \textbf{4} \\
+    9 & Softwareentwickler & \textbf{3}: Ein Cluster muss sich der User wahrscheinlich ein bisschen mehr gewöhnen. Toggle zwischen Clustern und Qualität ist noch nicht ganz optimal weil Cluster noch nicht umkreist / hinterlegt. Vielleicht könnte man auch die Clusterpunkte grün oder rot umranden damit man nur eine Ansicht hat. Die Qualität kann man dann ja ein und ausblenden lassen. & \textbf{4}: Aus den Tooltips ist teilweise Text noch über die Ränder gelaufen. Die Schwellwerte für die Farben der Zahlen unten in der Tabelle waren nicht symmetrisch nach unten und oben hin (ab 20\% rot und ab 70\% grün oder so). & \textbf{4} \\
     \midrule
-    10 & Developer & \textbf{3}: Cluster schwer für Nutzer zu verstehen. Ein Beispiel mit Interpretation einbauen. Wie bilden sich Cluster? & \textbf{4}: Cluster bildlich klarer darstellen, mit Umrandung z.B. & \textbf{5} \\
+    10 & Developer & \textbf{3}: Cluster schwer für Nutzer zu verstehen. Ein Beispiel mit Interpretation einbauen zum besseren Verständins? Wie bilden sich Cluster? So Fragestellungen sollten erklärt werden. Hinweis auf unterschiedlichen Anzeigemodus und wie die Grafik dann anders interpretiert werden sollte. & \textbf{4}: \textit{Potential for Improvement:} Cluster bildlich klarer darstellen, mit Umrandung z.B. & \textbf{5} \\
 \end{longtable}
 
 \clearpage
@@ -1357,38 +1398,38 @@ The detailed scores and original comments are listed in the following tables.
     \bottomrule
     \endlastfoot
 
-    1 & Entwickler & \textbf{5} & \textbf{5}: Vielleicht eine Gegenüberstellung mit existierenden Quick Actions. Bonus: direkt aus einem häufig ausgeführtem Aufgabentyp eine QuickAction erstellen können. & \textbf{5} \\
+    1 & Entwickler & \textbf{5} & \textbf{5}: \textit{Potential for Improvement:} Vielleicht eine Gügenüberstellung mit existierenden Quick Actions und Bonus Feature wäre, wenn man direkt aus einem häufig ausgeführtem Aufgabentyp eine QuickAction erstellen könnte. Direkt über einen link aus dem Interface. & \textbf{5} \\
     \midrule
-    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter. & \textbf{5} & \textbf{5} \\
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter (mehr Legenden, Beschreibungen). & \textbf{5} & \textbf{5} \\
     \midrule
-    3 & Customer Success Manager & \textbf{3}: Skala wieder etwas unklar, ggf. Beispiel. & \textbf{4} & \textbf{4}: Für mich wieder Bezug zum Clustering/Source herstellen. \\
+    3 & Customer Success Manager & \textbf{3}: Skala wieder etwas unklar, ggf. Beispiel wie erhält man einen hohen Wert, wie einen geringen. & \textbf{4}: \textit{Potential for Improvement:} Für mich wieder Bezug zum Clustering/Source herstellen, weil die Auswertung dann auf einen greifbaren Themenbereich herstellen kann. & \textbf{4} \\
     \midrule
-    4 & Manager & \textbf{4}: Farben sind hier nicht notwendig. Q\&A ist grün (gut?) andere rot (schlecht?) & \textbf{4}: finde es ein sehr gutes feature, wie gut lässt es sich erweitern, das es nicht zu grobe kategorien gibt? & \textbf{5} \\
+    4 & Manager & \textbf{4}: Farben sind hier nicht notwendig. Q&A ist grün (gut?) andere rot (schlecht?). & \textbf{4}: \textit{Potential for Improvement:} finde es ein sehr gutes feature, wie gut lässt es sich erweitern, das es nicht zu grobe kategorien gibt? & \textbf{5} \\
     \midrule
-    5 & Entwickler/TPO & \textbf{5}: Super intuitiv. & \textbf{5}: Finde der Zeitverlauf ist weniger Spannend als die Verteilung. Würde zentral eher ein Balkendiagramm platzieren. & \textbf{5}: Super nice Übersicht. \\
+    5 & Entwickler/TPO & \textbf{5}: Super intuitiv. & \textbf{5}: Top. \textit{Potential for Improvement:} Glaube die Darstellung würde ich vielleicht ein bisschen anpassen. Finde der Zeitverlauf ist weniger Spannend als einfach obendrüber die Verteilung. Würde also glaube ich zentral eher so ein Balkendiagramm platzieren und das mit der Timeline mehr als sekundäres Diagramm nutzen. & \textbf{5}: Super nice Übersicht. \\
     \midrule
-    6 & Developer & \textbf{5} & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{5} \\
+    6 & Developer & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{3}: Nicht so relevant wie die ersten drei Analyse-Seiten. \\
     \midrule
-    7 & Software Entwickler & \textbf{3}: Wie vorher, bin nicht von den graphen überzeugt. & \textbf{5}: Soweit die Klassen alle möglichkeiten abdecken, passt es. Verbesserung: Dynamisch die Klassen erzeugen (mit clustering). & \textbf{5}: Nützliche information. \\
+    7 & Software Entwickler & \textbf{3}: Wie vorher, bin nicht von den graphen überzeugt. & \textbf{5}: Soweit die ausgewählte anzahl an Klassen alle möglichkeiten abdecken, passt es. \textit{Potential for Improvement:} Villeicht Dynamisch die Kalssen erzeugen (mit clustering algorithmus), vor allem bei der klasse "andere". & \textbf{5}: Nützliche information. \\
     \midrule
-    8 & Softwareentwickler & \textbf{5} & \textbf{5}: in der Übersicht mit "Fragen insgesamt" etc. statt Layout mit Scrollbar ein Layout was sich automatisch in mehrere Zeilen aufteilt. & \textbf{5} \\
+    8 & Softwareentwickler & \textbf{5} & \textbf{5}: \textit{Potential for Improvement:} in der Übersicht mit "Fragen insgesamt" etc. statt einem Layout mit nur einer Zeile und Scrollbar ein Layout was sich automatisch in mehrere Zeilen aufteilt, damit man immer alle Kategorien sieht, denn diese Übersicht ist immer sehr hilfreich für den ersten Überblich. & \textbf{5} \\
     \midrule
-    9 & Softwareentwickler & \textbf{5} & \textbf{5} & \textbf{3}: Aufgabentyp "Sonstiges" sind sehr viele. Allgemein weniger spannender Insight als die anderen. \\
+    9 & Softwareentwickler & \textbf{5} & \textbf{5} & \textbf{3}: Aufgabentyp "Sonstiges" sind sehr viele (vielleicht liegt es ja auch nur an den Testdaten). Allgemein weniger spannender Insight als die anderen. \\
     \midrule
-    10 & Developer & \textbf{5} & \textbf{4}: Was umfasst Andere? Mehr Erklärungen für den Nutzer. & \textbf{4} \\
+    10 & Developer & \textbf{5} & \textbf{4}: \textit{Potential for Improvement:} Was umfasst Andere? Mehr Erklärungen für den Nutzer. & \textbf{4} \\
 \end{longtable}
 
 \clearpage
 
-% --- Table 5: Combined Views ---
+% --- Table 5: Task Type by Topic ---
 \begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
-    \caption{Feedback on Combined Views (Quality/Topics/Tasks)}
-    \label{tab:feedback_combined}\\
+    \caption{Feedback on the Feature: Task Type by Topic}
+    \label{tab:feedback_task_by_topic}\\
     \toprule
     \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
     \midrule
     \endfirsthead
-    \caption[]{Feedback on Combined Views (Continued)}\\
+    \caption[]{Feedback on the Feature: Task Type by Topic (Continued)}\\
     \toprule
     \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
     \midrule
@@ -1398,61 +1439,100 @@ The detailed scores and original comments are listed in the following tables.
 
     1 & Entwickler & \textbf{5} & \textbf{5} & \textbf{5} \\
     \midrule
-    2 & Product Owner & \textbf{3}: An sich ist diese spezifische Übersicht aber eindeutiger als die vorherigen imo. & \textbf{5} & \textbf{5} \\
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter (mehr Legenden, Beschreibungen), an sich ist diese spezifische Übersicht aber eindeutiger als die vorherigen imo. & \textbf{5} & \textbf{5} \\
     \midrule
     3 & Customer Success Manager & \textbf{5}: Top! & \textbf{5}: Top! & \textbf{5}: Top! \\
     \midrule
-    4 & Manager & \textbf{4}: Finde ich tatsächlich besser als nur "aufgabentyp" im verlauf. die grafik brint mir gefühlt mehr. & \textbf{5} & \textbf{4} \\
+    4 & Manager & \textbf{4}: Finde ich tatsächlich besser als nur "aufgabentyp" im verlauf. die grafik brint mir gefühlt mehr. & \textbf{4} & \textbf{4} \\
     \midrule
-    5 & Entwickler/TPO & \textbf{5}: Super easy. & \textbf{5}: Eventuell muss man sich was überlegen, sobald es super viele Kategorien gibt. Vielleicht die wichtigsten Spots highlighten (zB "Top 3"). & \textbf{5} \\
+    5 & Entwickler/TPO & \textbf{5}: Super easy. & \textbf{5}: \textit{Potential for Improvement:} Eventuell muss man sich bisschen was überlegen, sobald es super viele Kategorien und Aufgabentypen sind? Also vielleicht noch mehr die wichtigsten Spots highlighten und vielleicht auch außerhalb der Heatmap gesondert in den Fokus rücken. (zB so "Top 3" oder so). & \textbf{5} \\
     \midrule
-    6 & Developer & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{5} & \textbf{3}: Nicht so relevant wie die ersten drei Analyse-Seiten. \\
+    6 & Developer & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{3}: Nicht so relevant wie die ersten drei Analyse-Seiten. \\
     \midrule
-    7 & Software Entwickler & \textbf{5}: Sieht gut aus. & \textbf{5}: sieht gut aus. & \textbf{5}: Sehr hilfreich. \\
+    7 & Software Entwickler & \textbf{5}: Sieht gut aus. & \textbf{5}: sieht gut aus. \textit{Potential for Improvement:} nein. & \textbf{5}: Sehr hilfreich. \\
     \midrule
-    8 & Softwareentwickler & \textbf{3}: man sieht nicht, wie groß einzelne Cluster sind; Diagramm wird nicht vorsortiert. & \textbf{4}: Ziel wird erfüllt, würde aber bspw. auch durch ein Stacked Bar Chart erfüllt werden. & \textbf{4}: ich denke, das Gesamtziel ist leichter erreicht durch die vorherigen Dinge. Ich frage mich, welchen Mehrwert es durch diese Kombination wirklich gibt. \\
+    8 & Softwareentwickler & \textbf{3}: - man sieht nicht, wie groß einzelne Cluster sind - das Diagramm wird nicht "vorsortiert", man muss als Nutzer selbst die Informationen aus der Heatmap herauslesen. & \textbf{4}: > Ziel dieses Features ist es, dass Use Case Admins erkennen können bei welchen Themen, welcher Aufgabentyp hauptsächlich zum Einsatz kommt - wird erfüllt, würde aber bspw. auch erfüllt werden durch ein Stacked Bar Chart mit einer Bar pro Use Case, wo man auch leicht die dicksten Teile erkennt, könnte man auch sortieren nach der Häufigkeit der Einsatzarten > Hierdurch sollen sie abschätzen können, welche Dokumentenbasen, wie verwendet werden, um diese für ihren Einsatzzweck optimieren zu können. gut. \textit{Potential for Improvement:} die oben genannten anderen Varianten für die Darstellung. & \textbf{4}: ich denke, das Gesamtziel ist leichter erreicht durch die vorherigen Dinge. Einzeln die Fragearten und einzeln die Dokumentenqualität. Ich frage mich, welchen Mehrwert es durch diese Kombination (wirklich) gibt. \\
     \midrule
-    9 & Softwareentwickler & \textbf{3}: Man muss viel händisch einstellen und sieht nicht viel auf einmal. & \textbf{5} & \textbf{3}: Finde den Insight auch weniger spannend als die ersten Features. \\
+    9 & Softwareentwickler & \textbf{5} & \textbf{5} & \textbf{3}: Finde den Insight auch weniger spannend als die ersten Features. \\
     \midrule
-    10 & Developer & \textbf{3}: Gibt es eine Beschränkung für die Anzahl von Clustern? Das kann sehr schnell unübersichtlich werden. & \textbf{5} & \textbf{3}: Ist vielleicht eher eine Statistik fürs Analytics Dashboard? Was will ich mit dem Wissen verbessern? \\
+    10 & Developer & \textbf{3}: Gibt es eine Beschränkung für die Anzahl von Clustern? Das kann sehr schnell sehr groß und unübersichtlich werden. Statt Gesamtcluster vlt besser Anzahl Cluster oder Cluster Gesamt? & \textbf{5} & \textbf{3}: Ist vielleicht eher eine Statistik fürs Analytics Dashboard? Also klar, da gibt es kein Clustering, aber was will ich mit dem Wissen verbessern? \\
 \end{longtable}
 
 \clearpage
 
-% --- Table 6: General Feedback ---
-\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{10cm}}
-    \caption{General Feedback and Additional Feature Requests}
-    \label{tab:general_feedback_de}\\
+% --- Table 6: Quality by Task Type ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
+    \caption{Feedback on the Feature: Quality by Task Type}
+    \label{tab:feedback_quality_by_task}\\
     \toprule
-    \textbf{\#} & \textbf{Role in Team} & \textbf{Comment} \\
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
     \midrule
     \endfirsthead
-    \caption[]{General Feedback and Additional Feature Requests (Continued)}\\
+    \caption[]{Feedback on the Feature: Quality by Task Type (Continued)}\\
     \toprule
-    \textbf{\#} & \textbf{Role in Team} & \textbf{Comment} \\
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
     \midrule
     \endhead
     \bottomrule
     \endlastfoot
 
-    1 & Entwickler & Absolut. Ich glaube das Thema ist mega wichtig, um neue Features zu identifizieren um die Pipeline zu verbessern und so viel mehr. \\
+    1 & Entwickler & \textbf{5} & \textbf{5} & \textbf{5} \\
     \midrule
-    2 & Product Owner & Erweiterung auf alles, was Nutzer im Wingman anfragen können. Schöne Umsetzung, bin gespannt, wie sich das im Wingman macht :) \\
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter (mehr Legenden, Beschreibungen). & \textbf{5} & \textbf{5} \\
     \midrule
-    3 & Customer Success Manager & Ich finde die Umsetzung mit Werten, Grafiken, Erklräungen und Datenpunkten sehr gut umgesetzt! Häufiger Bezug zu Clusterings oder Sources herstellen, weil die Zahlen dann auf Wissenpakete oder sogar Ordnerstrukturen gemached werden können. Daraus lassen sich noch viel weitere Folge To-Dos ableiten, die tatsächlich zu einer Verbesserung aktiv beitragen. Je nach Ergebnis: Mögliche Optimierungsmöglichkeiten anzeigen. \\
+    3 & Customer Success Manager & \textbf{4} & \textbf{5} & \textbf{5} \\
     \midrule
-    4 & Manager & Super hilfreich. Ich würde für jedes Diagram und jede seite noch so ein LLM-generated "Statement" zur Interpretation der Diagramme anfügen. Sowas wie "Die relevanz der Antworten ist über die letzten 3 Tage von ...\% auf ...\% gestiegen." Mega cool! DANKE und sieht sehr stark aus. \\
+    4 & Manager & \textbf{4} & \textbf{4}: \textit{Potential for Improvement:} Ich würde für diese, wie auch alle andere Diagramme noch so ein LLM-generated "Statement" zur Interpretation der Diagramme anfügen. Sowas wie "Die relevanz der Antworten ist über die letzten 3 Tage von ...\% auf ...\% gestiegen." & \textbf{5} \\
     \midrule
-    5 & Entwickler/TPO & Glaube das kann super hilfreich sein, um den Wingman zu verbessern (für die jeweiligen Projekte). Vielleicht noch optionale Gruppierung per Knowledge Asset und nicht nur für den ganzen Use Case. Mach mal die Dashboards (feedback und analytics) auch so geil in Vue. \\
+    5 & Entwickler/TPO & \textbf{4} & \textbf{3}: Glaube zumindest in dem Screenshot kann man nicht allzuviel rauslesen. Glaube hier wäre auch wieder die Timeline weniger interessant und eher das "big picture", also zB einfach Balkendiagramm, wo man die verschiedenen Aufgabentypen einfacher vergleichen kann. (also zB Durchschnitt im ausgewählten Zeitraum). \textit{Potential for Improvement:} siehe oben. & \textbf{4}: Kann schon ganz gut helfen bei der Einschätzung der Qualität. \\
     \midrule
-    6 & Developer & Evaluation ist super wichtig. Schwierig eine Balance zwischen Kosten und Nutzen zu finden. Aber ist auf jeden Fall sehr schick dass wir eine Evaluation haben. Abgesehen davon finde ich die Diagramme extrem hübsch. Ohne LLM / mit Annotationen geht halt so eine Evaluation nicht wirklich für so vielfältige NLP Tasks. Also ist schon gut gelöst. \\
+    6 & Developer & \textbf{5}: sinnvoll und gut gelöst. & \textbf{5}: sinnvoll und gut gelöst. & \textbf{5}: finde ich widerum sehr sinnvoll. \\
     \midrule
-    7 & Software Entwickler & Wenigere evaluation metrics, wenigere graphen/ separate advanced view. Sieht insgesamt gut aus, gute arbeit :) \\
+    7 & Software Entwickler & \textbf{3}: same, graph könnte verwirrend sein, ein einzelner score ist gut. & \textbf{5}: sieht gut aus. \textit{Potential for Improvement:} nein. & \textbf{5}: Hilfreich. \\
     \midrule
-    8 & Softwareentwickler & Coole Analyse und vor allem schönes Interface. Ich meine gesehen zu haben, dass an manchen Stellen (bspw. der Heatmap?) nicht alle Texte übersetzt worden sind. Die Diagramme sehen top aus und Interaktion ist super! \\
+    8 & Softwareentwickler & \textbf{5} & \textbf{5}: > welche Aufgabentypen im Zeittrend, wie gut beantwortet werden SEHR GUT. & \textbf{5} \\
     \midrule
-    9 & Softwareentwickler & Es bietet gute Einblicke vor allem wie Admins ihre Daten verbessern können. Die Features weiter hinten in der Liste bieten meiner Meinung nach etwas weniger Mehrwert. \\
+    9 & Softwareentwickler & \textbf{3}: Man muss viel händisch einstellen und sieht nicht viel auf einmal. & \textbf{5} & \textbf{4} \\
     \midrule
-    10 & Developer & Mehr Informationen für die Diagramme, mehr Handlungsempfehlungen für die Nutzer, mehr Information über die Berechnungen und Ermittlungen der Werte und wie man sie interpretieren muss. Schön gestaltet, gutes Layout, übersichtlich. \\
+    10 & Developer & \textbf{3}: Fehlende Erklärung für Wert. Welcher Wert ist schlecht, welcher gut? Welchen Wert bekommt eine schlechte Antwort? Was kann der Nutzer verbessern? & \textbf{5} & \textbf{3} \\
+\end{longtable}
+
+\clearpage
+
+% --- Table 7: General Feedback ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{10cm}}
+    \caption{General Feedback and Additional Feature Requests}
+    \label{tab:general_feedback}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Overall Feedback and Suggestions} \\
+    \midrule
+    \endfirsthead
+    \caption[]{General Feedback and Additional Feature Requests (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Overall Feedback and Suggestions} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & \textbf{Overall Value (5/5):} Absolut. Ich glaube das Thema ist mega wichtig, um neue Features zu identifizieren um die Pipeline zu verbessern und so viel mehr. \\
+    \midrule
+    2 & Product Owner & \textbf{Overall Value (5/5):} Wird sehr helfen beim Verständnis, auch wie Nutzer mit den Daten arbeiten. Besonders spannend werden dann die Qualitätsbewertungen. \textbf{Requests:} Erweiterung auf alles, was Nutzer im Wingman anfragen können. \textbf{Additional Comments:} Schöne Umsetzung, bin gespannt, wie sich das im Wingman macht :) \\
+    \midrule
+    3 & Customer Success Manager & \textbf{Overall Value (4/5):} Ich finde die Umsetzung mit Werten, Grafiken, Erklräungen und Datenpunkten sehr gut umgesetzt! \textbf{Requests:} Häufiger Bezug zu Clusterings oder Sources herstellen, weil die Zahlen dann auf Wissenpakete oder sogar Ordnerstrukturen gemached werden können. Daraus lassen sich noch viel weitere Folge To-Dos ableiten, die tatsächlich zu einer Verbesserung aktiv beitragen. Je nach Ergebnis: Mögliche Optimierungsmöglichkeiten anzeigen: Geringe Datenqualität -> Doku Data Maintanance; Pipeline-Optimierungen, Nutzerschulungen sollten angeboten werden; ... \textbf{Additional Comments:} Tendenziell positive Bewertungsmethoden wählen, die nicht für eine Verschlechterung der Datenqualität-Wahrnehmung sorgen. \\
+    \midrule
+    4 & Manager & \textbf{Overall Value (5/5):} Super hilfreich. \textbf{Requests:} S.o. - Ich würde für jedes Diagram und jede seite noch so ein LLM-generated "Statement" zur Interpretation der Diagramme anfügen. Sowas wie "Die relevanz der Antworten ist über die letzten 3 Tage von ...\% auf ...\% gestiegen." \textbf{Additional Comments:} Mega cool! DANKE und sieht sehr stark aus. \\
+    \midrule
+    5 & Entwickler/TPO & \textbf{Overall Value (5/5):} Glaube das kann super hilfreich sein, um den Wingman zu verbessern (für die jeweiligen Projekte). \textbf{Requests:} Vielleicht noch optionale Gruppierung per Knowledge Asset und nicht nur für den ganzen Use Case. \textbf{Additional Comments:} Mach mal die Dashboards (feedback und analytics) auch so geil in Vue. \\
+    \midrule
+    6 & Developer & \textbf{Overall Value (5/5):} Evaluation ist super wichtig. \textbf{Requests:} Schwierig nh Balance zwischen Kosten und Nutzen zu finden ... bei einem stärkeren Modell schießen die Kosten halt schon in die Höhe in Richtung +100\% und dafür bekommt man halt "nur" LLM-rated Zeug zurück ... aber ist auf jeden Fall sehr schick dass wir nh Evaluation haben. \textbf{Additional Comments:} Abgesehen davon finde ich die Diagramme extrem hübsch hahahaha und ohne LLM / mit Annotationen geht halt so nh Evaluation nicht wirklich für so vielfältige NLP Tasks die unser Wingman bearbeiten muss - da bin ich bei dir. Also ist schon gut gelöst sag ich dir wie's ist. \\
+    \midrule
+    7 & Software Entwickler & \textbf{Overall Value (5/5):} Nothing to add. \textbf{Requests:} Wenigere evaluation metrics, wenigere graphen/ separate advanced view. \textbf{Additional Comments:} Sieht insgesamt gut aus, gute arbeit :). \\
+    \midrule
+    8 & Softwareentwickler & \textbf{Overall Value (5/5):} Coole Analyse und vor allem schönes Interface. \textbf{Requests:} ich meine gesehen zu haben, dass an manchen Stellen (bspw. der Heatmap?) nicht alle Texte übersetzt worden sind, bpsw. Outliers statt Ausreißer und ggf. noch weitere Texte. \textbf{Additional Comments:} die Diagramme sehen top aus und Interaktion ist super! \\
+    \midrule
+    9 & Softwareentwickler & \textbf{Overall Value (4/5):} Es bietet gute Einblicke vor allem wie Admins ihre Daten verbessern können. Die Features weiter hinten in der Liste bieten meiner Meinung nach etwas weniger Mehrwert. \\
+    \midrule
+    10 & Developer & \textbf{Overall Value (4/5):} \textbf{Requests:} Mehr Informationen für die Diagramme, mehr Handlungsempfehlungen für die Nutzer, mehr Information über die Berechnungen und Ermittlungen der Werte und wie man sie interpretieren muss. \textbf{Additional Comments:} Schön gestaltet, gutes Layout, übersichtlich. \\
 \end{longtable}
 \end{document}
