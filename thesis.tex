@@ -69,23 +69,50 @@
 \AtBeginBibliography{\setcounter{maxnames}{10}} % Im Literaturverzeichnis nenne mehr als 2 Autoren
 \counterwithout{footnote}{chapter} % Zähle Fußnoten über gesamtes Dokument hoch
 
+%%%%%%%%%%%%%%%%%%%
+% Code Styles
+%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{xcolor}
 
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\footnotesize\ttfamily,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2,
+  frame=single,
+  rulecolor=\color{black},
+  numbers=left,
+  numberstyle=\tiny\color{gray}
+}
 
 %%%%%%%%%%%%%%%%%%%
 %Paketvorschläge Tabellen
 %%%%%%%%%%%%%%%%%%%
-%\usepackage{array}     % Basispaket für Tabellenkonfiguration, wird von den folgenden automatisch geladen
+\usepackage{array}     % Basispaket für Tabellenkonfiguration, wird von den folgenden automatisch geladen
+\usepackage{seqsplit}
 \usepackage{tabularx}   % Tabellen, die sich automatisch der Breite anpassen
 \usepackage{longtable} % Mehrseitige Tabellen
 \usepackage{xtab,afterpage}
-%\usepackage{xltabular} % Mehrseitige Tabellen mit anpassarer Breite
+\usepackage{xltabular} % Mehrseitige Tabellen mit anpassarer Breite
 \usepackage{booktabs}   % Verbesserte Möglichkeiten für Tabellenlayout über horizontale Linien
 \usepackage{tikz}       % Graphen zeichnen
 \usepackage{enumitem, hyperref}   % for referencing in enumerate und description
 \usepackage{amsmath}    % https://tex.stackexchange.com/questions/32140/how-to-write-a-function-piecewise-with-bracket-outside
 % https://texblog.org/2012/03/21/cross-referencing-list-items/
 \usepackage[acronym,shortcuts,nonumberlist,nomain]{glossaries} % for Abbreviations (Acronyms)
-
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{ragged2e}
+\usepackage{pdflscape}
 %%%%%%%%%%%%%%%%%%%
 %Paketvorschläge Mathematik
 %%%%%%%%%%%%%%%%%%%
@@ -704,18 +731,728 @@ In conclusion, this work delivered a solid foundation for GenAI success measurem
 % --  --  --  --  --  --  --  --  --  --  Appendix  --  --  --  --  --  --  --  --  -- --%
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter*{Appendix}
-\addcontentsline{toc}{chapter}{Appendix}        %Kapitel bekommt keine Nummerierung und wird trotzdem
-                                                                %ins Inhaltsverzeichnis aufgenommen
+\addcontentsline{toc}{chapter}{Appendix}
 % Fortsetzung der römischen Seitennummerierung
 \pagenumbering{Roman}
-\setcounter{page}{\value{seitenzahlroemisch}}
+% \setcounter{page}{\value{seitenzahlroemisch}} % This line might need adjustment depending on your main document setup
+
 \section{Statement on the use of AI for the creation of this thesis}
 This paper was written independently and its language was revised with the assistance of Gemini and Grammarly. Cursor was used as a coding assistant during the artifact development.
 
-\printbibliography
+\section{Workshop Feedback}
+\subsection{Group 1}
 
+%--- All tables from Group 1 go here ---
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of System Quality Metrics}
+    \label{tab:system_quality}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+        
+        \multirow{2}{=}{System quality} 
+        & 1 & Response Times & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 2 & Error Rates & High & Errors will stop the user from using the wingman and there is a risk the user loses his interests in wingman. & & \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
 
-%\affidavit
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of Information Quality Metrics (Part 1)}
+    \label{tab:info_quality_p1}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+        \multirow{6}{=}{Information quality} 
+        & 3 & Topic Map\dots & High & Different topics would result in different adjustments for better quality overall. & & need of large amount of data. Maybe not available in the current wingman stage \\
+        \cmidrule(l){2-7}
+        & 3.1 & \dots of queries & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 3.2 & \dots of received docs & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 3.3 & \dots of knowledge assets asked & High & & & \\
+        \cmidrule(l){2-7}
+        & 4 & Task type map & High & Task types can help to improve the workflow. & & \\
+        \cmidrule(l){2-7}
+        & 5 & Quality of retrieval/responses & High & it is very important to guarante good retrievals to keep the user using the wingman. & & there is no realiable way to identify the quality of retrieval/responses \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
 
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of Information Quality Metrics (Part 2)}
+    \label{tab:info_quality_p2}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+        \multirow{6}{=}{Information quality} 
+        & 5.1 & LLM as a judge & Low & & & At the end it is a LLM correcting a LLM and therefore there may be a lack of quality in the rating. \\
+        \cmidrule(l){2-7}
+        & 5.2 & Binary & Medium & it is important to identify similar snippets. & & \\
+        \cmidrule(l){2-7}
+        & 5.3 & Amount of follow-up questions & Low & & & \\
+        \cmidrule(l){2-7}
+        & 6 & Combination of quality and topics/task types & High & important to identify a schema in the quality and the task types. & & \\
+        \cmidrule(l){2-7}
+        & 7 & Combination of task type and topic & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 9 & Knowledge gap detection & Medium & & & \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
 
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of Service Quality Metrics}
+    \label{tab:service_quality}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+        \multirow{12}{=}{Service quality} 
+        & 8 & Interactivity regardinng the amont of\dots & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 8.1 & \dots questions asked & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 8.2 & \dots copy-button pressed & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 8.3 & \dots quick action used & Low & & & \\
+        \cmidrule(l){2-7}
+        & 8.4 & \dots opened source & High & helps to identify if the retrieved source is interesting for the user. & & \\
+        \cmidrule(l){2-7}
+        & 8.5 & \dots started new thread & Low & & & \\
+        \cmidrule(l){2-7}
+        & 8.6 & \dots positive feedback provided & High & direct way for feedback very import. & & \\
+        \cmidrule(l){2-7}
+        & 8.7 & \dots negative feedback provided & High & & & \\
+        \cmidrule(l){2-7}
+        & 8.8 & \dots percentage of positive/negative feedback provided & High & good measurement. & & \\
+        \cmidrule(l){2-7}
+        & 8.9 & \dots changed model during a conversation & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 8.10 & \dots used websearch & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 8.11 & \dots deep-dive follow-up questions asked & Medium & can help to identify if the quality of the answers were good enough or not. & & \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
+
+\clearpage % This command forces all the tables above to be printed before continuing.
+
+\subsection{Group 2}
+
+%--- All tables from Group 2 go here ---
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of System Quality Metrics (Group 2 Feedback)}
+    \label{tab:system_quality_g2}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+        
+        \multirow{2}{=}{System quality} 
+        & 1 & Response Times & Medium & Not that interesting but easy to measure; we assume they do not vary that much. & & \\
+        \cmidrule(l){2-7}
+        & 2 & Error Rates & Medium & Leads to faster error diagnosis. & Should probably only be a view for us as the dev team and not visible to customers. & \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of Information Quality Metrics (Group 2 Feedback, Part 1)}
+    \label{tab:info_quality_g2_p1}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+
+        \multirow{6}{=}{Information quality} 
+        & 3 & Topic Map\dots & High & & & \\
+        \cmidrule(l){2-7}
+        & 3.1 & \dots of queries & High & Provides important insights into what knowledge is being requested. & & \\
+        \cmidrule(l){2-7}
+        & 3.2 & \dots of received docs & Medium & Less relevant because documents can be very large, and as a result, topics cannot be captured very precisely. & & \\
+        \cmidrule(l){2-7}
+        & 3.3 & \dots of knowledge assets asked & Low & Provides relatively little insight, right? The assets should be reasonably clear, shouldn't they? & & \\
+        \cmidrule(l){2-7}
+        & 4 & Task type map & High & Interesting to see in what way the Wingman is primarily used. & Perhaps the presentation as bubbles? Task types are mainly knowledge queries and Quick Actions, where variance isn't very interesting. A bar chart would be a good alternative. & Categorization. \\
+        \cmidrule(l){2-7}
+        & 5 & Quality of retrieval/responses & High & Pretty much the most important thing. & & \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of Information Quality Metrics (Group 2 Feedback, Part 2)}
+    \label{tab:info_quality_g2_p2}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+
+        \multirow{6}{=}{Information quality} 
+        & 5.1 & LLM as a judge & High & & & Costs? \\
+        \cmidrule(l){2-7}
+        & 5.2 & Binary & High & & & Hard to find a good threshold for relevance? \\
+        \cmidrule(l){2-7}
+        & 5.3 & Amount of follow-up questions & Low & It's just very hard to interpret. For example, follow-up questions can also happen simply by overlooking the alternative questions. & & \\
+        \cmidrule(l){2-7}
+        & 6 & Combination of quality and topics/task types & High & & & \\
+        \cmidrule(l){2-7}
+        & 7 & Combination of task type and topic & High & Also a good insight. & & \\
+        \cmidrule(l){2-7}
+        & 9 & Knowledge gap detection & High & Knowledge gap detection for system data is very important, the other less so. & & How is it checked if the topics fit together? \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
+
+\begin{sidewaystable}
+    \centering
+    \small 
+    \caption{Analysis of Service Quality Metrics (Group 2 Feedback)}
+    \label{tab:service_quality_g2}
+    \begin{tabularx}{\textheight}{p{2.2cm} l >{\RaggedRight\arraybackslash}X l >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}X}
+        \toprule
+        \textbf{Category} & \textbf{\#} & \textbf{Name} & \textbf{Priority} & \textbf{What do you like?} & \textbf{What should be changed?} & \textbf{Which difficulties do you see regarding the implementation?} \\
+        \midrule
+
+        \multirow{8}{=}{Service quality} 
+        & 8 & Interactivity regardinng the amont of\dots & Medium & & & \\
+        \cmidrule(l){2-7}
+        & 8.1 & \dots questions asked & Low & Already in the Analytics Dashboard. & & \\
+        \cmidrule(l){2-7}
+        & 8.2 & \dots copy-button pressed & & & & \\
+        \cmidrule(l){2-7}
+        & 8.3 & \dots quick action used & & & & \\
+        \cmidrule(l){2-7}
+        & 8.4 & \dots opened source & & & & \\
+        \cmidrule(l){2-7}
+        & 8.5 & \dots started new thread & & & & \\
+        \cmidrule(l){2-7}
+        & 8.6 & \dots positive feedback provided & Low & Already in Feedback Dashboard. & & \\
+        \cmidrule(l){2-7}
+        & 8.7 & \dots negative feedback provided & Low & Already in Feedback Dashboard. & & \\
+        \bottomrule
+    \end{tabularx}
+\end{sidewaystable}
+
+\clearpage % This command forces all the tables above to be printed before continuing.
+
+\section{Screenshots of the Dashboard}
+
+%--- All figures go here ---
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/WelcomePage.png}
+    \caption{The main Welcome Page of the analytics dashboard, serving as a central starting point.}
+    \label{fig:welcome_page}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/AnswerQualityWithTooltip.png}
+    \caption{The Answer Quality dashboard, showing a tooltip with detailed metrics for a specific date.}
+    \label{fig:answer_quality_tooltip}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/AnswerQualityWithoutOneLine.png}
+    \caption{The Answer Quality dashboard with one data series hidden to focus the analysis.}
+    \label{fig:answer_quality_filtered}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/DocumentQuality.png}
+    \caption{The Document Quality dashboard, displaying relevance scores and document counts over time.}
+    \label{fig:document_quality}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TaskTypes.png}
+    \caption{The Task Types analysis dashboard, showing the distribution of user intents over time.}
+    \label{fig:task_types}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TopicMaps1.png}
+    \caption{The Topic Map dashboard, visualizing user queries as semantically positioned bubbles.}
+    \label{fig:topic_maps_main}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TopicMaps2.png}
+    \caption{The Topic Map dashboard with a tooltip showing the text of an individual user query.}
+    \label{fig:topic_maps_tooltip}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TopicMaps3.png}
+    \caption{The Topic Map dashboard displaying document quality, with greener bubbles indicating higher relevance.}
+    \label{fig:topic_maps_doc_quality}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TopicMaps4.png}
+    \caption{The Topic Map dashboard displaying answer quality, where bubble colors represent the 'Faithfulness' score.}
+    \label{fig:topic_maps_ans_quality}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TopicMaps5.png}
+    \caption{The detailed table view showing answer quality metrics for all questions within a specific cluster.}
+    \label{fig:topic_maps_detail_table}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TopicMaps6.png}
+    \caption{The Topic Map dropdown menu for selecting which quality metric to visualize.}
+    \label{fig:topic_maps_menu}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/QualityPerTaskType.png}
+    \caption{The Quality per Task Type dashboard, comparing the performance of a quality metric across different user task types.}
+    \label{fig:quality_per_task}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/QualityPerTaskTypeTooltip.png}
+    \caption{The Quality per Task Type dashboard, with a tooltip showing a detailed breakdown for a specific day.}
+    \label{fig:quality_per_task_tooltip}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TaskTypePerTopic.png}
+    \caption{A heatmap showing the correlation between topics (clusters) and user task types.}
+    \label{fig:task_type_per_topic}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/TaskTypePerTopicTooltip.png}
+    \caption{The Task Type per Topic heatmap with a tooltip indicating the frequency for a specific topic-task combination.}
+    \label{fig:task_type_per_topic_tooltip}
+\end{figure}
+
+\clearpage % This command forces all the images above to be printed before continuing.
+
+\section{Prompt Templates}
+\begin{lstlisting}[caption={Prompt Template for AI Interaction Evaluation}, label={lst:prompt_template}]
+<General Instructions>
+    You are an expert evaluator of human AI interactions.
+Your task is to assess multiple aspects of the interaction between a human and an AI in a RAG system.
+You should assess the task type of the user's question and the quality of the answer.
+</General Instructions>
+
+<Task Type Instructions>
+Please evaluate the task type of the user's question. Only look at the question and not the answer or the supporting documents as these may distract you and are not relevant for the task type.
+Then assign a task type to the question and determine a score between 0.0 and 1.0 that measures how well the answer fits to the task type. Generally try to assign a task type
+The available task types are:
+1. Youtubeing: Answer a question based on the provided text or document. This is the most common task type. Even if the system fails to answer the question, it is still a question answering task if a user asks a question that could potentially be found in documents.
+2. summarization: Condense a long text into a shorter, coherent summary.
+3. content_creation: Generate new content, such as articles, marketing copy, or stories.
+4. code_generation: Create code in a specified programming language based on a natural language description.
+5. rewriting: Rephrase or alter the provided text to change its style, tone, or complexity or other aspects.
+6. translation: Translate text from a source language to a target language.
+7. data_analysis: Interpret provided data to identify trends, generate insights, or create summaries.
+8. other: Perform a task that does not fit into the other defined categories.
+If you are not sure about the task type (task type score < 0.5), please choose the OTHER task type.
+</Task Type Instructions>
+
+<Answer Quality Rating Instructions>
+Please evaluate the answer on the following four dimensions with a score between 0.0 and 1.0. Really think about the answer and the supporting documents and the question.
+Here are the dimensions:
+1. relevance_score: How well does the answer address the specific question asked? Does it stay on topic and provide information that directly relates to what was asked?
+2. completeness_score: How comprehensive is the answer? Does it cover all aspects of the question or leave important parts unanswered?
+3. accuracy_score: How factually correct is the information provided in the answer? Does it align with the supporting documents and contain accurate information? Does it fit to the common sense you know?
+4. faithfulness_score: How well does the answer reflect the information from the supporting documents? Does it accurately represent the source material without adding unsupported claims?
+</Answer Quality Rating Instructions>
+
+<Conversation to assess>
+Question: [QUESTION_PLACEHOLDER]
+
+Answer: [ANSWER_PLACEHOLDER]
+
+Supporting Documents:
+[DOCUMENTS_PLACEHOLDER]
+</Conversation to assess>
+
+<Output Format>
+IMPORTANT: Provide your evaluation as a JSON object with exactly the fields mentioned above in the following format:
+{
+    'task_type_response': {
+        'task_type': 'Youtubeing',
+        'task_type_score': x.xx
+    },
+    'quality_rating_response': {
+        'relevance_score': x.xx,
+        'completeness_score': x.xx,
+        'accuracy_score': x.xx,
+        'faithfulness_score': x.xx
+    }
+}
+</Output Format>
+\end{lstlisting}
+
+\section{GDPR Compliance}
+\begin{longtable}{>{\RaggedRight}p{3.5cm} >{\RaggedRight}p{2.5cm} >{\RaggedRight}p{4.5cm} >{\RaggedRight}p{4.5cm}}
+    \caption{Data Fields for GDPR Compliance}
+    \label{tab:gdpr_compliance_en}\\
+    
+    \toprule
+    \textbf{Data Field} & \textbf{Data Type} & \textbf{Description of the Data Field} & \textbf{Purpose of Collection} \\
+    \midrule
+    \endfirsthead
+    
+    \multicolumn{4}{c}{{\bfseries\tablename\ \thetable{} -- Continued}} \\
+    \toprule
+    \textbf{Data Field} & \textbf{Data Type} & \textbf{Description of the Data Field} & \textbf{Purpose of Collection} \\
+    \midrule
+    \endhead
+    
+    \midrule
+    \multicolumn{4}{r}{{Continued on next page}} \\
+    \midrule
+    \endfoot
+    
+    \bottomrule
+    \endlastfoot
+
+    % --- Thread ---
+    \multicolumn{4}{l}{\textbf{Thread}} \\
+    \multicolumn{4}{p{15cm}}{\textit{A Thread marks a cohesive usage session (User Journey).}} \\
+    \cmidrule(r){1-4}
+    Thread.id & UUID & Anonymous identifier for a cohesive User Journey. & Enables the anonymized analysis of a User Journey to improve system quality by enhancing the data foundation and processing. \\
+    Thread.created\_at & datetime & Timestamp of the thread's creation. & Serves the temporal analysis of user behavior, e.g., the frequency of new threads. \\
+    Thread.use\_case\_id & str & If the thread uses knowledge assets to include external knowledge in the model's responses, it is assigned to a use case. This is the identifier for the use case. & Required for topic-specific evaluation to selectively improve the quality and data foundation for different use cases. \\
+    \midrule
+
+    % --- Chat ---
+    \multicolumn{4}{l}{\textbf{Chat}} \\
+    \multicolumn{4}{p{15cm}}{\textit{A Chat is a single conversation within a thread and groups related interactions.}} \\
+    \cmidrule(r){1-4}
+    Chat.id & UUID & Anonymous identifier for a single conversation. & Serves anonymized analysis and quality assessment to optimize the underlying data template and data processing. \\
+    Chat.type & ChatType & Classification of the conversation type, whether it uses external knowledge sources (ChatSearch) or not (Chat). & Necessary to differentiate system performance between general conversations and specific knowledge queries. \\
+    Chat.thread\_id & UUID & Reference to the parent thread. & Technical necessity to analyze a conversation in the context of its entire user journey. \\
+    \seqsplit{Chat.knowledge\_asset\_ids} & list[str] & List of identifiers for knowledge assets whose contents are used for the answers in this conversation. & Analysis of the usage and combined performance of different knowledge assets to maintain and qualitatively improve the data basis. \\
+    Chat.created\_at & datetime & Timestamp of the chat's creation. & Enables the temporal classification of conversations for trend and progress analyses. \\
+    \midrule
+
+    % --- Interaction ---
+    \multicolumn{4}{l}{\textbf{Interaction}} \\
+    \multicolumn{4}{p{15cm}}{\textit{An Interaction represents a single action by the user or the system, e.g., a question or an answer.}} \\
+    \cmidrule(r){1-4}
+    Interaction.id & UUID & Anonymous identifier for a single action. & Serves as a technical reference for reconstructing user flows and for detailed traceability of system decisions. \\
+    Interaction.type & InteractionType & Type of user or system action (e.g., QuestionAsked). & Statistical basis for understanding interaction patterns. Necessary to optimize system logic and user guidance. \\
+    Interaction.value & InteractionValue & Specific content of the respective interaction, the structure of which depends on Interaction.type. & Provides the content basis for statistical analysis to improve the data foundation and data processing models. \\
+    Interaction.chat\_id & UUID & Reference to the parent conversation. & Technical necessity to assign an interaction to its specific conversation. \\
+    \seqsplit{Interaction.previous\_interaction\_id} & UUID & Reference to the immediately preceding interaction. & Technical necessity to restore the chronological course of the conversation for analysis purposes. \\
+    Interaction.created\_at & datetime & Timestamp of the interaction's creation. & Enables fine-grained, temporal analysis of individual user actions and system responses. \\
+    \midrule
+
+    % --- InteractionValue ---
+    \multicolumn{4}{l}{\textbf{InteractionValue}} \\
+    \multicolumn{4}{p{15cm}}{\textit{An InteractionValue contains the specific content data of an interaction.}} \\
+    \cmidrule(r){1-4}
+    \seqsplit{QuestionAskedValue.question} & str & The query text entered by the user. & Analysis of questions and for quality optimization of the data basis, e.g., by identifying knowledge gaps. \\
+    \seqsplit{DocsReceivedValue.docs} & list[Doc] & List of source documents that the RAG system considered relevant for the answer. & Serves to review and optimize the search and ranking algorithm. \\
+    \seqsplit{AnswerReceivedValue.answer} & str & The answer text generated by the system and presented to the user. & Statistical analysis of the answers to evaluate and optimize the relevance and quality of the answer generation. \\
+    \seqsplit{QuickActionUsedValue.quick\_action} & str & Identifier of the quick action used by the user. & Analysis of the frequency of use of quick actions to improve user-friendliness and functionality. \\
+    \seqsplit{OpenedSourceValue.doc} & Doc & Details of the source document that the user explicitly opened for viewing. & Strong indicator of user-perceived relevance, crucial for validating and improving source ranking. \\
+    GaveFeedbackValue & str, int... & Structured data of the explicitly submitted user feedback on an answer. & Processing of direct, voluntary feedback for targeted troubleshooting and prioritization of further developments. \\
+    \seqsplit{SelectedModelValue.model} & str & Name of the language model selected by the user, if a choice is available. & Analysis of model preferences and the performance of different models in specific contexts. \\
+    \seqsplit{UsedQueryReformulationValue.reformulated\_query} & str & Automatically reformulated search query for better searching within the database. & Analysis of the effectiveness of query optimizations. \\
+    \seqsplit{UsedQuerySplittingValue.split\_subtasks} & list[str] & List of subtasks into which a complex query was divided for better processing. & Analysis of the usefulness and correctness of task decomposition to improve the understanding of complex user queries. \\
+    \midrule
+
+    % --- Doc ---
+    \multicolumn{4}{l}{\textbf{Doc}} \\
+    \multicolumn{4}{p{15cm}}{\textit{A Doc (Document) represents a document used by the RAG system to answer queries.}} \\
+    \cmidrule(r){1-4}
+    Doc.title & str & Title of a source document. & Identification of documents for the analysis of source relevance and usage. \\
+    Doc.url & str & URL that links to the source document. & Provision of a reference to the original source and analysis of the most frequently used information sources. \\
+    \seqsplit{Doc.knowledge\_source\_id} & str & Identifier of the parent knowledge source from which the document originates. & Tracking of information origin to assess the reliability of different knowledge sources. \\
+    Doc.quality\_score & float & System-calculated relevance score for the document regarding the query. & Serves the analysis and improvement of the RAG system's internal ranking algorithms. \\
+    Doc.content & str & Relevant excerpt of the document used for answer generation. & Basis for answer generation and analysis of the relevance of specific text passages. \\
+    \midrule
+
+    % --- Enums ---
+    \multicolumn{4}{l}{\textbf{Enums}} \\
+    \cmidrule(r){1-4}
+    ChatType & Enum, str & Identifier for the type of a chat: "ChatSearch" for a chat including knowledge assets or "Chat" for a conversation without them. & Differentiation between different types of chat histories for analysis purposes. \\
+    InteractionType & Enum, str & Identifier for the type of an interaction. Possible values: QuestionAsked, DocsReceived, AnswerReceived, QuickActionUsed, AlternativeQuestionAsked, FollowUpQuestionAsked, OpenedSource, GaveFeedback, SelectedModel, UsedFiltering, UsedQueryReformulation, UsedQuerySplitting, CopyButtonClicked, TranslationUsed. & Detailed differentiation of user interactions for fine-grained analysis of system behavior and user guidance. \\
+
+\end{longtable}
+\section{Evaluation}
+\subsection{Detailed Feature Feedback}
+
+The following feedback was collected in a workshop with the development team. Participants rated the presented features based on three criteria on a scale of 1 (strongly disagree) to 5 (strongly agree):
+\begin{itemize}
+    \item \textbf{Is Intuitive to Use (Kann intuitiv verwendet werden):} Rating of the feature's user-friendliness and clarity.
+    \item \textbf{Fulfills Functionality (Erfüllt Funktionalität):} Rating of whether the feature achieves its intended purpose.
+    \item \textbf{Provides Added Value (Liefert Mehrwert):} Rating of the feature's contribution to the overall goal of GenAI Success Evaluation.
+\end{itemize}
+
+The detailed scores and original comments are listed in the following tables.
+
+% --- Table 1: Answer Quality ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
+    \caption{Feedback on the Feature: Answer Quality}
+    \label{tab:feedback_answer_quality}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endfirsthead
+    \caption[]{Feedback on the Feature: Answer Quality (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & \textbf{5}: Es ist alles sehr klar und übersichtlich gestaltet. Ich finde es sehr gut designed. Ich finde mich gut zurecht. & \textbf{5}: Was ich cool fänd, ist wenn man die Zeitspanne per maus im Graphen auswählen kann. Wie so ein sliding window. Vielleicht könnte man auch für uns release dates/changes an der Pipeline in dem Chart markieren dann könnte man Qualität zu Änderungen an der Pipeline nachvollziehen. & \textbf{5}: Ich denke es ist sehr wichtig die Qualität der Antworten zu überwachen. \\
+    \midrule
+    2 & Product Owner & \textbf{3}: Mehr Legenden wären hilfreich, z. B. Score liegt zwischen 0 und 1, was genau bedeuten die Kategorien wie Treue. & \textbf{5}: Alle Werte sind gut ablesbar. Verbesserung: Siehe oben, mehr Beschreibungen für Nutzerinfos. & \textbf{5}: Schafft mehr Transparenz für den Nutzer. \\
+    \midrule
+    3 & Customer Success Manager & \textbf{4}: Ich finde die Erklärung oben sehr gut! Die Skalen von 0-1 finde ich per se klar, aber die Bezeichnung der Skalen würde dennoch helfen. & \textbf{5}: Tranparenz hinsichtlich der Erklärung, wie sich die einzelnen Werte berechnen (non-technisch und nicht zu ausschweifend). Verbesserung: Skalen bezeichnen, y-Achse insbesondere, Vergleichbarkeit schaffen. & \textbf{5} \\
+    \midrule
+    4 & Manager & \textbf{4}: Ich überlege, ob es einen Zusammenhang zwischen den 4 kategorien gibt. Ist nicht eine hohe Treue, von hoher Genauigkeit und vollständigkeit abhängig? Falls ja, wäre das gut, dem Nutzer zu erklären, oder es vllt sogar wie einen Informations funnel drop-off darzustellen. & \textbf{4}: Ich denke nochmal auf die abhängigkeit der kategorien eingehen. & \textbf{5} \\
+    \midrule
+    5 & Entwickler/TPO & \textbf{3}: Man muss sich zumindest mal die Beschreibung gut durchlesen, die 4 Metriken sind jetzt glaube ich gerade für Laien (irgendwelche Gabelstaplerverkäufer zB) bestimmt nicht bekannt. & \textbf{4}: Gibt einen Überblick, aber da es durch LLMs erstellt wird, kann es glaube ich relativ random sein. Bzw ist die Frage so, was an Kontext alles dazu kommt. Also meine Vermutung wäre zB, dass ein menschlicher Experte wahrscheinlich oft anders scoren würde. Verbesserung: Vielleicht noch die Möglichkeit die 4 Kategorien zu gewichten und daraus einen "Superscore" basteln. & \textbf{2}: Glaube es ist besser als nichts, aber würde jetzt nur rein aus Intuition so vermuten, dass es wahrscheinlich nicht super akkurat ist. \\
+    \midrule
+    6 & Developer & \textbf{5}: Nutzung eindeutig. & \textbf{3}: LLM bewertet sich im Grunde selbst indem es seine eigene Antwortqualität benotet. Ist zwar einfach + vollautomatisch umsetzbar aber dafür sehr fehleranfällig. Verbesserung: Komplexere Evaluationspipeline bauen bspw. mit Inkorporation von Websuche + Self-reflection - sorgt dann halt auch wieder für deutlich höhere Kosten. & \textbf{4}: Automatische Qualitätsevaluation ist immer sinnvoll. \\
+    \midrule
+    7 & Software Entwickler & \textbf{3}: Ist villeicht nicht intuitiv genug für einen Nutzer. & \textbf{5}: Immerhin ist die funktion nützlich und es erfüllt die Funktionalität. Verbesserung: Villeicht es intuitiver ohne graphen, sonder nur mit einem einzelnen score. & \textbf{5}: Die Funktion ist nützlich, es erstellt eine neue nützliche information der Antwortqualität zum verbessern des Produkts. \\
+    \midrule
+    8 & Softwareentwickler & \textbf{5}: bekannte Diagrammart, Farben stimmen überein, Filter sind intuitiv verständlich. & \textbf{4}: (A) kann gut erkannt werden ob der Trend nach oben geht. (B) könnte schwierig werden, da der Nutzer ggf. nicht weiß, ab welchem Wert keine weitere Maßnahme notwendig ist. Verbesserung: verschiedene Arten von Punkten (Kreis, Quadrat, etc.), um Linien nicht nur anhand der Farbe unterscheiden zu können. Für (B) eine Art Threshold (vline) anzeigen. & \textbf{5} \\
+    \midrule
+    9 & Softwareentwickler & \textbf{3}: Beispiele in einem Help Tooltip wären sinnvoll um die einzelnen Metriken nochmal genauer zu erläutern. & \textbf{5}: Verbesserung: Prüfen wie gut die Evaluierungen durch das LLM sind und ob sie deswegen wirklichen Mehrwert bieten. Vielleicht noch einen Disclaimer hinpacken, dass diese Werte auch alle KI-generiert sind. & \textbf{4} \\
+    \midrule
+    10 & Developer & \textbf{5} & \textbf{5}: Verbesserung: Titel des Diagramms finde ich zu generisch. Erklärung was Maßnahmen sein könnten, um Werte zu verbessern? Information wie genau die Werte ermittelt wurden? Ist 1 überhaupt realistisch erreichbar? Was wäre ein "guter" Wert? & \textbf{5} \\
+\end{longtable}
+
+\clearpage
+
+% --- Table 2: Document Quality ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
+    \caption{Feedback on the Feature: Document Quality}
+    \label{tab:feedback_doc_quality}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endfirsthead
+    \caption[]{Feedback on the Feature: Document Quality (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & \textbf{5} & \textbf{5}: Es wäre cool, wenn man noch fein granularer z.B. in einer Tabelle pro Use-Case die Metriken auf einer Dokumenten Ebene sehen könnte. & \textbf{5}: Absolut, ala garbage in garbage out. \\
+    \midrule
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter (mehr Legenden, Beschreibungen). & \textbf{5} & \textbf{5} \\
+    \midrule
+    3 & Customer Success Manager & \textbf{3}: Beispiele zur Bewertung angeben, damit das Feature für non-technicals verständlich wird. & \textbf{3} & \textbf{2}: Dokumentenqulität sehr wichtig, die generelle Zahl hilft jedoch im Zweifel weniger als die Analyse einzelner Themenbereiche oder gar Dokumente. Vll kann man zwischen Sources unterscheiden? Dann wäre pro Use Case ein deutlicher Mehrwert gewonnen. \\
+    \midrule
+    4 & Manager & \textbf{4}: Die werte befinden sich teil über 1. anders als in der beschreibung. & \textbf{4}: ist es besser eine höhere anzahl verwendeter Dokumente zu haben, oder eine niedrigere? & \textbf{5} \\
+    \midrule
+    5 & Entwickler/TPO & \textbf{5}: Glaube "Relevanz" und "Anzahl gefundener Dokumente" sind eher Begriffe, die man auf Anhieb versteht. & \textbf{4}: Verbesserung: Eventuell noch die Dokumente aus dem Retriever auch mit reinnehmen? (optional). Manchmal ist ja doch auch der Reranker einfach dumm, bzw gibt er auch oft ganz schön andere Scores als der Retriever. & \textbf{5}: Ist einfach zu verstehen und man kann denke ich es gut nutzen, um die Datenlage zu analysieren und daraus Schritte abzuleiten. \\
+    \midrule
+    6 & Developer & \textbf{5}: Nutzung eindeutig. & \textbf{3}: Hier sind die Scores am Ende halt auch wieder das Ergebnis von je einem LLM Call. Das Problem ist halt hier dass das LLM den Retriever bewertet und es uns nur mitteilt dass die Dokumente gut/schlecht sind aber keinen tieferen Insight liefert WARUM. & \textbf{4} \\
+    \midrule
+    7 & Software Entwickler & \textbf{3}: Wie schon vorher begründet, villeicht sind die Graphen zu komplex für einen Endnutzer, zu viele metriken können auch verwirrend sein. & \textbf{5}: Mir scheint es die gewünschte funktionalität zu erfüllen. Verbesserung: Dumb it down for the end user. & \textbf{5}: Sieht gut aus, ist eine nützliche information, es kann benutzt werden für die verbesserung und entwicklung von wingman. \\
+    \midrule
+    8 & Softwareentwickler & \textbf{4}: selbe Punkte wie eben, ABER die Auswahl mit dem Diagrammmodus könnte verwirren bzw. übersehen werden, ggf. in die Einstellungsleiste oben (bei Datumsfiltern) mit aufnehmen. & \textbf{5}: Es sollte leicht ersichtlich werden, welche Dokumente am hilfreichsten sind. Aber meine Frage: Was bringt hier der Diagramm-Modus "Anzahl Dokumente"? Geht es nicht eigentlich nur um die Qualität? & \textbf{5}: Ziel ist es, die relevantesten Dokumente hochzuladen, und das wird hiermit besser zu erkennen. \\
+    \midrule
+    9 & Softwareentwickler & \textbf{5}: Skala 0-1 leicht verständlich. & \textbf{5}: Pro Use Case kann man gut einsehen, ob relevante Dokumente vorhanden sind. Verbesserung: Die Farben der Metriken finde ich nicht super intuitiv. Höchste Relevanz vielleicht lieber grün und niedrigste rot. & \textbf{5}: Dokumentenbasis kann basierend darauf erweitert werden. \\
+    \midrule
+    10 & Developer & \textbf{4} & \textbf{4}: Weiß ich, welches Dokument nicht gut funktioniert, wenn es mehrere pro Use Case gibt? Durchschnittsymbol bei höchsten und niedrigste Relevanz? Diagrammtitel zu generisch. Übersicht welche Dokumente dann wirklich auch top oder flop sind? Ein Diagramm über die Entwicklung der Anzahl der Dokumente sagt nicht viel aus oder? & \textbf{3} \\
+\end{longtable}
+
+\clearpage
+
+% --- Table 3: Topic Maps ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
+    \caption{Feedback on the Feature: Topic Maps}
+    \label{tab:feedback_topic_maps}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endfirsthead
+    \caption[]{Feedback on the Feature: Topic Maps (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & \textbf{5} & \textbf{5} & \textbf{5}: Zu sehen, wo die Pipeline noch fehlschlägt und genau diese Edge Cases zu adressieren ist sehr sehr wichtig. \\
+    \midrule
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter. & \textbf{5}: Cluster noch stärker hervorheben (z.B. kurze Beschreibung, nicht nur Titel?). & \textbf{5}: Hilft zu sehen, wie viele Anfragen wirklich thematisch gestellt werden. \\
+    \midrule
+    3 & Customer Success Manager & \textbf{3}: Darstellung empfinde ein wenig als verwirrend, wegen fehlenden Skalen. & \textbf{5}: Prozent-Zahlen bzgl. Fragen zum Use Case / Clusterings / Knowledge Sourcen angeben \& ob diese im positiven / negativen Bereich liegen. & \textbf{4} \\
+    \midrule
+    4 & Manager & \textbf{3}: Clustergröße sollte einen weniger technischen namen bekommen. Das Diagram ist etwas komplex. & \textbf{4}: das diagram etwas vereinfachen. & \textbf{5} \\
+    \midrule
+    5 & Entwickler/TPO & \textbf{4}: Zumindest mit kleiner Intro glaube ich kann man das schon ganz gut verstehen, wenn man so bisschen Plan von Clustern hat. & \textbf{4}: Es gibt einen guten Überblick über oft gefragte Topics. Verbesserung: Cluster besser kennzeichnen (Kreis, Farbiger Hintergrund). Qualität lieber durch Größe der Punkte darstellen als durch Grüntöne. & \textbf{4}: Es gibt einen guten Überblick und zeigt direkt, wie gut diese abschneiden. \\
+    \midrule
+    6 & Developer & \textbf{5} & \textbf{5}: coolstes Feature 10/10. & \textbf{5}: feier ich. \\
+    \midrule
+    7 & Software Entwickler & \textbf{3}: Wie von Casper vorgeschlagen, mit dem clustering können grenzen um die cluster gemalt werden. & \textbf{4}: Ich bin verwirrt dass fragen außerhalb des clusters, bei denen wingman keine antwort gibt, gut evaluiert wurden. Verbesserung: Gut evaluierte datenpunkte die vom use case cluster weit entfernt sind ignorieren. Antwort beim clustering algorithmus benutzen. & \textbf{5}: Guter Feature, macht sinn es zu haben. \\
+    \midrule
+    8 & Softwareentwickler & \textbf{3}: Dem Nutzer ist nicht klar, wie das Clustering zu lesen ist. Ein Balkendiagramm wäre vielleicht besser. Die Cluster-Details unten sind sehr hilfreich. & \textbf{3}: Wo sieht man die Antwort-/Dokumentqualität in den einzelnen Themenbereichen? Verbesserung: Cluster-Qualität gleich sortieren wie die Legende. Ggf. Balkendiagramm. & \textbf{4}: sehr hilfreich um zu sehen wie die Nutzer den Use Case verwenden. \\
+    \midrule
+    9 & Softwareentwickler & \textbf{3}: Ein Cluster muss sich der User wahrscheinlich ein bisschen mehr gewöhnen. Toggle zwischen Clustern und Qualität ist noch nicht ganz optimal. & \textbf{4}: Aus den Tooltips ist teilweise Text noch über die Ränder gelaufen. Schwellwerte für die Farben der Zahlen in der Tabelle waren nicht symmetrisch. & \textbf{4} \\
+    \midrule
+    10 & Developer & \textbf{3}: Cluster schwer für Nutzer zu verstehen. Ein Beispiel mit Interpretation einbauen. Wie bilden sich Cluster? & \textbf{4}: Cluster bildlich klarer darstellen, mit Umrandung z.B. & \textbf{5} \\
+\end{longtable}
+
+\clearpage
+
+% --- Table 4: Task Type Analysis ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
+    \caption{Feedback on the Feature: Task Type Analysis}
+    \label{tab:feedback_task_type}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endfirsthead
+    \caption[]{Feedback on the Feature: Task Type Analysis (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & \textbf{5} & \textbf{5}: Vielleicht eine Gegenüberstellung mit existierenden Quick Actions. Bonus: direkt aus einem häufig ausgeführtem Aufgabentyp eine QuickAction erstellen können. & \textbf{5} \\
+    \midrule
+    2 & Product Owner & \textbf{3}: Siehe vorhergehender Reiter. & \textbf{5} & \textbf{5} \\
+    \midrule
+    3 & Customer Success Manager & \textbf{3}: Skala wieder etwas unklar, ggf. Beispiel. & \textbf{4} & \textbf{4}: Für mich wieder Bezug zum Clustering/Source herstellen. \\
+    \midrule
+    4 & Manager & \textbf{4}: Farben sind hier nicht notwendig. Q\&A ist grün (gut?) andere rot (schlecht?) & \textbf{4}: finde es ein sehr gutes feature, wie gut lässt es sich erweitern, das es nicht zu grobe kategorien gibt? & \textbf{5} \\
+    \midrule
+    5 & Entwickler/TPO & \textbf{5}: Super intuitiv. & \textbf{5}: Finde der Zeitverlauf ist weniger Spannend als die Verteilung. Würde zentral eher ein Balkendiagramm platzieren. & \textbf{5}: Super nice Übersicht. \\
+    \midrule
+    6 & Developer & \textbf{5} & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{5} \\
+    \midrule
+    7 & Software Entwickler & \textbf{3}: Wie vorher, bin nicht von den graphen überzeugt. & \textbf{5}: Soweit die Klassen alle möglichkeiten abdecken, passt es. Verbesserung: Dynamisch die Klassen erzeugen (mit clustering). & \textbf{5}: Nützliche information. \\
+    \midrule
+    8 & Softwareentwickler & \textbf{5} & \textbf{5}: in der Übersicht mit "Fragen insgesamt" etc. statt Layout mit Scrollbar ein Layout was sich automatisch in mehrere Zeilen aufteilt. & \textbf{5} \\
+    \midrule
+    9 & Softwareentwickler & \textbf{5} & \textbf{5} & \textbf{3}: Aufgabentyp "Sonstiges" sind sehr viele. Allgemein weniger spannender Insight als die anderen. \\
+    \midrule
+    10 & Developer & \textbf{5} & \textbf{4}: Was umfasst Andere? Mehr Erklärungen für den Nutzer. & \textbf{4} \\
+\end{longtable}
+
+\clearpage
+
+% --- Table 5: Combined Views ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm} >{\RaggedRight}p{3.5cm}}
+    \caption{Feedback on Combined Views (Quality/Topics/Tasks)}
+    \label{tab:feedback_combined}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endfirsthead
+    \caption[]{Feedback on Combined Views (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Is Intuitive to Use (Justification)} & \textbf{Fulfills Functionality (Potential for Improvement)} & \textbf{Provides Added Value (Justification)} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & \textbf{5} & \textbf{5} & \textbf{5} \\
+    \midrule
+    2 & Product Owner & \textbf{3}: An sich ist diese spezifische Übersicht aber eindeutiger als die vorherigen imo. & \textbf{5} & \textbf{5} \\
+    \midrule
+    3 & Customer Success Manager & \textbf{5}: Top! & \textbf{5}: Top! & \textbf{5}: Top! \\
+    \midrule
+    4 & Manager & \textbf{4}: Finde ich tatsächlich besser als nur "aufgabentyp" im verlauf. die grafik brint mir gefühlt mehr. & \textbf{5} & \textbf{4} \\
+    \midrule
+    5 & Entwickler/TPO & \textbf{5}: Super easy. & \textbf{5}: Eventuell muss man sich was überlegen, sobald es super viele Kategorien gibt. Vielleicht die wichtigsten Spots highlighten (zB "Top 3"). & \textbf{5} \\
+    \midrule
+    6 & Developer & \textbf{5}: finde ich sinnvoll und gut gelöst. & \textbf{5} & \textbf{3}: Nicht so relevant wie die ersten drei Analyse-Seiten. \\
+    \midrule
+    7 & Software Entwickler & \textbf{5}: Sieht gut aus. & \textbf{5}: sieht gut aus. & \textbf{5}: Sehr hilfreich. \\
+    \midrule
+    8 & Softwareentwickler & \textbf{3}: man sieht nicht, wie groß einzelne Cluster sind; Diagramm wird nicht vorsortiert. & \textbf{4}: Ziel wird erfüllt, würde aber bspw. auch durch ein Stacked Bar Chart erfüllt werden. & \textbf{4}: ich denke, das Gesamtziel ist leichter erreicht durch die vorherigen Dinge. Ich frage mich, welchen Mehrwert es durch diese Kombination wirklich gibt. \\
+    \midrule
+    9 & Softwareentwickler & \textbf{3}: Man muss viel händisch einstellen und sieht nicht viel auf einmal. & \textbf{5} & \textbf{3}: Finde den Insight auch weniger spannend als die ersten Features. \\
+    \midrule
+    10 & Developer & \textbf{3}: Gibt es eine Beschränkung für die Anzahl von Clustern? Das kann sehr schnell unübersichtlich werden. & \textbf{5} & \textbf{3}: Ist vielleicht eher eine Statistik fürs Analytics Dashboard? Was will ich mit dem Wissen verbessern? \\
+\end{longtable}
+
+\clearpage
+
+% --- Table 6: General Feedback ---
+\begin{longtable}{l >{\RaggedRight}p{3cm} >{\RaggedRight}p{10cm}}
+    \caption{General Feedback and Additional Feature Requests}
+    \label{tab:general_feedback_de}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Comment} \\
+    \midrule
+    \endfirsthead
+    \caption[]{General Feedback and Additional Feature Requests (Continued)}\\
+    \toprule
+    \textbf{\#} & \textbf{Role in Team} & \textbf{Comment} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    1 & Entwickler & Absolut. Ich glaube das Thema ist mega wichtig, um neue Features zu identifizieren um die Pipeline zu verbessern und so viel mehr. \\
+    \midrule
+    2 & Product Owner & Erweiterung auf alles, was Nutzer im Wingman anfragen können. Schöne Umsetzung, bin gespannt, wie sich das im Wingman macht :) \\
+    \midrule
+    3 & Customer Success Manager & Ich finde die Umsetzung mit Werten, Grafiken, Erklräungen und Datenpunkten sehr gut umgesetzt! Häufiger Bezug zu Clusterings oder Sources herstellen, weil die Zahlen dann auf Wissenpakete oder sogar Ordnerstrukturen gemached werden können. Daraus lassen sich noch viel weitere Folge To-Dos ableiten, die tatsächlich zu einer Verbesserung aktiv beitragen. Je nach Ergebnis: Mögliche Optimierungsmöglichkeiten anzeigen. \\
+    \midrule
+    4 & Manager & Super hilfreich. Ich würde für jedes Diagram und jede seite noch so ein LLM-generated "Statement" zur Interpretation der Diagramme anfügen. Sowas wie "Die relevanz der Antworten ist über die letzten 3 Tage von ...\% auf ...\% gestiegen." Mega cool! DANKE und sieht sehr stark aus. \\
+    \midrule
+    5 & Entwickler/TPO & Glaube das kann super hilfreich sein, um den Wingman zu verbessern (für die jeweiligen Projekte). Vielleicht noch optionale Gruppierung per Knowledge Asset und nicht nur für den ganzen Use Case. Mach mal die Dashboards (feedback und analytics) auch so geil in Vue. \\
+    \midrule
+    6 & Developer & Evaluation ist super wichtig. Schwierig eine Balance zwischen Kosten und Nutzen zu finden. Aber ist auf jeden Fall sehr schick dass wir eine Evaluation haben. Abgesehen davon finde ich die Diagramme extrem hübsch. Ohne LLM / mit Annotationen geht halt so eine Evaluation nicht wirklich für so vielfältige NLP Tasks. Also ist schon gut gelöst. \\
+    \midrule
+    7 & Software Entwickler & Wenigere evaluation metrics, wenigere graphen/ separate advanced view. Sieht insgesamt gut aus, gute arbeit :) \\
+    \midrule
+    8 & Softwareentwickler & Coole Analyse und vor allem schönes Interface. Ich meine gesehen zu haben, dass an manchen Stellen (bspw. der Heatmap?) nicht alle Texte übersetzt worden sind. Die Diagramme sehen top aus und Interaktion ist super! \\
+    \midrule
+    9 & Softwareentwickler & Es bietet gute Einblicke vor allem wie Admins ihre Daten verbessern können. Die Features weiter hinten in der Liste bieten meiner Meinung nach etwas weniger Mehrwert. \\
+    \midrule
+    10 & Developer & Mehr Informationen für die Diagramme, mehr Handlungsempfehlungen für die Nutzer, mehr Information über die Berechnungen und Ermittlungen der Werte und wie man sie interpretieren muss. Schön gestaltet, gutes Layout, übersichtlich. \\
+\end{longtable}
 \end{document}
