@@ -238,17 +238,22 @@ An evaluation with the development team confirmed the dashboard's high practical
 
 \begin{xtabular}{ll}
 AI & Artificial Intelligence\\
+API & Application Programming Interface\\
 ARES & Automatic RAG Evaluation and Scoring \\
 DSR & Design Science Research\\
 DSGVO & Datenschutz-Grundverordnung (General Data Protection Regulation)\\
 GCP & Google Cloud Platform\\
+GDP & Gross Domestic Product\\
 GDPR & General Data Protection Regulation\\
 GenAI & Generative AI\\
 HDBSCAN & Hierarchical Density-Based Spatial Clustering of Applications with Noise\\
+HIPAA & Health Insurance Portability and Accountability Act\\
+HTTP & Hypertext Transfer Protocol\\
 IS & Information Systems\\
 ISSM & Information Systems Success Model\\
 KM & Knowledge Management\\
 KMS & Knowledge Management System\\
+KPI & Key Performance Indicator\\
 LLM & Large Language Model\\
 ML & Machine Learning\\
 PEU & Perceived Ease of Use\\
@@ -258,8 +263,7 @@ RAGAS & Retrieval-Augmented Generation Assessment \\
 TAM & Technology Acceptance Model\\
 t-SNE & t-distributed Stochastic Neighbor Embedding \\
 UMAP & Uniform Manifold Approximation and Projection\\
-\end{xtabular} 
-
+\end{xtabular}
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  -- - Introduction  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
@@ -537,7 +541,7 @@ This roadmap was particularly important because it was clear from the beginning 
 \section{Description of the implemented software features}
 The following section describes how the software features were implemented in the RAG system. For each feature, the description will cover its integration into the user flow as well as its technical implementation.
 \subsection{Tracking system and GDPR compliance}
-The first thing we need to evaluate the user interactions is a tracking system to record them. The foundation of the tracking system developed during the thesis is BigQuery \parencite{GoogleBigQuery}, a scalable, high-performance data warehouse solution from Google. As it is natively integrated into the Google Cloud Platform (GCP), it is well-suited for analyzing the application's user data.
+The first thing we need to evaluate the user interactions is a tracking system to record them. The foundation of the tracking system developed during the thesis is BigQuery \parencite{GoogleBigQuery}, a scalable, high-performance data warehouse solution from Google. As it is natively integrated into the GCP, it is well-suited for analyzing the application's user data.
 
 To record the data, a Google Cloud Run service \parencite{GoogleCloudRunService} is used, which receives data from the RAG application's Vue-based \parencite{vuejs} frontend via HTTP and writes it to BigQuery. These HTTP calls are executed asynchronously and in parallel with the rest of the application's requests. This ensures that the tracking process does not interfere with the performance or usability of the RAG application.
 \\
