@@ -62,7 +62,7 @@
 %%%%%%%%%%%%%%%%%%%
 %Literaturverzeichnis
 %%%%%%%%%%%%%%%%%%%
-\usepackage[style=authoryear-ibid,backend=biber]{biblatex}   % Literaturverzeichnis
+\usepackage[style=authoryear-ibid,backend=biber]{biblatex}
 \DeclareLanguageMapping{english}{english-apa}
 \bibliography{references}
 \AtBeginBibliography{\setcounter{maxnames}{10}} % Im Literaturverzeichnis nenne mehr als 2 Autoren
@@ -135,7 +135,7 @@
 \newcommand*{\FeatureFalse}{\ding{56}}
 \usepackage{hyperref}
 
-\makeglossaries
+\makeglossaries{}
 
 \begin{document}
 
@@ -166,7 +166,7 @@
 %\dedication{Für alle, die \TeX{} nutzen.}
 
 \maketitle
-\newpage % Start a new page
+\newpage 
 
 \begin{titlepage}
     % 1. Add a flexible space at the top to push everything down.
@@ -187,7 +187,7 @@
     Supervisor: M.Sc. Adrian Glauben \\[0.75em]
     \noindent
     Prof. Dr. Peter Buxmann \\
-    Wirtschaftsinformatik | Software & Digital Business \\
+    Wirtschaftsinformatik | Software \& Digital Business \\
     Law and Economics Department \\
     Technische Universität Darmstadt Hochschulstraße 1 \\
     64289 Darmstadt\\
@@ -323,7 +323,7 @@ of knowledge management success.\\
 \begin{figure}
     \centering
     \includegraphics[width=0.6\linewidth]{images/knowledge_management_success.png}
-    \caption{Knowledge management success model by Jennex & Olfman \parencite[p.~56]{Jennex2006}}
+    \caption{Knowledge management success model by Jennex \& Olfman \parencite[p.~56]{Jennex2006}}
     \label{fig:enter-label}
 \end{figure}
 The \textit{System Quality} dimension extends to contain the \textit{technological resources}, \textit{KM form} and the \textit{KM level} \parencite[p.~56]{Jennex2006}. \textit{Technological resources} define the capability of an organization to develop, operate, and maintain KM \parencite[p.~56]{Jennex2006}. This includes all kinds of technical conditions like the amount of experience available to develop, operate and maintain the KM, the underlying network infrastructure or the databases to hold the data use in KM. The \textit{KM form} refers to the extent to which knowledge and knowledge management processes are computerized and integrated \parencite[p.~56]{Jennex2006}. This is important since computerized KM processes are more effective than analogue ones as they make knowledge accessible everywhere at any time through a simple to use interface. The \textit{KM level} in the end refers to the ability to influence current activities \parencite[p.~57]{Jennex2006}. \textit{Technological resources} and the \textit{KM form} are both enablers for the \textit{KM level} and serve as a technical foundation for the ability of the KMS to influence the decision-making process.\\
@@ -336,7 +336,7 @@ AI in general is hard to define. For now we will follow the definition by Marvin
 Large Language Models are one flavor of GenAI models. These models are trained on huge amounts of data and are capable of many text-processing tasks \parencite[p.~2]{Naveed2024}. The workflow using these LLMs is as follows: A user submits a request, known as a prompt, to the LLM, and the LLM generates a response based on its training data and the prompt \parencite[p.~575]{Lund2023}.\\
 The GenAI system we will focus on throughout this thesis is a retrieval-augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS, or third-party sources through retrieval algorithms \parencite{AWS_RAG}. The retrieved context is then passed alongside the user's query to a large language model (LLM) that generates an answer grounded on the retrieved knowledge. Such RAG systems can be used for open-domain question answering and can be used for knowledge work in an organization as they make (proprietary) knowledge available to an LLM \parencite[p.~9459]{Lewis2020}.\\
 \subsection{Advantages of RAG systems for organizational KM}
-One problem of LLMs that do not use RAG is that they can only provide the data they were trained on. This causes them to become outdated. As we know from the KMS success model, an organization must be able to access up-to-date information using their KMS. RAG systems can provide this by utilizing up-to-date knowledge sources for their generation \parencite[p.~9459]{Lewis2020}}.\\
+One problem of LLMs that do not use RAG is that they can only provide the data they were trained on. This causes them to become outdated. As we know from the KMS success model, an organization must be able to access up-to-date information using their KMS. RAG systems can provide this by utilizing up-to-date knowledge sources for their generation \parencite[p.~9459]{Lewis2020}.\\
 Another issue with LLMs is that they tend to hallucinate if they don't know the answer to a user's query or apply a pattern from the training data incorrectly. Since RAG systems bind the LLMs they use to the information provided by the retrieval algorithms, they reduce hallucinations, allowing a user to verify the answer provided by the LLM by double-checking the sources used by the RAG system \parencite[p.~9469]{Lewis2020}. This way, the RAG approach improves the accuracy of LLMs.\\
 Since RAG systems can query various data sources at once \parencite{GoogleCloudRAG}, they provide good linkages to other KMS as well. Following the KMS and IS success model, RAG systems appear to be a suitable choice for organizational KM. \\
 \subsection{Challenges for RAG systems in organizations}
