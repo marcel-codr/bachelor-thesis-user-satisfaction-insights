@@ -177,7 +177,7 @@
     % 2. Your first block of content (student/thesis info)
     \noindent
     Marcel Pfeiffer \\
-    Matrikelnummer: 2912332 \\
+    Matriculation Numberr: 2912332 \\
     Course of study: Bachelor Wirtschaftsinformatik \\[0.75em]
     
     Bachelorthesis \\
@@ -267,7 +267,7 @@ UMAP & Uniform Manifold Approximation and Projection\\
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  -- - Introduction  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
-
+\cleardoublepage 
 \onehalfspacing
 % Umstellen auf arabische Seitenzahlen. Die Anzahl der bisherigen
 % Seiten wird zwischengespeichert, da die römische Nummerierung am
@@ -275,7 +275,6 @@ UMAP & Uniform Manifold Approximation and Projection\\
 \newcounter{seitenzahlroemisch}
 \setcounter{seitenzahlroemisch}{\value{page}}
 \pagenumbering{arabic}
-
 \chapter{Introduction}
 ChatGPT reached 1 million users within 5 days after its launch in 2022 which was only exceeded by Threads in 2023 \parencite{Brandt2023}. Today ChatGPT provides benefits for 800 million weekly users \parencite{Huber2025} and thus has become an established Generative AI (GenAI) tool. GenAI bares high potential not only for the private sector but also for the modern business world. Projections underscore this, suggesting that GenAI could increase Germany's GDP by up to €585 billion by 2040 \parencite[p.~12]{McKinsey2023}. Furthermore for enterprise applications, \textbf{Retrieval-Augmented Generation (RAG)} has emerged as a particularly suitable technology by connecting large language models (LLMs) to company-specific proprietary knowledge bases  \parencite[p.~9459]{Lewis2020}. Connecting and bounding LLMs to proprietary knowledge bases not only enables them to access up-to-date company data \parencite{GoogleCloudRAG} but also enhances transparency and reduces the likelihood of hallucinations, as the company data serves as the ground truth  \parencite[p.~9469]{Lewis2020}.
 
@@ -318,7 +317,6 @@ The Technology Acceptance Model (TAM) and the Information Systems Success Model 
 The ISSM, on the other hand, argues from a company's perspective. It concludes that three quality dimensions influence system success: \textit{information quality}, \textit{system quality}, and \textit{service quality}. These dimensions impact both \textit{user satisfaction} and \textit{ intention to use}, which drives \textit{actual system use} \parencite[pp.~22-23]{DeloneMcLean2003ISSuccessTenYearUpdate}. Overall, the two models appear to be quite similar to each other, as both incorporate factors such as the simplicity of a system and its overall benefit. Therefore we can conclude that evaluations we take on a small individual scale will be valid on an organizational scale, too.
 
 For this thesis, the ISSM provides a more practical framework. It offers specific, measurable dimensions rather than the TAM's general concept of \textit{external variables} and argues from a company's perspective. Therefore, we will use the ISSM to develop and categorize the quality measurements for the RAG application.
-
 \newpage
 \section{Knowledge Management System's success}
 Now that we have a solid understanding of IS acceptance and success in general we are going to have a closer look at knowledge management systems (KMS). We'll start of with some definitions that will help us understand what knowledge, knowledge management (KM) and knowledge management systems (KMS) are. "Knowledge is a fluid mix of framed experience, values, contextual information, and expert insight that provides a framework for
@@ -340,11 +338,11 @@ All three dimensions - the \textit{system quality}, \textit{knowledge quality} a
 Since we now know what determines the success of KMS in organizations like enterprises, we are going to have a closer look at the GenAI systems that are used to support KM in an organization, find out what they are used for and which factors define their quality.\\
 AI in general is hard to define. For now we will follow the definition by Marvin Minsky and define Artificial Intelligence as "the science of making machines do things that would require intelligence if done by men" \parencite{Minsky1966} as cited in \parencite{Dennis2025}. In other words, AI systems are systems that show some form of intelligent behavior similar to human intelligence. Machine learning (ML) is a subfield of AI and describes the analysis of huge amounts of data \parencite[p.~573]{Lund2023}. Neural networks are models used in ML to perform this analysis. They imitate the human brain by using interconnected layers of artificial neurons (or nodes) to process information \parencite[p.~573]{Lund2023}. Generative AI (GenAI) is one kind of ML model approach that uses neural networks with a vast number of layers to generate new data based on training data \parencite[p.~574]{Lund2023}.
 Large Language Models are one flavor of GenAI models. These models are trained on huge amounts of data and are capable of many text-processing tasks \parencite[p.~2]{Naveed2024}. The workflow using an LLM is as follows: A user submits a request, known as a prompt, to the LLM, and the LLM generates a response based on its training data and the prompt \parencite[p.~575]{Lund2023}.\\
-The GenAI system we will focus on throughout this thesis is a retrieval-augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS, or third-party sources through retrieval algorithms \parencite{AWS_RAG}. The retrieved context is then passed alongside the user's query to a large language model (LLM) that generates an answer grounded on the retrieved knowledge. Such RAG systems can be used for open-domain question answering and for knowledge work in an organization as they make (proprietary) knowledge available to an LLM \parencite[p.~9459]{Lewis2020}.\\
+The GenAI system we will focus on throughout this thesis is a retrieval-augmented generation (RAG) system. These systems utilize external data sources like web pages, other organizational KMS, or third-party sources through retrieval algorithms \parencite{AWS_RAG}. The retrieved context is then passed alongside the user's query to a large language model (LLM) that generates an answer grounded on the retrieved knowledge. Such RAG systems can be used for open-domain question answering and for knowledge work in an organization as they make (proprietary) knowledge available to an LLM \parencite[p.~9459]{Lewis2020}.
 \subsection{Advantages of RAG systems for organizational KM}
 One problem of LLMs that do not use RAG is that they can only provide the data they were trained on. This causes them to become outdated. As we know from the KMS success model, an organization must be able to access up-to-date information using their KMS. RAG systems can provide this by utilizing up-to-date knowledge sources for their generation \parencite[p.~9459]{Lewis2020}.\\
 Another issue with LLMs is that they tend to hallucinate if they don't know the answer to a user's query or apply a pattern from the training data incorrectly. Since RAG systems bind the LLMs they use to the information provided by the retrieval algorithms, they reduce hallucinations, allowing a user to verify the answer provided by the LLM by double-checking the sources used by the RAG system \parencite[p.~9469]{Lewis2020}. This way, the RAG approach improves the accuracy of LLMs.\\
-Since RAG systems can query various data sources at once \parencite{GoogleCloudRAG}, they provide good linkages to other KMS as well. Following the KMS and IS success model, RAG systems appear to be a suitable choice for organizational KM. \\
+Since RAG systems can query various data sources at once \parencite{GoogleCloudRAG}, they provide good linkages to other KMS as well. Following the KMS and IS success model, RAG systems appear to be a suitable choice for organizational KM.
 \subsection{Challenges for RAG systems in organizations}
 However, realizing the full potential of RAG systems in an enterprise context requires significant effort. Enterprises typically have high requirements concerning not only the output quality but also compliance regulations, the integration of various data sources, and other factors. In the following analysis, we will examine some of the issues encountered in RAG systems used in enterprises and assign them to the quality dimensions of the ISSM. \\
 A formal taxonomy of failure points for a RAG system, created based on three case studies, highlights seven distinct issue types related to \textit{Information quality} \parencite[p.~91]{Barnett2024}. These challenges range from fundamental data gaps, where the required information is simply missing from the knowledge base, to retrieval failures where required documents are not ranked highly enough by the retrieval algorithm or are lost during context consolidation. Further down the pipeline, the Large Language Model (LLM) might fail to extract the correct answer from the provided context. Finally, even if factually correct, the generated answer may have the wrong format, an incorrect level of specificity, or be incomplete, failing to fully satisfy the user's query.\\
@@ -364,48 +362,44 @@ Proprietary services also exist, such as Google's Gen AI Evaluation Service avai
 
 However, the frameworks mentioned above focus exclusively on RAG quality, which corresponds solely to the \textit{Information Quality} dimension of the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}. This thesis aims to cover the other quality dimensions as well. Existing systems often achieve a broader analysis through the integration of general analytic tools, e.g., Google Analytics \parencite{GoogleAnalytics}. Such tools enable the tracking of detailed user interactions, providing a more comprehensive picture of system usage. For instance, \textit{System Quality} \parencite[p.~64]{DeloneMcLean1992ISSuccess} can be assessed by measuring end-to-end page load times or errors to evaluate performance and reliability. \textit{Service Quality} \parencite[p.~18]{DeloneMcLean2003ISSuccessTenYearUpdate} can be analyzed by tracking feature usage and monitoring engagement with advanced features to understand how users interact with the system.
 
-The goal of this thesis is to develop a dashboard that combines both approaches. It aims to move beyond a narrow focus on RAG-specific \textit{Information Quality} to provide a foundation for a holistic analysis of all quality dimensions of the ISSM.
+The goal of this thesis is to develop a dashboard that combines both approaches. It aims to move beyond a narrow focus on RAG-specific \textit{Information Quality} to provide a foundation for a holistic analysis of all quality dimensions of the ISSM.\\
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  Methodology  --  --  --  --  --  --  --  -- --%
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter{Methodology}
-The research methodology is based on the DSR approach following \cite{Peffers2007}, which involves the definition, development and evaluation of artifacts in iterative cycles. DSR aims to develop innovative solutions for specific problems and to test these solutions in real-world contexts.\\
-\subsection{Problem Identification and Motivation}
-In the first phase of the DSR approach, I identified the need for support in evaluating the RAG system using a holistic approach following the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}. I determined that system administrators require insights that enable them to assess the current performance and quality of the RAG application more effectively and draw conclusions about the measures that must be taken to improve it. Examples of such measures include employee training, enhancing the knowledge base, or improving the RAG mechanism itself.
+The research methodology is based on the DSR approach following \cite{Peffers2007}, which involves the definition, development and evaluation of artifacts in iterative cycles. DSR aims to develop innovative solutions for specific problems and to test these solutions in real-world contexts.
+\section{Problem Identification and Motivation}
+In the first phase of the DSR approach, the need for support in evaluating the RAG system using a holistic approach following the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} was identified. System administrators require insights that enable them to assess the current performance and quality of the RAG application more effectively and draw conclusions about the measures that must be taken to improve it. Examples of such measures include employee training, enhancing the knowledge base, or improving the RAG mechanism itself.
 \section{First iteration - Definition of valuable insights}
-In the first iteration, specific software features were defined to support system administrators in managing the system. I did this in collaboration with the developers of the investigated RAG software during several joint workshops.
+In the first iteration, specific software features were defined to support system administrators in managing the system. The software features were ideated in collaboration with the developers of the investigated RAG software during several joint workshops.
 \subsection{Define Objectives of Artifacts}
-In the first workshop, the developers collected initial ideas for evaluating the RAG application. They analyzed its current data situation to determine what additional data needed to be gathered to implement the automated analysis. I presented the foundational principles of IS \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} and KMS success \parencite{Jennex2006} to the developers. They then developed ideas on how to evaluate the RAG application and which data needs to be collected in small groups and afterwards discussed their findings in a plenary session. Through this process, the objectives for the evaluation of the RAG system were established
+In the first workshop, the developers collected initial ideas for evaluating the RAG application. They analyzed its current data situation to determine what additional data needed to be gathered to implement the automated analysis. The foundational principles of IS \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} and KMS success \parencite{Jennex2006} were presented to the developers. They then developed ideas on how to evaluate the RAG application and which data needs to be collected in small groups and afterwards discussed their findings in a plenary session. Through this process, the objectives for the evaluation of the RAG system were established
 \subsection{Development of Artifacts}
-Based on the developers' ideas, I developed specific concepts for software features that I then classified into the quality categories of the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}.
+Based on the developers' ideas, specific concepts for software features were developed and then classified into the quality categories of the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}.
 \subsection{Demonstration and Evaluation}
-In a second workshop, I presented the developed concepts to the developers and gathered feedback on them. Additionally, the developers prioritized the individual software features with the categories low, medium and high to ensure that the subsequent implementation phase could focus on developing and delivering the most important ones.
+In a second workshop, the developed concepts were presented to the developers and feedback on them was gathered. Additionally, the developers prioritized the individual software features with the categories low, medium and high to ensure that the subsequent implementation phase could focus on developing and delivering the most important ones.
 \section{Second iteration - Implementation of features}
-In the second iteration, I implemented the developed software concepts technically and integrated them into the existing RAG application.
+In the second iteration, the developed software concepts were technically implemented and integrated into the existing RAG application.
 \subsection{Define Objectives of Artifacts}
-First, I developed different technical implementation solutions and presented them to the development team once again. I gathered feedback on them again, and the team and I decided how the features should be technically implemented.
+First, different technical implementation solutions were developed and presented to the development team once again. Feedback on them was gathered, and a decision was made on how the features should be technically implemented.
 \subsection{Development of Artifacts}
-Subsequently, I implemented the software features and integrated them into the existing RAG application. Technical reviews by the developers took place to validate the correctness of the software features I created.
+Subsequently, the software features were implemented and integrated into the existing RAG application. Technical reviews by the developers were conducted to validate the correctness of the software features created.
 \subsection{Demonstration and Evaluation}
-Finally, I presented the software features I had created to the development team in another workshop and gathered feedback on them.
+Finally, the software features created were presented to the development team in another workshop and feedback on them was gathered.
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  Results  --  --  --  --  --  --  --  --  --  -- %
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter{Results}
-In the following chapter, we will elaborate on the concepts for software features developed during the workshops and how I implemented them in the RAG application. Feedback from the developer team and their prioritization of features will also be discussed.
+In the following chapter, we will elaborate on the concepts for software features developed during the workshops and how they have been implemented in the RAG application. Feedback from the developer team and their prioritization of features will also be discussed.
 \section{Description of the RAG system used in the study}
 To provide a basis for further investigation, this section describes the features of the Retrieval-Augmented Generation (RAG) system under examination. The system is designed for enterprise use, making company-specific knowledge accessible to employees through a conversational interface powered by LLMs.
-
 \subsection{System Architecture and Technology Stack}
-The system is deployed on the Google Cloud Platform (GCP) \parencite{GoogleCloudDocumentation} and utilizes Vertex AI Search \parencite{GoogleVertexAISearch} for the initial document retrieval from its knowledge base. The relevance of the retrieved documents is subsequently optimized by the Vertex AI Reranker \parencite{GoogleReranker}. For the generation component, the system is capable of integrating various LLMs through the LangChain framework \parencite{LangChain}. Given its deployment on GCP, Google's Gemini models \parencite{GoogleGemini} are typically employed for response generation.
-
+The system is deployed on the Google Cloud Platform (GCP) \parencite{GoogleCloudDocumentation} and utilizes Vertex AI Search \parencite{GoogleVertexAISearch} for the initial document retrieval from its knowledge base. The relevance of the retrieved documents is subsequently optimized by the Vertex AI Reranker \parencite{GoogleReranker}. For the generation component, the system is capable of integrating various LLMs through the LangChain framework \parencite{LangChain}. Given its deployment on GCP, Google's Gemini models \parencite{GoogleGemini} are typically employed for response generation.\\
 A central architectural feature of the system is the implementation of distinct \textbf{Use Cases} that are customized units capable of handling requests to a specified set of data. The customization allows the system to provide context-aware responses by augmenting the generation prompt with use-case-specific information, such as a specialized glossary or other supplementary data like a use-case-specific tonality. Each Use Case is associated with a specific selection of so-called Knowledge Assets, which are custom compilations of so-called Knowledge Sources. A Knowledge Source contains information on a particular topic and is technically linked to a Datastore in Vertex AI Search, which performs the underlying retrieval and holds the specific data.\\
 The user requests are organized as follows: A user can start a thread within a use case. This thread can contain multiple chats that are linked to it. The user's requests are connected to a chat in turn.\\
 A use case and the data used in a use case are managed by a so-called use case admin, who is a trained employee of the company using the RAG system. The Use Case admins are the actual target group of the created dashboard. They are supposed to use the information presented to them to enhance the RAG system in the end.
-
 \subsection{Retrieval and Query Enhancement Features}
 The system incorporates several advanced features to enhance the retrieval process:
-
 \begin{itemize}
     \item \textbf{Query Splitting:} The user's search query is semantically decomposed into multiple sub-queries. A separate retrieval process is executed for each sub-query to ensure every semantic aspect of the user's query is covered \parencite[p.~8]{Ammann2025}.
     
@@ -413,10 +407,8 @@ The system incorporates several advanced features to enhance the retrieval proce
     
     \item \textbf{Metadata Filtering:} The search performed by Vertex AI Search can be refined by applying a metadata filter. This allows for the retrieval to be constrained to only those documents that match specific attributes \parencite[pp.~7--8]{Setty2024}.
 \end{itemize}
-
 \subsection{User Interface and Interaction Features}
 The system provides a range of interactive features to enhance the user experience and workflow integration:
-
 \begin{itemize}
     \item \textbf{Question Suggestions:} After an answer is generated, the system proposes alternative and potential follow-up questions to the users initial question that the user can select with a single click.
     
@@ -437,7 +429,6 @@ The first concept for determining the system quality of the RAG application is t
 For the visualization of this data, a time-series diagram is proposed. The x-axis would represent the time and the y-axis the measured response time. To improve readability and highlight long-term developments, the chart should be smoothed, for instance, by displaying daily averages. The interface should also include interactive filters that allow for the inclusion of the different system factors. These filters would enable users to display data subsets, such as showing only the response times associated with a specific LLM or with Query Splitting enabled/disabled.
 
 During the workshop, the development team assigned a \textbf{medium priority} to this feature (see Tables \ref{tab:system_quality}, \ref{tab:system_quality_g2} in the appendix). In their feedback, they noted that while the feature would be straightforward to implement, they suspected that overall response times would not vary significantly. Therefore, they hypothesized that this analysis would likely not yield major conclusions.
-
 \subsubsection{Error Rate Monitoring}
 A second concept proposed to evaluate system quality focuses on monitoring error rates to assess system stability and reliability. The core metrics to be captured are the absolute count and the percentage of user queries that result in a system error. For a more granular analysis, these error metrics can be combined with the system factors (LLM selection and the activation state of Query Splitting and Reformulation) and with the different predefined error types and messages of the system. By analyzing the error rates of the system, Use Case administrators can conclude the overall reliability of the system, which is yet another critical \textit{system quality metric} \parencite[p.~64]{DeloneMcLean1992ISSuccess}. By providing the development and operations team of the RAG application with insights into frequent errors, this feature partly contributes to the \textit{IS KM service quality} \parencite[pp.~58--59]{Jennex2006} of the RAG system, as well, since service processes carried out by the RAG system's vendor, such as bug fixes, are enhanced.
 
@@ -511,7 +502,6 @@ The events considered most important were:
 A specific challenge that arose from tracking user interactivity was how to correctly interpret follow-up questions. The team needed a way to distinguish between "deep dive" questions, which indicate positive user engagement, and questions asked because the system's previous response was unclear or unhelpful. Two main approaches were considered: using a simple heuristic (e.g., assuming system-suggested "Follow-Up questions" are deep dives, while user-rephrased "alternative questions" are not) or employing an AI model as a "judge" to classify the question's intent based on context.
 
 The recommendation from the workshop was to adopt a pragmatic hybrid strategy (see section \ref{section:recommendation-follow-ups} in the appendix). The consensus was to start with the "simple distinction" method first, as it is easy to implement and has no operational cost. If this heuristic proves insufficient for reliably separating the two question types, the team could then explore using an AI judge as a second step. This approach was favored due to concerns that the AI judge would be expensive to run and might not guarantee reliable results.
-
 \subsubsection{Knowledge Gap Detection}
 The last concept proposed for measuring service quality \parencite[p.~18]{DeloneMcLean2003ISSuccessTenYearUpdate} is "Knowledge Gap Detection," which aims to identify areas where the system or the users may lack adequate knowledge. The goal is to highlight two distinct types of knowledge gaps:
 
@@ -588,7 +578,6 @@ The first page a Use Case administrator sees when accessing the dashboard is the
 \subsection{Answer Quality}
 \subsubsection{User Flow}
 The answer quality feature was implemented to provide Use Case administrators with a time-series chart, as outlined in the initial feature concept (see Figure \ref{fig:answer_quality} in the appendix). This chart allows them to observe trends in answer quality over time and draw conclusions about the success of their own measures. The diagram displays the four quality metrics: Relevance, Completeness, Accuracy, and Faithfulness. A description for each metric can be found in the prompt template provided in the appendix. Furthermore, an end-user study should be conducted to validate the choice and correct calculation of these metrics. To provide a clearer overview, the values are smoothed to display the daily averages for the selected period. In addition to filtering by Use Case and date range, the dashboard also displays the overall average values for each metric above the chart, enabling a quick analysis of the entire period. The chart is interactive, allowing users to hide individual lines for better focus and use tooltips to analyze specific data points in detail.
-
 \subsubsection{Technical Implementation}
 During the workshops, three technical options were proposed for this feature: evaluation using binary metrics, analysis of user behavior, or using an AI model as a "judge". The binary metric and user behavior analysis were considered to be less accurate proxies for quality, as both methods only indirectly evaluate the content of the generated response. This is obvious in the case of user behavior analysis, which only looks at the user's subsequent questions, not the answer itself. In this way, a detailed explanation of the answer quality is not possible. The binary analysis is also limited, as it primarily checks if the RAG system could assemble relevant information, but does not assess the qualitative aspects of that information.
 
@@ -596,13 +585,11 @@ Therefore, the decision was made to implement the AI evaluation variant. In this
 \subsection{Document quality}
 \subsubsection{User Flow}
 The Document Quality feature was implemented in a manner similar to the Answer Quality feature, based on the concepts developed in the workshops (see Figure \ref{fig:document_quality} in the appendix). For each user query, this dashboard displays a time series that shows several metrics related to the retrieved documents: the average, highest, and lowest relevance scores, as well as the total number of documents. The technical basis for relevance is described in the next section. These values are presented as smoothed daily averages in a time-series chart to make it easier for the Use Case administrator to analyze trends. The dashboard also includes options to filter by Use Case and time period, and the overall averages for each metric are displayed as KPI cards above the chart. The chart itself is interactive, allowing administrators to use tooltips for detailed analysis of specific data points and to toggle the visibility of individual time series.
-
 \subsubsection{Technical Implementation}
 To determine the document quality metrics, the implementation uses the relevance scores that are calculated by the system's reranker during the retrieval process. This approach was chosen to avoid the additional costs associated with using another AI model for a separate evaluation. These reranker scores, which are generated by Googles Ranking API \parencite{GoogleReranker}, already provide an assessment of how well the retrieved documents match the user's query. From these scores, the system calculates the average, highest, and lowest relevance values for each query, as well as the total number of documents retrieved in the preprocessing step. It can then request these aggregated values.
 \subsection{Topic maps}
 \subsubsection{User Flow}
 The Topic Maps are presented to the user as a bubble plot (see Figures \ref{fig:topic_maps_overview},  \ref{fig:topic_maps_maps} in the appendix). In contrast to the proposal from the workshop in the implemented visualization, each bubble represents an individual user question -- not a whole topic -- allowing for a more detailed overview. The position of each bubble in the chart is determined by its semantic meaning, with topically similar questions appearing closer together than dissimilar ones. Furthermore, the questions are thematically grouped using a clustering algorithm. Each cluster of questions is assigned a unique color on the chart and is displayed with a descriptive title in the legend. The dashboard allows administrators to filter the view by Use Case and date range, enabling them to analyze how the thematic composition of user queries changes over time. Tooltips are also available to show details for each individual question bubble.
-
 \subsubsection{Technical Implementation}
 The Topic Maps are generated during preprocessing by first embedding all user queries using the \texttt{gemini-embedding-001} model in its clustering mode \parencite{GoogleEmbedding001}. These embeddings are then clustered using the HDBSCAN algorithm \parencite{Malzer2021}. To achieve robust results across varying amounts of data, the input parameters for HDBSCAN, specifically \texttt{min\_cluster\_size} and \texttt{min\_samples}, are dynamically adjusted based on the total number of queries being analyzed. This adaptive approach ensures sensible clustering for both small and large datasets. The HDBSCAN algorithm is a good choice for this use case as it automatically determines the number of topics (clusters) and effectively isolates irrelevant queries as noise. This eliminates the need to pre-specify the number of clusters, a key limitation of methods like K-means, making it ideal for discovering topics in an exploratory way \parencite[p.~5]{Baligodugula2025}. To overcome the issue that HDBSCAN is not well-suited for high-dimensional data \parencite[p.~5]{Baligodugula2025}, UMAP \parencite{McInnes2020} is applied before the HDBSCAN algorithm to reduce the dimensions to 50 beforehand.
 
@@ -626,7 +613,6 @@ The system recognizes and displays the following task types:
 \textbf{Note:} These task types are a collection of types that are recognized as typical task types for GenAI applications and could potentially appear in requests to the examined RAG system. Yet, they should be evaluated in an end-user study.\\
 \\
 The dashboard also provides options to filter by Use Case and time period. The chart is interactive, supporting tooltips for detailed analysis and the ability to toggle the visibility of each time series. Furthermore, to provide the at-a-glance summary that a bar chart would have offered, the overall percentage distribution of each task type for the entire selected period is displayed above the chart.
-
 \subsubsection{Technical implementation}
 Technically, a language model assigns each user query to a specific task type during preprocessing. This is done using a prompt template (see Listing \ref{lst:prompt_template} in the appendix) that contains detailed instructions and descriptions for each category. The prompt template receives the user's question, the final answer, and the retrieved documents as input parameters. To save costs, the quality evaluation (as described previously) and the task type assignment were combined into a single prompt. Therefore, for this classification task, the language model receives more inputs than just the user query. In the end the assigned task types can be requested by the frontend using the Cloud Run backend that accesses the results stored in BigQuery.
 \subsection{Combining answer and document quality with topic maps}
@@ -636,7 +622,6 @@ In the Topic Map view, administrators can display collected document and answer 
 Additionally, a detail view is available which presents a table with an overview of either the document or answer quality metrics for all questions within a specific cluster (see Figure  \ref{fig:topic_maps_details} in the appendix). The administrator can select both the cluster and the set of metrics to be displayed using dropdown menus.
 
 This feature allows for the identification of specific knowledge gaps for certain topics within a Use Case. By analyzing quality in the context of topics, a Use Case administrator can determine which subjects are being answered well and which are not. If a topic is performing unexpectedly poorly, the administrator can use this analysis to recognize the issue and initiate countermeasures, such as adding new source documents to the knowledge base.
-
 \subsubsection{Technical Implementation}
 Technically, this feature is enabled through simple \texttt{JOIN} operations in the BigQuery queries. This allows the quality metrics for each question to be queried and merged with the topic map data at the time of the request. Preprocessing is not needed.
 \subsection{Combining quality with task types}
@@ -644,16 +629,13 @@ Technically, this feature is enabled through simple \texttt{JOIN} operations in 
 The combination of quality and task types is also presented to Use Case admins as a time-series diagram (see Figure \ref{fig:quality_per_task_type} in the appendix). In this view, the administrator can select a specific quality metric (from either document or answer quality) using dropdown menus. The chart then displays the performance of this chosen metric over time, with each line representing a different task type (e.g., "Question Answering," "Summarization"). This allows for a direct comparison of how quality differs across various user intents.
 
 As in the other dashboards, the data is smoothed by displaying daily averages. Users can filter the data by Use Case and time period. Above the chart, cards display the overall average values for the relevant quality metrics across the entire selected period. The chart itself is interactive, offering tooltips for a detailed daily breakdown of quality per task type, and the ability to show or hide the lines for specific task types to focus the analysis.
-
 \subsubsection{Technical Implementation}
 Technically, the data for this view is queried using simple \texttt{JOIN} operations on the necessary tables in BigQuery during the user's request.
 \subsection{Combination of task type and topics}
 \subsubsection{User Flow}
 The last implemented feature is the combination of task type and topic (see Figure  \ref{fig:task_type_per_topic} in the appendix). This analysis is presented to the user as a heatmap. In this visualization, the horizontal axis represents the individual task types, while the vertical axis represents the respective semantic clusters. Each question that belongs to a specific task type and a specific cluster is counted in the cell where the two overlap. Cells with higher total values are colored more darkly than cells with lower values. It is also possible to filter the display for a specific time period and to restrict the view to a single Use Case.
-
 \subsubsection{Technical Implementation}
 Here as well, the data is queried through simple \texttt{JOIN} operations on the necessary tables in BigQuery during the user's request.
-
 \subsection{Relative Operational Cost Comparison}
 To assess the financial impact of the implemented analytics features, a detailed, relative comparison of operational costs per request was conducted. The analysis focused specifically on the additional Large Language Model (LLM) and embedding costs incurred by the new analytics pipeline for each user query. This additional cost was then compared to the baseline LLM cost of the main RAG query-response chain. To create a focused comparison, several cost factors were intentionally excluded, most notably data retrieval costs from the Vertex AI Datastore that cannot be traced back to a single request, as well as negligible costs from BigQuery and Cloud Run. This means the resulting percentages represent a \textbf{maximum relative increase}, since including the relatively high datastore costs would lower the final figure. The costs for the title generation for the clusters have been ignored too, as they are negligible at scale (many queries form a cluster) and cannot be traced back to a single query.
 
@@ -667,7 +649,6 @@ Two primary scenarios were analyzed to understand the cost impact under differen
 Detailed calculations can be found in the appendix (see section \ref{app:cost_calculations} in the appendix).
 
 From these scenarios, it was concluded that the analytics features add approximately \textbf{20\%} to the direct LLM-related costs, depending on the complexity of the underlying RAG chain. It is important to contextualize this increase: the cost is comparable to that of other advanced features like query reformulation and query splitting. Therefore, the introduction of the new analytics features is not expected to impact the total operational budget significantly.
-
 \section{Final Feedback from the Development Team}
 Finally, the development team was asked to provide feedback on the implemented software features in a dedicated workshop. During this session, the fundamental goal of the thesis, evaluating GenAI Success, was recapped first. Following this, each new analytics feature was presented in a live demonstration, with an explanation of how it contributes to the overall evaluation goal. To conclude the workshop, the developers provided structured feedback by filling out a detailed questionnaire, the complete results of which can be found in the appendix.
 
@@ -685,7 +666,6 @@ In conclusion, from the development team's perspective, the implemented features
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter{Discussion}
 The primary goal of this work was to develop an artifact in the form of a dashboard that automatically evaluates the success of an enterprise GenAI application and presents its findings to the use case administrators in a clear and meaningful way so that they can draw conclusions for the optimization of the RAG system. The discussion will begin by interpreting the key findings in the context of the initial research question. Afterwards, the limitations of the developed artifact and the research methodology will be critically examined. Finally, the implications for both theory and practice will be outlined, followed by an outlook on future research opportunities.
-
 \section{Interpretation of the Results}
 The central result of this thesis is the successful development and implementation of an analytics dashboard integrated into an existing enterprise RAG system. This artifact was designed to provide Use Case administrators with the necessary tools to evaluate and improve the success of their GenAI applications, directly addressing the initial research question.
 
@@ -700,14 +680,13 @@ Using the evaluation features of these three categories Use Case administrators 
 The final workshop feedback confirmed that the development team saw a clear link between the implemented features and the goal of evaluating IS success. The features were perceived as providing a solid foundation for a comprehensive "Knowledge Analytics Engine."
 
 \paragraph{Functionality and Value Added} The implemented artifact successfully translates abstract quality dimensions into specific, measurable metrics. The most valuable feature is the Topic Map combined with quality metrics. It moves beyond simple quality or performance checks and allows Use Case administrators to ask, "For which specific topic is our system failing?" This is a highly actionable insight that can directly lead to improvements, such as adding specific documents to the knowledge base. In contrast, features like the standalone quality dashboards provide scores that are harder to interpret without context. They signal that a problem exists, but do not immediately point to the cause. Tracing these aggregated metrics to their sources by adding drill-down functionalities will improve the actionability of these features.
-
 \section{Critical Reflection and Limitations}
 The limitations of this thesis can be categorized into methodological and technical aspects.
 
 \paragraph{Methodological Limitations}
 \begin{itemize}
     \item \textbf{Evaluation Scope:} The evaluation of the artifact was conducted exclusively with the internal development team. While their feedback is valuable for assessing technical feasibility and the conceptual alignment with developer goals, it does not represent the perspective of the end-users -- the Use Case administrators. An end-user study in a real-world scenario should be the next step to validate and improve the dashboard's practical usefulness and apply DSR best practices \parencite{Peffers2007}. However, this was not possible during the thesis due to time constraints.
-    \item \textbf{Partial Implementation}: Also, due to the time constraints of the thesis, I could not implement all features from the initial workshops. Features such as \textit{Response Time Analysis}, \textit{Error Rate Monitoring}, and \textit{Knowledge Gap Detection} were conceptualized but not implemented. This means the implemented artifact provides a view that is heavily focused on \textit{information quality}, while \textit{system quality} and \textit{service quality} are less comprehensively covered.
+    \item \textbf{Partial Implementation}: Also, due to the time constraints of the thesis, not all features from the initial workshops could be implemented. Features such as \textit{Response Time Analysis}, \textit{Error Rate Monitoring}, and \textit{Knowledge Gap Detection} were conceptualized but not implemented. This means the implemented artifact provides a view that is heavily focused on \textit{information quality}, while \textit{system quality} and \textit{service quality} are less comprehensively covered.
 \end{itemize}
 
 \paragraph{Technical and Conceptual Limitations}
@@ -715,7 +694,6 @@ The limitations of this thesis can be categorized into methodological and techni
     \item \textbf{Reliability of AI-based Evaluation:} The core of the answer quality evaluation relies on an LLM acting as a "judge." As pointed out by the development team, this approach has inherent limitations. An LLM evaluating another LLM's output can be unreliable and may not align with human judgment. Therefore, a disclaimer should be added to manage users' expectations.
     \item \textbf{Complexity vs. Intuitiveness:} The final feedback highlighted an important tension. The dashboards are powerful but also complex. A non-technical user will need to invest time to understand the metrics and how to interpret them. The need for good help features and user onboarding is a direct consequence of this observation.
 \end{itemize}
-
 \section{Implications for Practice and Theory}
 Despite the limitations, this thesis offers significant implications for both practical application and academic research in the field of Information Systems.
 
@@ -729,7 +707,6 @@ Despite the limitations, this thesis offers significant implications for both pr
 The cost analysis further showed that the financial impact of such an analytics suite is manageable, adding approximately 20\% to the LLM-related costs, which is a justifiable expense for the insights gained.
 
 \paragraph{Theoretical Implications} This work contributes to the academic discourse by demonstrating an operationalization of the IS Success Model \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} in the new context of enterprise RAG systems. It shows how the abstract dimensions of the model can be translated into specific, measurable metrics (e.g., "Faithfulness" as a metric for Information Quality). By employing the Design science research methodology \parencite{Peffers2007}, a well-structured framework has been used to create new artifacts reliably. Furthermore, this work adopts a new perspective on evaluating RAG applications shaped by the IS Success Model \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}, which has not been used in prior research. Rather than focusing only on RAG quality, a more holistic perspective is taken -- based on the three quality dimensions of the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} -- which in turn guides the development of a dashboard that allows use case administrators to perform comprehensive analyses.
-
 \section{Outlook and Future Research}
 This thesis provides a solid foundation and opens up several paths for future research and development.
 
@@ -747,15 +724,15 @@ In conclusion, the developed artifact represents a significant step towards the 
 % --  --  --  --  --  --  --  --  -- - Conclusion  --  --  --  --  --  --  --  --  -- --%
 % --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- %
 \chapter{Conclusion}
-The objective of this thesis was to design and implement a system for automatically measuring the success of an enterprise-level Retrieval-Augmented Generation (RAG) application from a new and more holistic perspective on RAG success, utilizing the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}. The project began with a series of collaborative workshops with the development team of the investigated RAG application to conceptualize a suite of analytics features tailored to the specific needs of the RAG system. Following this, I implemented a significant portion of these features technically, resulting in an integrated analytics dashboard within the application's admin panel. I built the technical solution on the Google Cloud Platform, leveraging BigQuery for scalable data warehousing, Cloud Run for efficient data processing, and a Vue-based frontend for interactive data visualization.
+The objective of this thesis was to design and implement a system for automatically measuring the success of an enterprise-level Retrieval-Augmented Generation (RAG) application from a new and more holistic perspective on RAG success, utilizing the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate}. The project began with a series of collaborative workshops with the development team of the investigated RAG application to conceptualize a suite of analytics features tailored to the specific needs of the RAG system. Following this, a significant portion of these features was technically implemented, resulting in an integrated analytics dashboard within the application's admin panel. The technical solution was built on the Google Cloud Platform, leveraging BigQuery for scalable data warehousing, Cloud Run for efficient data processing, and a Vue-based frontend for interactive data visualization.
 
-The implemented system provides insights into the three quality dimensions of the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} - \textit{system quality}, \textit{information quality} and \textit{service quality}. Key implemented features include dashboards for \textit{Answer Quality} and \textit{Document Quality}, which utilize AI-based evaluation to provide metrics such as relevance and faithfulness. Furthermore, dashboards for \textit{Topic Map} and \textit{Task Type} analysis were developed to offer a deeper understanding of user interests and intents. I then combined these individual views into more powerful analytics tools that combine quality with specific topics and task types, allowing administrators to pinpoint knowledge gaps and areas for improvement. A cost analysis revealed that these new features incur a manageable, maximum overhead of approximately \textbf{20\%} on LLM-related costs.
+The implemented system provides insights into the three quality dimensions of the ISSM \parencite{DeloneMcLean2003ISSuccessTenYearUpdate} - \textit{system quality}, \textit{information quality} and \textit{service quality}. Key implemented features include dashboards for \textit{Answer Quality} and \textit{Document Quality}, which utilize AI-based evaluation to provide metrics such as relevance and faithfulness. Furthermore, dashboards for \textit{Topic Map} and \textit{Task Type} analysis were developed to offer a deeper understanding of user interests and intents. These individual views were then combined into more powerful analytics tools that correlate answer or document quality with specific topics and task types, allowing administrators to pinpoint knowledge gaps and areas for improvement. A cost analysis revealed that these new features incur a manageable, maximum overhead of approximately \textbf{20\%} on LLM-related costs.
 
-I presented the implemented analytics dashboard to the development team for evaluation. The feedback was very positive, with the team confirming the high value and potential of the features for monitoring and improving the RAG system. The design, interactivity, and visual appeal of the dashboards were particularly praised.
+The implemented analytics dashboard was presented to the development team for evaluation. The feedback was very positive, with the team confirming the high value and potential of the features for monitoring and improving the RAG system. The design, interactivity, and visual appeal of the dashboards were particularly praised.
 
 The constructive feedback also highlighted several key areas for future enhancement. The most prominent theme was the need to improve clarity and user guidance for non-technical administrators through refined in-app explanations and user onboarding. A second major theme was the desire for greater actionability, primarily through the implementation of drill-down features that would allow users to trace an aggregated metric back to the specific documents or conversations that influenced it.
 
-Due to the time constraints of this thesis, I could not implement all of the conceptualized features. However, the roadmap and the developer's feedback provide a clear path for future development. Future work should prioritize the following.
+Due to the time constraints of this thesis, not all of the conceptualized features could be implemented. However, the roadmap and the developer's feedback provide a clear path for future development. Future work should prioritize the following.
 \begin{itemize}
     \item Enhancing user guidance, for example by implementing the suggested LLM-generated "insight statements" for each chart.
     \item Developing drill-down capabilities to make the data more actionable.
@@ -777,11 +754,8 @@ In conclusion, this work delivered a solid foundation for GenAI success measurem
 
 \section*{Statement on the use of AI for the creation of this thesis}
 This paper was written independently and its language was revised with the assistance of Gemini and Grammarly. Cursor was used as a coding assistant during the artifact development.
-
 \section*{Workshop Feedback}
 \subsection*{Group 1}
-
-%--- All tables from Group 1 go here ---
 \begin{sidewaystable}
     \centering
     \small 
@@ -890,8 +864,6 @@ This paper was written independently and its language was revised with the assis
 \clearpage % This command forces all the tables above to be printed before continuing.
 
 \subsection*{Group 2}
-
-%--- All tables from Group 2 go here ---
 \begin{sidewaystable}
     \centering
     \small 
@@ -991,9 +963,7 @@ This paper was written independently and its language was revised with the assis
         \bottomrule
     \end{tabularx}
 \end{sidewaystable}
-
 \clearpage % This command forces all the tables above to be printed before continuing.
-
 \subsection*{Recommendation for the distinction between deep-dive follow-up questions and follow-up questions due to an insufficient answer}
 \label{section:recommendation-follow-ups}
 I would use a hybrid strategy. First of all trying the simple distinction and if we cant seperate them than we could try AI as a judge. The problem with AI as a judge is that it is expensive and there is a risk that you dont get reliable results
@@ -1001,7 +971,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 
 %--- All figures go here ---
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/WelcomePage.png}
     \captionsetup{list=no}
     \caption{Welcome Page of the dashboard}
@@ -1009,7 +978,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/AnswerQuality.png}
     \captionsetup{list=no}
     \caption{Answer Quality dashboard}
@@ -1017,7 +985,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/DocumentQuality.png}
     \captionsetup{list=no}
     \caption{Document Quality dashboard}
@@ -1025,7 +992,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/TaskTypes.png}
     \captionsetup{list=no}
     \caption{Task Types analysis dashboard}
@@ -1033,7 +999,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/TopicMapsOverview.png}
     \captionsetup{list=no}
     \caption{Topic Map dashboard overview}
@@ -1041,7 +1006,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/TopicMapsMap.png}
     \captionsetup{list=no}
     \caption{Topic Map in the Topic Map dashboard}
@@ -1049,7 +1013,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/TopicMapsDetails.png}
     \captionsetup{list=no}
     \caption{Detail view in the Topic Map dashboard}
@@ -1057,7 +1020,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/TopicMapsQuality.png}
     \captionsetup{list=no}
     \caption{Topic Map dashboard with quality overlay}
@@ -1065,7 +1027,6 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/QualityPerTaskType.png}
     \captionsetup{list=no}
     \caption{Quality per Task Type dashboard}
@@ -1073,15 +1034,12 @@ I would use a hybrid strategy. First of all trying the simple distinction and if
 \end{figure}
 
 \begin{figure}[h!]
-    \centering
     \includegraphics[width=0.75\linewidth]{images/TaskTypePerTopic.png}
     \captionsetup{list=no}
     \caption{Task Type per Topic heatmap}
     \label{fig:task_type_per_topic}
 \end{figure}
-
-\clearpage % This command forces all the images above to be printed before continuing.
-
+\clearpage
 \section*{Prompt Templates}
 \begin{lstlisting}[caption={Prompt Template for AI based quality and task type Evaluation}, label={lst:prompt_template}]
 <General Instructions>
@@ -1139,7 +1097,6 @@ IMPORTANT: Provide your evaluation as a JSON object with exactly the fields ment
 }
 </Output Format>
 \end{lstlisting}
-
 \section*{GDPR Compliance}
 \begin{longtable}{>{\RaggedRight}p{3.5cm} >{\RaggedRight}p{2.5cm} >{\RaggedRight}p{4.5cm} >{\RaggedRight}p{4.5cm}}
     \caption{GDPR Compliance Table}
@@ -1233,7 +1190,6 @@ IMPORTANT: Provide your evaluation as a JSON object with exactly the fields ment
 \label{app:cost_calculations}
 
 This section illustrates the calculation of the approximately 20\% relative cost increase in LLM costs.
-
 \subsection*{Methodology}
 To be able to create a meaningful estimate, a simplification was applied. The following assumptions and limitations were made:
 \begin{itemize}
@@ -1247,7 +1203,6 @@ To be able to create a meaningful estimate, a simplification was applied. The fo
     \end{itemize}
     \item \textbf{Result as a Maximum Estimate:} Because retrieval costs in particular are ignored, the calculated values should be considered \textbf{maximum estimates} of the relative cost increase.
 \end{itemize}
-
 \subsection*{Pricing Basis}
 The calculations are based on the prices for the respective Google Gemini models assumed in the project (per 1 million input tokens) \parencite{GoogleGeminiPricing}:
 \begin{itemize}
@@ -1256,7 +1211,6 @@ The calculations are based on the prices for the respective Google Gemini models
     \item \textbf{Gemini-2.0-flash-lite:} \$0.075 / 1M tokens
     \item \textbf{Gemini-Embedding-0001:} \$0.15 / 1M tokens
 \end{itemize}
-
 \subsection*{Scenario 1: Basic Functionality}
 In this scenario, advanced features like query reformulation and the generation of follow-up questions are deactivated. The RAG System only performs answer generation.
 
@@ -1277,7 +1231,6 @@ The percentage increase is derived from the ratio of the additional costs to the
 \begin{equation*}
 \frac{\text{Costs}_\text{new}}{\text{Costs}_\text{Baseline}} = \frac{\$0.30}{\$1.25} = 0.24 = \textbf{24\%}
 \end{equation*}
-
 \subsection*{Scenario 2: Full Functionality}
 In this scenario, all features of the RAG System are activated.
 
@@ -1300,10 +1253,8 @@ In this scenario, all features of the RAG System are activated.
 \begin{equation*}
 \frac{\text{Costs}_\text{new}}{\text{Costs}_\text{Baseline}} = \frac{\$0.30}{\$1.70} \approx 0.176 = \textbf{17.6\%}
 \end{equation*}
-
 \subsection*{Conclusion}
 As the calculations demonstrate, the additional costs incurred by the evaluation features per request are in the range of \textbf{approximately 20\%}. The exact increase depends on which features are active in the underlying chain.
-
 \section*{Evaluation}
 \subsection*{Detailed Feature Feedback}
 
